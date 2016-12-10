@@ -1,7 +1,7 @@
 var jokeProvider = (function() {
 	"use strict";
 	var jokesTold = 0, jokes = [
-			"Idzie facet do windy, a tam batman nogi myje",
+			"Idzie facet do windy, a tam batman nogi myje!",
 			"Idzie zgarbiona baba do lekarza, a lekarz pyta: na chuj sie skradasz",
 			"Generic Joke #1", "Generic Joke #2" ];
 

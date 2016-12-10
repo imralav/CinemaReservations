@@ -1,6 +1,7 @@
 *.class
 *.log
 *node_modules/
+/src/main/resources/public/*
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
