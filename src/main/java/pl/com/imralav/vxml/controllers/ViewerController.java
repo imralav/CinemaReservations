@@ -5,10 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class MainDialogController {
+public class ViewerController {
 
-    @RequestMapping("/vxml")
-    public String vxmlDialog(Model model) {
-        return "dialog.xml";
+    @RequestMapping("/viewer")
+    public String htmlDialog(Model model) {
+        return "viewer.html";
     }
+
 }
