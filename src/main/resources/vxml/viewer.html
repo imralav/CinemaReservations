@@ -1,4 +1,20 @@
 <html>
-	<script src="/script.js"></script>
 	<p onclick="alert(jokeProvider.next())">Siema</p>
+	<h3>Customers</h3>
+	<table>
+	   <thead>
+	       <tr>
+	           <th>ID</th>
+	           <th>CODE</th>
+	       </tr>
+	   </thead>
+	   <tbody>
+	       <tr th:each="customer : ${customers}">
+	           <td th:text="${customer.id}">10100</td>
+	           <td th:text="${customer.code}">12020</td>
+	       </tr>
+	   </tbody>
+	</table>
+	
+    <script src="/script.js"></script>
 </html>
