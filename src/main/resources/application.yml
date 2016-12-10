@@ -1,0 +1,24 @@
+# ----------------------------------------
+# CORE PROPERTIES
+# ----------------------------------------
+
+# LOGGING
+logging:
+    file: fullLogs.log
+
+# ----------------------------------------
+# WEB PROPERTIES
+# ----------------------------------------
+# EMBEDDED SERVER CONFIGURATION
+
+# THYMELEAF (ThymeleafAutoConfiguration)
+spring:
+    thymeleaf:
+        cache: false
+        prefix: classpath:/vxml/
+        suffix: .xml
+    datasource:
+        url: jdbc:mysql://localhost/cinema_reservations
+        username: bozena
+        password: vxml
+        driverClassName: com.mysql.jdbc.Driver

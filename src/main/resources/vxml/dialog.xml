@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version = "2.1" xml:lang="pl-pl">
+  <script src="/script.js"></script>
+  <meta name="maintainer" content="imralav@gmail.com" />
+  <var name="attempt" expr="1"/>
+  <script>
+    dialogContext.setJokeLimitTo(2);
+  </script>
+  <form id="MainMenu">
+    <block>
+      <prompt>Dzień dobry.</prompt>
+      <goto next="#Joke"/>
+    </block>
+  </form>
+  <form id="Joke">
+    <block cond="dialogContext.shouldTellJoke()">
+      <prompt>Oto <emphasis level="strong">losowy</emphasis> żart <emphasis level="reduced">numer <value expr="dialogContext.toldJokesAmount() + 1"/></emphasis>: <value expr="jokeProvider.next()"></value>...</prompt>
+      <goto next="#MainMenu"/>
+    </block>
+  </form>
+</vxml>
