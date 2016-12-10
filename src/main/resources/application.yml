@@ -16,7 +16,7 @@ spring:
     thymeleaf:
         cache: false
         prefix: classpath:/vxml/
-        suffix: .xml
+        suffix: .html
     datasource:
         url: jdbc:mysql://localhost/cinema_reservations
         username: bozena

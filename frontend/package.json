@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "gulp": "latest",
+    "gulp-util": "latest",
+    "jasmine": "^2.5.2",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-phantomjs-launcher": "^1.0.2"
+  },
+  "scripts": {
+    "copy": "gulp copy",
+    "test": "karma start --single-run"
+  }
+}

@@ -25,7 +25,6 @@ repositories {
 	mavenCentral()
 }
 
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.flywaydb:flyway-core')
@@ -33,4 +32,19 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
     runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+task cleanPublicFolder(type: Delete) {
+    def dirName = project.projectDir.getAbsolutePath() + 'src/main/resources/public'
+    println 'Cleaning up ' + dirName
+    file( dirName ).list().each{
+        f ->
+            delete "${dirName}/${f}"
+    }
+}
+
+clean.dependsOn cleanPublicFolder
+
+task frontend(type: Task) {
+    println 'Processing frontend'
 }

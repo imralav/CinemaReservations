@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IntroDialogController {
 
-    @RequestMapping
+    @RequestMapping("/")
     public String introDialog(Model model) {
         return "dialog";
     }
