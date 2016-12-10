@@ -55,9 +55,20 @@ task frontendCopy(type: NpmTask) {
     }
 }
 
+task frontendCopyBower(type: NpmTask) {
+    description 'Copies bower libraries to public resource dir'
+    args = ['run', 'copyBowerDependencies'];
+    execOverrides {
+      it.workingDir = 'frontend'
+    }
+}
+
+frontendCopy.dependsOn frontendCopyBower
+
 task frontend() {
     dependsOn 'frontendTest'
     dependsOn 'frontendCopy'
+    dependsOn 'frontendCopyBower'
     description 'Responsible for testing, building and copying frontend resources'
 }
 
