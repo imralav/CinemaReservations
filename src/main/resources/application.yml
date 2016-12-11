@@ -24,3 +24,5 @@ spring:
         username: bozena
         password: vxml
         driverClassName: com.mysql.jdbc.Driver
+    jpa:
+        show-sql: true

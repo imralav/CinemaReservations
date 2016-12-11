@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Booking {
@@ -12,11 +13,14 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer customerId;
+    @ManyToOne
+    private Customer customer;
 
-    private Integer seatId;
+    @ManyToOne
+    private Seat seat;
 
-    private Integer showingId;
+    @ManyToOne
+    private Showing showing;
 
 
     public Integer getId() {
@@ -29,40 +33,41 @@ public class Booking {
     }
 
 
-    public Integer getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
 
-    public Integer getSeatId() {
-        return seatId;
+    public Seat getSeat() {
+        return seat;
     }
 
 
-    public void setSeatId(Integer seatId) {
-        this.seatId = seatId;
+    public void setSeat(Seat seat) {
+        this.seat = seat;
     }
 
 
-    public Integer getShowingId() {
-        return showingId;
+
+    public Showing getShowing() {
+        return showing;
     }
 
 
-    public void setShowingId(Integer showingId) {
-        this.showingId = showingId;
+
+    public void setShowing(Showing showing) {
+        this.showing = showing;
     }
 
 
     @Override
     public String toString() {
-        return "Booking [id=" + id + ", customerId=" + customerId + ", seatId=" + seatId + ", showingId=" + showingId
-                + "]";
+        return "Booking [id=" + id + ", customer=" + customer + ", seat=" + seat + ", showing=" + showing + "]";
     }
 
 
@@ -70,10 +75,10 @@ public class Booking {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
+        result = prime * result + ((customer == null) ? 0 : customer.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((seatId == null) ? 0 : seatId.hashCode());
-        result = prime * result + ((showingId == null) ? 0 : showingId.hashCode());
+        result = prime * result + ((seat == null) ? 0 : seat.hashCode());
+        result = prime * result + ((showing == null) ? 0 : showing.hashCode());
         return result;
     }
 
@@ -90,11 +95,11 @@ public class Booking {
             return false;
         }
         Booking other = (Booking)obj;
-        if (customerId == null) {
-            if (other.customerId != null) {
+        if (customer == null) {
+            if (other.customer != null) {
                 return false;
             }
-        } else if (!customerId.equals(other.customerId)) {
+        } else if (!customer.equals(other.customer)) {
             return false;
         }
         if (id == null) {
@@ -104,18 +109,18 @@ public class Booking {
         } else if (!id.equals(other.id)) {
             return false;
         }
-        if (seatId == null) {
-            if (other.seatId != null) {
+        if (seat == null) {
+            if (other.seat != null) {
                 return false;
             }
-        } else if (!seatId.equals(other.seatId)) {
+        } else if (!seat.equals(other.seat)) {
             return false;
         }
-        if (showingId == null) {
-            if (other.showingId != null) {
+        if (showing == null) {
+            if (other.showing != null) {
                 return false;
             }
-        } else if (!showingId.equals(other.showingId)) {
+        } else if (!showing.equals(other.showing)) {
             return false;
         }
         return true;

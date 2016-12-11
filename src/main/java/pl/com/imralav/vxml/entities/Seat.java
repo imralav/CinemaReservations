@@ -17,10 +17,6 @@ public class Seat {
 
     private Integer rowNumber;
 
-    @ManyToOne
-    private Auditorium auditorium;
-
-
     public Integer getId() {
         return id;
     }
@@ -51,16 +47,6 @@ public class Seat {
     }
 
 
-    public Auditorium getAuditorium() {
-        return auditorium;
-    }
-
-
-    public void setAuditorium(Auditorium auditorium) {
-        this.auditorium = auditorium;
-    }
-
-
     @Override
     public String toString() {
         return "Seat [id=" + id + ", seatNumber=" + seatNumber + ", rowNumber=" + rowNumber + "]";
@@ -71,7 +57,6 @@ public class Seat {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((auditorium == null) ? 0 : auditorium.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((rowNumber == null) ? 0 : rowNumber.hashCode());
         result = prime * result + ((seatNumber == null) ? 0 : seatNumber.hashCode());
@@ -91,13 +76,6 @@ public class Seat {
             return false;
         }
         Seat other = (Seat)obj;
-        if (auditorium == null) {
-            if (other.auditorium != null) {
-                return false;
-            }
-        } else if (!auditorium.equals(other.auditorium)) {
-            return false;
-        }
         if (id == null) {
             if (other.id != null) {
                 return false;
