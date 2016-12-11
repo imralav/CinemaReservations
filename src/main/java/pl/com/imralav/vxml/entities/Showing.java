@@ -1,9 +1,12 @@
 package pl.com.imralav.vxml.entities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -15,10 +18,14 @@ public class Showing {
     private Integer id;
 
     @ManyToOne
+    @JoinColumn(name="MOVIE_ID")
     private Movie movie;
 
     @ManyToOne
+    @JoinColumn(name="AUDITORIUM_ID")
     private Auditorium auditorium;
+
+    private LocalDateTime showingDatetime;
 
 
     public Integer getId() {
@@ -51,9 +58,20 @@ public class Showing {
     }
 
 
+    public LocalDateTime getShowingDatetime() {
+        return showingDatetime;
+    }
+
+
+    public void setShowingDatetime(LocalDateTime showingDatetime) {
+        this.showingDatetime = showingDatetime;
+    }
+
+
     @Override
     public String toString() {
-        return "Showing [id=" + id + ", movie=" + movie + ", auditorium=" + auditorium + "]";
+        return "Showing [id=" + id + ", movie=" + movie + ", auditorium=" + auditorium + ", showingDatetime="
+                + showingDatetime + "]";
     }
 
 
@@ -64,6 +82,7 @@ public class Showing {
         result = prime * result + ((auditorium == null) ? 0 : auditorium.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((movie == null) ? 0 : movie.hashCode());
+        result = prime * result + ((showingDatetime == null) ? 0 : showingDatetime.hashCode());
         return result;
     }
 
@@ -99,6 +118,13 @@ public class Showing {
                 return false;
             }
         } else if (!movie.equals(other.movie)) {
+            return false;
+        }
+        if (showingDatetime == null) {
+            if (other.showingDatetime != null) {
+                return false;
+            }
+        } else if (!showingDatetime.equals(other.showingDatetime)) {
             return false;
         }
         return true;

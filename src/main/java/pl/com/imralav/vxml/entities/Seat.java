@@ -13,48 +13,71 @@ public class Seat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private Integer seatNumber;
+
     private Integer rowNumber;
 
     @ManyToOne
     private Auditorium auditorium;
 
+
     public Integer getId() {
         return id;
     }
+
 
     public void setId(Integer id) {
         this.id = id;
     }
 
+
+    public Integer getSeatNumber() {
+        return seatNumber;
+    }
+
+
+    public void setSeatNumber(Integer seatNumber) {
+        this.seatNumber = seatNumber;
+    }
+
+
     public Integer getRowNumber() {
         return rowNumber;
     }
+
 
     public void setRowNumber(Integer rowNumber) {
         this.rowNumber = rowNumber;
     }
 
+
     public Auditorium getAuditorium() {
         return auditorium;
     }
+
 
     public void setAuditorium(Auditorium auditorium) {
         this.auditorium = auditorium;
     }
 
+
     @Override
     public String toString() {
-        return "Seat [id=" + id + ", rowNumber=" + rowNumber + "]";
+        return "Seat [id=" + id + ", seatNumber=" + seatNumber + ", rowNumber=" + rowNumber + "]";
     }
+
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((auditorium == null) ? 0 : auditorium.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((rowNumber == null) ? 0 : rowNumber.hashCode());
+        result = prime * result + ((seatNumber == null) ? 0 : seatNumber.hashCode());
         return result;
     }
+
 
     @Override
     public boolean equals(Object obj) {
@@ -68,6 +91,13 @@ public class Seat {
             return false;
         }
         Seat other = (Seat)obj;
+        if (auditorium == null) {
+            if (other.auditorium != null) {
+                return false;
+            }
+        } else if (!auditorium.equals(other.auditorium)) {
+            return false;
+        }
         if (id == null) {
             if (other.id != null) {
                 return false;
@@ -80,6 +110,13 @@ public class Seat {
                 return false;
             }
         } else if (!rowNumber.equals(other.rowNumber)) {
+            return false;
+        }
+        if (seatNumber == null) {
+            if (other.seatNumber != null) {
+                return false;
+            }
+        } else if (!seatNumber.equals(other.seatNumber)) {
             return false;
         }
         return true;
