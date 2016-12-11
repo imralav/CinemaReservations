@@ -25,3 +25,13 @@ public class LocalDateTimeAttributeConverter implements AttributeConverter<Local
     }
 }
 ```
+## MVC Integration Test - JsonPath
+Whenever integration tests for controllers are made, it might be useful to validate returned JSON. JsonPath is used for this. Check [this](https://github.com/jayway/JsonPath) for official documentation and [this](http://jsonpath.herokuapp.com/) for online jsonpath checker.
+Example:
+```Java
+mockMvc.perform(get("/customers")).andExpect(status().isOk())
+               .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+               .andExpect(jsonPath("$").isArray())
+               .andExpect(jsonPath("$.*.id").exists())
+               .andExpect(jsonPath("$.*.code").exists());
+```
