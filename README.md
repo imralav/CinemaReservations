@@ -10,7 +10,7 @@ default-character-set=utf8
 ```
 ## Using LocalDateTime etc
 JPA 2.1 does not support new Java 8 Date/Time API out of the box. Special converters need to be implemented:
-```
+```Java
 @Converter(autoApply = true)
 public class LocalDateTimeAttributeConverter implements AttributeConverter<LocalDateTime, Timestamp> {
 

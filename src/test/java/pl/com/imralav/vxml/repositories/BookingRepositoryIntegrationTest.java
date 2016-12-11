@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import pl.com.imralav.vxml.entities.Booking;
 
 @RunWith(SpringRunner.class)
-@DataJpaTest(showSql=true)
+@DataJpaTest
 public class BookingRepositoryIntegrationTest {
 
     @Autowired
@@ -26,5 +26,6 @@ public class BookingRepositoryIntegrationTest {
         assertThat(findOne).isNotNull();
         assertThat(findOne.getCustomer().getId()).isEqualTo(1);
         assertThat(findOne.getSeat().getId()).isEqualTo(1);
+        assertThat(findOne.getShowing().getId()).isEqualTo(1);
     }
 }

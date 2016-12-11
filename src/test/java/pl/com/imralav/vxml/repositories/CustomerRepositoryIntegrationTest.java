@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import pl.com.imralav.vxml.entities.Customer;
 
 @RunWith(SpringRunner.class)
-@DataJpaTest(showSql=true)
+@DataJpaTest
 public class CustomerRepositoryIntegrationTest {
 
     @Autowired
