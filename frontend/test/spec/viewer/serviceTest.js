@@ -18,7 +18,7 @@ describe('ViewerService', function() {
 		var viewerService;
 		var dummyCustomers = [ {
 			id : 1,
-			code : 1234
+			code : 1233
 		}, {
 			id : 2,
 			code : 4321

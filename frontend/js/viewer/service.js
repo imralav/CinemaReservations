@@ -1,12 +1,13 @@
-'use strict';
-
 angular.module('CinemaReservations').service('ViewerService', function($http) {
+	'use strict';
 	function genericGet(url, onSuccessCallback) {
 		$http.get(url).then(function(response) {
-			onSuccessCallback && onSuccessCallback(response.data);
+			if (onSuccessCallback) {
+				onSuccessCallback(response.data);
+			}
 		});
 	}
-	
+
 	var getCustomers = function(onSuccessCallback) {
 		genericGet('customers', onSuccessCallback);
 	};
