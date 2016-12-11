@@ -20,7 +20,7 @@ spring:
         prefix: classpath:/vxml/
         suffix: 
     datasource:
-        url: jdbc:mysql://localhost/cinema_reservations
+        url: jdbc:mysql://localhost/cinema_reservations?characterEncoding=utf-8
         username: bozena
         password: vxml
         driverClassName: com.mysql.jdbc.Driver
