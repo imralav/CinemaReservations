@@ -41,5 +41,6 @@ public class ShowingRepositoryIntegrationTest {
         Showing save = showingRepository.save(showing);
         //then
         assertThat(save.getId()).isNotNull();
+
     }
 }
