@@ -35,3 +35,9 @@ mockMvc.perform(get("/customers")).andExpect(status().isOk())
                .andExpect(jsonPath("$.*.id").exists())
                .andExpect(jsonPath("$.*.code").exists());
 ```
+## Returning object from parameters when mocking
+When mocking using Mockito it is possible to return the same object that was passed as a parameter to a mocked method:
+```Java
+when(customerRepository.save(any(Customer.class))).then(AdditionalAnswers.returnsFirstArg());
+```
+`AdditionalAnswers` is a pretty handy class when mocking.

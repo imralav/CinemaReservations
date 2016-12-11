@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import pl.com.imralav.vxml.controllers.rest.CustomerRest;
 import pl.com.imralav.vxml.entities.Customer;
-import pl.com.imralav.vxml.repositories.CustomerRepository;
+import pl.com.imralav.vxml.services.CustomerService;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(CustomerRest.class)
@@ -29,21 +29,39 @@ public class CustomerRestIntegrationTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private CustomerRepository customerRepository;
+    private CustomerService customerService;
 
     @Test
     public void shouldFetchCustomers() throws Exception {
         // given
-        Customer customer = new Customer();
-        customer.setId(1);
-        customer.setCode(1000);
-        given(customerRepository.findAll()).willReturn(Arrays.asList(customer));
+        Customer customer = prepareCustomer();
+        given(customerService.findAll()).willReturn(Arrays.asList(customer));
         // when
         // then
         mockMvc.perform(get("/customers")).andExpect(status().isOk())
                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-               .andExpect(jsonPath("$").isArray())
-               .andExpect(jsonPath("$.*.id").exists())
+               .andExpect(jsonPath("$").isArray()).andExpect(jsonPath("$.*.id").exists())
                .andExpect(jsonPath("$.*.code").exists());
+    }
+
+    private Customer prepareCustomer() {
+        Customer customer = new Customer();
+        customer.setId(1);
+        customer.setCode(1000);
+        return customer;
+    }
+
+    @Test
+    public void shouldGenerateNewCustomer() throws Exception {
+        // given
+        Customer generatedCustomer = prepareCustomer();
+        given(customerService.generateNewCustomer()).willReturn(generatedCustomer);
+        // when
+        // then
+        mockMvc.perform(get("/customers/generate")).andExpect(status().isOk())
+               .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+               .andExpect(jsonPath("$").isMap())
+               .andExpect(jsonPath("$.id").exists())
+               .andExpect(jsonPath("$.code").exists());
     }
 }

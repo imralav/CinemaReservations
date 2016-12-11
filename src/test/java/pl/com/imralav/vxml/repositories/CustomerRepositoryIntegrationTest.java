@@ -33,4 +33,14 @@ public class CustomerRepositoryIntegrationTest {
         assertThat(actualCustomer).isEqualTo(expectedCustomer);
     }
 
+
+    @Test
+    public void shouldCorrectlyCheckCodeExistance() {
+        //given
+        //when
+        //then
+        assertThat(customerRepository.doesExistForCode(1234)).isTrue();
+        assertThat(customerRepository.doesExistForCode(9999)).isFalse();
+    }
+
 }
