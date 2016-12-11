@@ -2,8 +2,11 @@
 
 angular.module('CinemaReservations')
   .controller('ViewerController', ['$scope', 'ViewerService', '$log', function($scope, viewerService, logger) {
-	  viewerService.getCustomers(function(customers) {
-		  logger.info('Fetched ', customers);
-		  $scope.customers = customers;
-	  });
+	  function refreshCustomers() {
+		  viewerService.getCustomers(function(customers) {
+			  $scope.customers = customers;
+		  });
+	  };
+	  refreshCustomers();
+	  $scope.refreshCustomers = refreshCustomers;
   }]);
