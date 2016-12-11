@@ -17,10 +17,11 @@
     "bower": "latest"
   },
   "scripts": {
-    "test": "karma start --single-run",
+    "watch:test": "karma start",
+    "test": "npm run watch:test -- --single-run",
     "lint": "gulp lint",
     "copy": "gulp copy",
     "copyBowerDependencies": "gulp copyBowerDependencies",
-    "watch": "watch 'npm run lint && npm test' js/"
+    "watch": "gulp watch"
   }
 }

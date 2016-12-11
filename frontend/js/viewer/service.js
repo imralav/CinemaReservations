@@ -12,7 +12,12 @@ angular.module('CinemaReservations').service('ViewerService', function($http) {
 		genericGet('customers', onSuccessCallback);
 	};
 
+	var generateNewCustomer = function(onSuccessCallback) {
+		genericGet('customers/generate', onSuccessCallback);
+	};
+
 	return {
-		getCustomers : getCustomers
+		getCustomers : getCustomers,
+		generateNewCustomer : generateNewCustomer
 	};
 });

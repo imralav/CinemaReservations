@@ -2,11 +2,13 @@
 
 describe('ViewerService', function() {
 	var $httpBackend;
+	var viewerService;
 
 	beforeEach(module('CinemaReservations'));
 
 	beforeEach(inject(function($injector) {
 		$httpBackend = $injector.get('$httpBackend');
+		viewerService = $injector.get('ViewerService');
 	}));
 
 	afterEach(function() {
@@ -15,7 +17,6 @@ describe('ViewerService', function() {
 	});
 
 	describe('Fetching customer', function() {
-		var viewerService;
 		var dummyCustomers = [ {
 			id : 1,
 			code : 1233
@@ -24,7 +25,6 @@ describe('ViewerService', function() {
 			code : 4321
 		} ];
 		beforeEach(inject(function($injector) {
-			viewerService = $injector.get('ViewerService');
 			$httpBackend.when('GET', 'customers').respond(dummyCustomers);
 		}));
 		it('should hit customers endpoint when getting customers', function() {
@@ -37,6 +37,22 @@ describe('ViewerService', function() {
 			$httpBackend.expectGET('customers');
 			viewerService.getCustomers(function(customers) {
 				expect(customers).toEqual(dummyCustomers);
+			});
+			$httpBackend.flush();
+		});
+	});
+	describe('Generating new customer', function() {
+		var dummyCustomer = {
+			id : 1,
+			code : 1233
+		};
+		beforeEach(inject(function($injector) {
+			$httpBackend.when('GET', 'customers/generate').respond(dummyCustomer);
+		}));
+		it('should get new customer', function() {
+			$httpBackend.expectGET('customers/generate');
+			viewerService.generateNewCustomer(function(customer) {
+				expect(customer).toEqual(dummyCustomer);
 			});
 			$httpBackend.flush();
 		});
