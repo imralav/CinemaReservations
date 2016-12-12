@@ -1,26 +1,25 @@
-const gulp = require('gulp');
-const mainBowerFiles = require('main-bower-files');
-const jshint = require('gulp-jshint');
-const stylish = require('jshint-stylish');
-const Server = require('karma').Server;
+var gulp = require('gulp');
+var mainBowerFiles = require('main-bower-files');
+var jshint = require('gulp-jshint');
+var stylish = require('jshint-stylish');
+var Server = require('karma').Server;
+var runSequence = require('run-sequence');
 
 var publicFolderPath = '../src/main/resources/public';
 
 gulp.task('copy', function() {
-	return gulp.src("js/**/*")
-	.pipe(gulp.dest(publicFolderPath));
+	return gulp.src("js/**/*").pipe(gulp.dest(publicFolderPath));
 });
 
 gulp.task('copyBowerDependencies', function() {
-	return gulp.src(mainBowerFiles(), { base: 'bower_components'})
-	.pipe(gulp.dest(publicFolderPath));
+	return gulp.src(mainBowerFiles(), {
+		base : 'bower_components'
+	}).pipe(gulp.dest(publicFolderPath));
 });
 
 gulp.task('lint', function() {
-	return gulp.src('js/**/*')
-	.pipe(jshint())
-	.pipe(jshint.reporter('jshint-stylish'))
-	.pipe(jshint.reporter('fail'));
+	return gulp.src('js/**/*').pipe(jshint()).pipe(
+			jshint.reporter('jshint-stylish')).pipe(jshint.reporter('fail'));
 });
 
 gulp.task('test', function(done) {
@@ -30,7 +29,11 @@ gulp.task('test', function(done) {
 	}, done).start();
 });
 
+gulp.task('build', function() {
+	runSequence('lint','test');
+})
+
 gulp.task('watch', function() {
-	gulp.watch('js/**/*', ['lint', 'test']);
-	gulp.watch('test/**/*', ['test']);
+	gulp.watch('js/**/*', [ 'build' ]);
+	gulp.watch('test/**/*', [ 'test' ]);
 });
