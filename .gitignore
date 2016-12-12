@@ -1,6 +1,7 @@
 *.class
 *.log
 *node_modules/
+*bower_components/
 /src/main/resources/public/*
 
 # Mobile Tools for Java (J2ME)
