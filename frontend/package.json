@@ -19,7 +19,7 @@
   },
   "scripts": {
     "watch:test": "karma start",
-    "test": "npm run watch:test -- --single-run",
+    "test": "gulp test",
     "lint": "gulp lint",
     "copy": "gulp copy",
     "copyBowerDependencies": "gulp copyBowerDependencies",

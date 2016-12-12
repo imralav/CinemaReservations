@@ -13,6 +13,7 @@ jar {
     baseName = 'CinemaReservations'
     version = '0.0.1-SNAPSHOT'
 }
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -33,41 +34,84 @@ dependencies {
         exclude module: 'junit'
     }
     testCompile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.4'
-    
-    
-    
 }
+
+node {
+    version = '6.2.0'
+    npmVersion = '3.8.9'
+    download = true
+}
+
+def frontendPath = 'frontend'
+def packageJsonPath = frontendPath + '/package.json'
+def nodeModulesPath = frontendPath + '/node_modules'
+def bowerJsonPath = frontendPath + '/bower.json'
+def bowerComponentsPath = frontendPath + '/bower_components'
+
+task npmCacheConfig(type: NpmTask) {
+    description = "Configure the NPM cache"
+    def npmCacheDir = "${gradle.getGradleUserHomeDir()}/caches/npm"
+    outputs.files file(npmCacheDir)
+    outputs.upToDateWhen { false }
+    args = [ 'config', 'set', 'cache', npmCacheDir ]
+}
+
+task npmPackages(type: NpmTask, dependsOn: npmCacheConfig) {
+    description = "Install Node.js packages"
+    args = [ 'install' ]
+    execOverrides {
+      it.workingDir = frontendPath
+    }
+    inputs.files file('package.json')
+    outputs.files file('node_modules')
+    outputs.upToDateWhen { file('frontend/node_modules').exists() }
+}
+
+task bowerInstall(type: NodeTask) {
+    script = file(nodeModulesPath + '/bower/bin/bower')
+    args = ["--config.storage.cache=${gradle.getGradleUserHomeDir()}/caches/bower/cache",
+            "--config.storage.packages=${gradle.getGradleUserHomeDir()}/caches/bower/packages",
+            "--config.storage.registry=${gradle.getGradleUserHomeDir()}/caches/bower/registry",
+            'install']
+    execOverrides {
+      it.workingDir = frontendPath
+    }
+    inputs.files file('bower.json')
+    outputs.files file('bower_components')
+    outputs.upToDateWhen { file('frontend/bower_components').exists() }
+    dependsOn npmPackages
+}
+
+task frontendTest(type: NpmTask) {
+    description 'Used to run frontend tests'
+    args = ['test']
+    execOverrides {
+      it.workingDir = frontendPath
+    }
+}
+
+test.dependsOn frontendTest
 
 task cleanPublicFolder(type: Delete) {
     def dirName = project.projectDir.getAbsolutePath() + '/src/main/resources/public'
     file( dirName ).list().each{ f -> delete "${dirName}/${f}" }
 }
 
-clean.dependsOn cleanPublicFolder
-
-task frontendTest(type: NpmTask) {
-    description 'Used to run frontend tests'
-    args = ['test']
-    execOverrides {
-      it.workingDir = 'frontend'
-    }
-}
-
-test.dependsOn frontendTest
-
 task frontendCopy(type: NpmTask) {
     description 'Copies frontend resources to public resource dir'
     args = ['run', 'copy'];
     execOverrides {
-      it.workingDir = 'frontend'
+      it.workingDir = frontendPath
     }
+    dependsOn bowerInstall
+    dependsOn cleanPublicFolder
 }
 
 task frontendCopyBower(type: NpmTask) {
     description 'Copies bower libraries to public resource dir'
     args = ['run', 'copyBowerDependencies'];
     execOverrides {
-      it.workingDir = 'frontend'
+      it.workingDir = frontendPath
     }
 }
 
@@ -81,5 +125,7 @@ task frontend() {
 }
 
 assemble.dependsOn frontendCopy
+processResources.dependsOn bowerInstall
 processResources.dependsOn frontendCopy
+frontendCopy.mustRunAfter bowerInstall
 jar.mustRunAfter frontendCopy
