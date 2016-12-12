@@ -124,7 +124,6 @@ task frontend() {
     description 'Responsible for testing, building and copying frontend resources'
 }
 
-assemble.dependsOn frontendCopy
 processResources.dependsOn bowerInstall
 processResources.dependsOn frontendCopy
 frontendCopy.mustRunAfter bowerInstall

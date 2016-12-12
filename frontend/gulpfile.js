@@ -22,11 +22,11 @@ gulp.task('lint', function() {
 			jshint.reporter('jshint-stylish')).pipe(jshint.reporter('fail'));
 });
 
-gulp.task('test', function(done) {
+gulp.task('test', function() {
 	return new Server({
 		configFile : __dirname + '/karma.conf.js',
 		singleRun : true
-	}, done).start();
+	}).start();
 });
 
 gulp.task('build', function() {

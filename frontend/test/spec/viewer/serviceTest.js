@@ -46,7 +46,7 @@ describe('ViewerService', function() {
 			id : 1,
 			code : 1233
 		};
-		beforeEach(function($injector) {
+		beforeEach(function() {
 			$httpBackend.when('GET', 'customers/generate').respond(dummyCustomer);
 		});
 		it('should get new customer', function() {
