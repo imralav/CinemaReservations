@@ -11,7 +11,7 @@ apply plugin: 'org.springframework.boot'
 
 jar {
     baseName = 'CinemaReservations'
-    version = '0.0.1-SNAPSHOT'
+    archiveName = 'cinema.jar'
 }
 
 sourceCompatibility = 1.8
