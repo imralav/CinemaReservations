@@ -11,4 +11,6 @@ echo "Removing old deploy files"
 rm $DEPLOY_FOLDER/cinema.jar
 cp "build/libs/cinema.jar" "$DEPLOY_FOLDER"
 java -jar build/libs/*.jar &
-echo $! > $DEPLOY_FOLDER/pid
+PID=$!
+echo "Saving pid $PID to $DEPLOY_FOLDER/pid"
+echo $PID > $DEPLOY_FOLDER/pid
