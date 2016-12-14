@@ -64,7 +64,7 @@ task npmPackages(type: NpmTask, dependsOn: npmCacheConfig) {
     }
     inputs.files file('package.json')
     outputs.files file('node_modules')
-    outputs.upToDateWhen { file('frontend/node_modules').exists() }
+    outputs.upToDateWhen { false }
 }
 
 task bowerInstall(type: NodeTask) {
@@ -78,7 +78,7 @@ task bowerInstall(type: NodeTask) {
     }
     inputs.files file('bower.json')
     outputs.files file('bower_components')
-    outputs.upToDateWhen { file('frontend/bower_components').exists() }
+    outputs.upToDateWhen { false }
     dependsOn npmPackages
 }
 
