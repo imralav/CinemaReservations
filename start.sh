@@ -5,7 +5,9 @@ if ! [ -d "$DEPLOY_FOLDER" ]; then
 	mkdir -p "$DEPLOY_FOLDER"
 fi
 if [ -e "$DEPLOY_FOLDER/pid" ]; then
-	kill -9 `cat "$DEPLOY_FOLDER/pid"`
+    OLD_PID=`cat "$DEPLOY_FOLDER/pid"`
+    echo "Killing old process with pid $OLD_PID"
+	kill -9 $OLD_PID
 fi
 echo "Removing old deploy files"
 rm $DEPLOY_FOLDER/cinema.jar

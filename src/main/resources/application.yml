@@ -4,7 +4,6 @@
 
 # LOGGING
 logging:
-    path: /var/log
     file: cinema.log
 
 # ----------------------------------------
