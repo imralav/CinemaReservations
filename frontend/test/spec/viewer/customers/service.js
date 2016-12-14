@@ -1,14 +1,14 @@
 'use strict';
 
-describe('ViewerService', function() {
+describe('CustomerService', function() {
 	var $httpBackend;
-	var viewerService;
+	var customerService;
 
 	beforeEach(module('CinemaReservations'));
 
-	beforeEach(inject(function(_$httpBackend_, ViewerService) {
+	beforeEach(inject(function(_$httpBackend_, CustomerService) {
 		$httpBackend = _$httpBackend_;
-		viewerService = ViewerService;
+		customerService = CustomerService;
 	}));
 
 	afterEach(function() {
@@ -27,15 +27,9 @@ describe('ViewerService', function() {
 		beforeEach(function() {
 			$httpBackend.when('GET', 'customers').respond(dummyCustomers);
 		});
-		it('should hit customers endpoint when getting customers', function() {
-			$httpBackend.expectGET('customers');
-			viewerService.getCustomers();
-			$httpBackend.flush();
-		});
-
 		it('should get correct customers', function() {
 			$httpBackend.expectGET('customers');
-			viewerService.getCustomers(function(customers) {
+			customerService.getCustomers(function(customers) {
 				expect(customers).toEqual(dummyCustomers);
 			});
 			$httpBackend.flush();
@@ -51,7 +45,7 @@ describe('ViewerService', function() {
 		});
 		it('should get new customer', function() {
 			$httpBackend.expectGET('customers/generate');
-			viewerService.generateNewCustomer(function(customer) {
+			customerService.generateNewCustomer(function(customer) {
 				expect(customer).toEqual(dummyCustomer);
 			});
 			$httpBackend.flush();

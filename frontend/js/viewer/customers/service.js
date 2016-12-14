@@ -1,23 +1,16 @@
-angular.module('CinemaReservations').service('ViewerService', function($http) {
+angular.module('CinemaReservations').service('CustomerService', ['UtilsService', function(utilsService) {
 	'use strict';
-	function genericGet(url, onSuccessCallback) {
-		$http.get(url).then(function(response) {
-			if (onSuccessCallback) {
-				onSuccessCallback(response.data);
-			}
-		});
-	}
 
 	var getCustomers = function(onSuccessCallback) {
-		genericGet('customers', onSuccessCallback);
+		utilsService.genericGet('customers', onSuccessCallback);
 	};
 
 	var generateNewCustomer = function(onSuccessCallback) {
-		genericGet('customers/generate', onSuccessCallback);
+		utilsService.genericGet('customers/generate', onSuccessCallback);
 	};
 
 	return {
 		getCustomers : getCustomers,
 		generateNewCustomer : generateNewCustomer
 	};
-});
+}]);

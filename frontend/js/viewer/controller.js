@@ -1,8 +1,8 @@
 angular.module('CinemaReservations')
-  .controller('ViewerController', ['$scope', 'ViewerService', '$log', function($scope, viewerService, logger) {
+  .controller('ViewerController', ['$scope', 'CustomerService', function($scope, customerService) {
 	  'use strict';
 	  function refreshCustomers() {
-		  viewerService.getCustomers(function(customers) {
+		  customerService.getCustomers(function(customers) {
 			  $scope.customers = customers;
 		  });
 	  }

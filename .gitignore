@@ -3,6 +3,7 @@
 *node_modules/
 *bower_components/
 /src/main/resources/public/*
+coverage/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

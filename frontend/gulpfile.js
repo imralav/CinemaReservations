@@ -18,22 +18,30 @@ gulp.task('copyBowerDependencies', function() {
 });
 
 gulp.task('lint', function() {
-	return gulp.src('js/**/*').pipe(jshint()).pipe(
-			jshint.reporter('jshint-stylish')).pipe(jshint.reporter('fail'));
+	return gulp.src('js/**/*')
+			.pipe(jshint())
+			.pipe(jshint.reporter('jshint-stylish'))
+			.pipe(jshint.reporter('fail'));
 });
 
-gulp.task('test', function() {
-	return new Server({
-		configFile : __dirname + '/karma.conf.js',
-		singleRun : true
+function runTests(singleRun, done) {
+	var karmaOptions = {
+			configFile : __dirname + '/karma.conf.js',
+			singleRun : singleRun,
+			autoWatch: !singleRun
+		};
+	new Server(karmaOptions, function(failCount) {
+		done(failCount ? new Error("Failed " + failCount + " tests.") : null);
 	}).start();
+}
+
+gulp.task('test', function(done) {
+	runTests(true, done);
 });
 
-gulp.task('build', function() {
-	runSequence('lint','test');
-})
-
-gulp.task('watch', function() {
-	gulp.watch('js/**/*', [ 'build' ]);
-	gulp.watch('test/**/*', [ 'test' ]);
+gulp.task('watch', function(done) {
+	var watchOptions = { debounceDelay: 1000 };
+	gulp.watch('js/**/*.js', watchOptions, ['lint', 'test']);
+	gulp.watch('test/**/*.js', watchOptions, ['test']);
 });
+
