@@ -4,7 +4,8 @@
 
 # LOGGING
 logging:
-    file: fullLogs.log
+    path: /var/log
+    file: cinema.log
 
 # ----------------------------------------
 # WEB PROPERTIES
