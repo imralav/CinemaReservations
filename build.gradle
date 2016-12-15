@@ -118,7 +118,6 @@ task frontendCopy(type: NpmTask) {
       it.workingDir = frontendPath
     }
     dependsOn frontendBuild
-    dependsOn cleanPublicFolder
 }
 
 task frontend() {
@@ -131,4 +130,5 @@ task frontend() {
     description 'Responsible for testing, building and copying frontend resources'
 }
 
-jar.dependsOn frontend
+processResources.dependsOn frontend
+clean.dependsOn cleanPublicFolder

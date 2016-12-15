@@ -18,7 +18,7 @@ gulp.task('build:js', function() {
 	return gulp.src(paths)
 	    .pipe(concat('scripts.js'))
 	    .pipe(rename('scripts.min.js'))
-	    .pipe(uglify())
+	    .pipe(uglify({mangle: false}))
 	    .pipe(gulp.dest(jsDest));
 });
 
