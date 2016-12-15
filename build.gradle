@@ -126,6 +126,7 @@ task frontendClean(type: NpmTask) {
     execOverrides {
       it.workingDir = frontendPath
     }
+    dependsOn npmPackages
 }
 
 task frontend() {
