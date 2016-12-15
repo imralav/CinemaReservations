@@ -8,23 +8,37 @@ var concat = require('gulp-concat');
 var rename = require('gulp-rename');  
 var uglify = require('gulp-uglify'); 
 var clean = require('gulp-clean');
+var gutil = require('gulp-util');
 
 var publicFolderPath = '../src/main/resources/public';
-var appPath = 'app';
+var appPath = 'webapp';
 var allJsFiles = appPath + '/js/**/*.js';
 var baseJsFiles = appPath + '/js/*.js';
 var htmlFiles = appPath + '/**/*.html';
 var buildPath = 'build';
 
-gulp.task('build:js', function() {  
+gulp.task('build:js:webapp', function() {  
 	var paths = mainBowerFiles();
 	paths.push(baseJsFiles);
 	paths.push(allJsFiles);
+	gutil.log(gutil.colors.magenta('Building paths: ', paths));
 	return gulp.src(paths)
-	    .pipe(concat('scripts.js'))
-	    .pipe(rename('scripts.min.js'))
+	    .pipe(concat('webapp.js'))
+	    .pipe(rename('webapp.min.js'))
 	    .pipe(uglify({mangle: false}))
 	    .pipe(gulp.dest(buildPath + '/js'));
+});
+
+gulp.task('build:js:vxmlapp', function() {
+	var paths = [];
+	paths.push('bower_components/jquery/dist');
+	paths.push('vxml/js/**/*.js');
+	gutil.log(gutil.colors.magenta('Building paths: ', paths));
+	return gulp.src(paths)
+	.pipe(concat('vxml.js'))
+	.pipe(rename('vxml.min.js'))
+	.pipe(uglify({mangle: false}))
+	.pipe(gulp.dest(buildPath + '/js'));
 });
 
 gulp.task('build:html', function() {
@@ -35,7 +49,7 @@ gulp.task('clean', function() {
 	return gulp.src(buildPath + '/*', {read: false}).pipe(clean());
 })
 
-gulp.task('build', ['lint', 'build:js', 'build:html']);
+gulp.task('build', ['lint', 'build:js:webapp', 'build:js:vxmlapp', 'build:html']);
 
 gulp.task('copy', function() {
 	return gulp.src(buildPath + '/**/*').pipe(gulp.dest(publicFolderPath));
