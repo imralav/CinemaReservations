@@ -36,6 +36,17 @@ dependencies {
     testCompile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.4'
 }
 
+task cleanPublicFolder(type: Delete) {
+    def dirName = project.projectDir.getAbsolutePath() + '/src/main/resources/public'
+    file( dirName ).list().each{ f -> delete "${dirName}/${f}" }
+}
+
+test {
+    testLogging {
+        events "PASSED", "STARTED", "FAILED", "SKIPPED"
+    }
+}
+
 node {
     version = '6.2.0'
     npmVersion = '3.8.9'
@@ -88,13 +99,16 @@ task frontendTest(type: NpmTask) {
     execOverrides {
       it.workingDir = frontendPath
     }
+    dependsOn bowerInstall
 }
 
-test.dependsOn frontendTest
-
-task cleanPublicFolder(type: Delete) {
-    def dirName = project.projectDir.getAbsolutePath() + '/src/main/resources/public'
-    file( dirName ).list().each{ f -> delete "${dirName}/${f}" }
+task frontendBuild(type: NpmTask) {
+    description 'Builds frontend resources'
+    args = ['run', 'build']
+    execOverrides {
+      it.workingDir = frontendPath
+    }
+    dependsOn frontendTest
 }
 
 task frontendCopy(type: NpmTask) {
@@ -103,28 +117,18 @@ task frontendCopy(type: NpmTask) {
     execOverrides {
       it.workingDir = frontendPath
     }
-    dependsOn bowerInstall
+    dependsOn frontendBuild
     dependsOn cleanPublicFolder
 }
 
-task frontendCopyBower(type: NpmTask) {
-    description 'Copies bower libraries to public resource dir'
-    args = ['run', 'copyBowerDependencies'];
-    execOverrides {
-      it.workingDir = frontendPath
-    }
-}
-
-frontendCopy.dependsOn frontendCopyBower
-
 task frontend() {
+    dependsOn 'npmCacheConfig'
+    dependsOn 'npmPackages'
+    dependsOn 'bowerInstall'
     dependsOn 'frontendTest'
+    dependsOn 'frontendBuild'
     dependsOn 'frontendCopy'
-    dependsOn 'frontendCopyBower'
     description 'Responsible for testing, building and copying frontend resources'
 }
 
-processResources.dependsOn bowerInstall
-processResources.dependsOn frontendCopy
-frontendCopy.mustRunAfter bowerInstall
-jar.mustRunAfter frontendCopy
+jar.dependsOn frontend
