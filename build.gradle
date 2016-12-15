@@ -142,4 +142,5 @@ task frontend() {
 
 processResources.dependsOn frontend
 clean.dependsOn frontendClean
+frontendBuild.mustRunAfter frontendClean
 clean.dependsOn cleanPublicFolder

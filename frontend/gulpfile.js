@@ -18,10 +18,12 @@ var htmlFiles = appPath + '/**/*.html';
 var buildPath = 'build';
 
 gulp.task('build:js:webapp', function() {  
-	var paths = mainBowerFiles();
+	var paths = [];
+	paths.push('bower_components/angular/angular.js');
+	paths.push('bower_components/angular-mocks/angular-mocks.js');
 	paths.push(baseJsFiles);
 	paths.push(allJsFiles);
-	gutil.log(gutil.colors.magenta('Building paths: ', paths.join('\n')));
+	gutil.log('Building paths:\n', gutil.colors.magenta(paths.join('\n')));
 	return gulp.src(paths)
 	    .pipe(concat('webapp.js'))
 	    .pipe(rename('webapp.min.js'))
@@ -31,12 +33,12 @@ gulp.task('build:js:webapp', function() {
 
 gulp.task('build:js:vxmlapp', function() {
 	var paths = [];
-	paths.push('bower_components/jquery/dist');
-	paths.push('vxml/js/**/*.js');
-	gutil.log(gutil.colors.magenta('Building paths: ', paths.join('\n')));
+	paths.push('bower_components/jquery/dist/jquery.js');
+	paths.push('vxmlapp/js/**/*.js');
+	gutil.log('Building paths:\n', gutil.colors.magenta(paths.join('\n')));
 	return gulp.src(paths)
-	.pipe(concat('vxml.js'))
-	.pipe(rename('vxml.min.js'))
+	.pipe(concat('vxmlapp.js'))
+	.pipe(rename('vxmlapp.min.js'))
 	.pipe(uglify({mangle: false}))
 	.pipe(gulp.dest(buildPath + '/js'));
 });

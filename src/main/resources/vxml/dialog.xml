@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version = "2.1" xml:lang="pl-pl">
-  <script src="js/scripts.min.js"></script>
-  <script>
-      angular.bootstrap(document, ['CinemaReservations']);
-      var injector = angular.element(document).injector();
-      var utilsService = injector.get('UtilsService');
-  </script>
+  <script src="js/vxmlapp.min.js"></script>
   <meta name="maintainer" content="imralav@gmail.com" />
   <var name="attempt" expr="1"/>
   <script>
@@ -13,7 +8,7 @@
   </script>
   <form id="MainMenu">
     <block>
-      <prompt>Dzień dobry. <value expr="utilsService.getJoke()"></value></prompt>
+      <prompt>Dzień dobry.</prompt>
       <goto next="#Joke"/>
     </block>
   </form>
