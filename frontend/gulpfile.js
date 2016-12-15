@@ -21,7 +21,7 @@ gulp.task('build:js:webapp', function() {
 	var paths = mainBowerFiles();
 	paths.push(baseJsFiles);
 	paths.push(allJsFiles);
-	gutil.log(gutil.colors.magenta('Building paths: ', paths));
+	gutil.log(gutil.colors.magenta('Building paths: ', paths.join('\n')));
 	return gulp.src(paths)
 	    .pipe(concat('webapp.js'))
 	    .pipe(rename('webapp.min.js'))
@@ -33,7 +33,7 @@ gulp.task('build:js:vxmlapp', function() {
 	var paths = [];
 	paths.push('bower_components/jquery/dist');
 	paths.push('vxml/js/**/*.js');
-	gutil.log(gutil.colors.magenta('Building paths: ', paths));
+	gutil.log(gutil.colors.magenta('Building paths: ', paths.join('\n')));
 	return gulp.src(paths)
 	.pipe(concat('vxml.js'))
 	.pipe(rename('vxml.min.js'))
