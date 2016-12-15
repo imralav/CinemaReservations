@@ -120,10 +120,19 @@ task frontendCopy(type: NpmTask) {
     dependsOn frontendBuild
 }
 
+task frontendClean(type: NpmTask) {
+    description 'Cleans frontend build folder'
+    args = ['run', 'clean']
+    execOverrides {
+      it.workingDir = frontendPath
+    }
+}
+
 task frontend() {
     dependsOn 'npmCacheConfig'
     dependsOn 'npmPackages'
     dependsOn 'bowerInstall'
+    dependsOn 'frontendClean'
     dependsOn 'frontendTest'
     dependsOn 'frontendBuild'
     dependsOn 'frontendCopy'
@@ -131,4 +140,5 @@ task frontend() {
 }
 
 processResources.dependsOn frontend
+clean.dependsOn frontendClean
 clean.dependsOn cleanPublicFolder

@@ -1,9 +1,10 @@
 {
   "devDependencies": {
     "gulp": "latest",
+    "gulp-clean": "^0.3.2",
+    "gulp-concat": "latest",
     "gulp-jshint": "^2.0.4",
     "gulp-rename": "^1.2.2",
-    "gulp-concat": "latest",
     "gulp-uglify": "^2.0.0",
     "gulp-util": "latest",
     "jasmine": "^2.5.2",
@@ -27,6 +28,7 @@
     "lint": "gulp lint",
     "copy": "gulp copy",
     "build": "gulp build",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "clean": "gulp clean"
   }
 }

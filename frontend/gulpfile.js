@@ -7,11 +7,14 @@ var runSequence = require('run-sequence');
 var concat = require('gulp-concat');  
 var rename = require('gulp-rename');  
 var uglify = require('gulp-uglify'); 
+var clean = require('gulp-clean');
 
 var publicFolderPath = '../src/main/resources/public';
-var allJsFiles = 'js/**/*.js';
-var baseJsFiles = 'js/*.js';
-var jsDest = 'build';
+var appPath = 'app';
+var allJsFiles = appPath + '/js/**/*.js';
+var baseJsFiles = appPath + '/js/*.js';
+var htmlFiles = appPath + '/**/*.html';
+var buildPath = 'build';
 
 gulp.task('build:js', function() {  
 	var paths = mainBowerFiles();
@@ -21,20 +24,22 @@ gulp.task('build:js', function() {
 	    .pipe(concat('scripts.js'))
 	    .pipe(rename('scripts.min.js'))
 	    .pipe(uglify({mangle: false}))
-	    .pipe(gulp.dest(jsDest));
+	    .pipe(gulp.dest(buildPath + '/js'));
 });
 
-gulp.task('build', ['lint', 'build:js']);
-
-gulp.task('copy:js', function() {
-	return gulp.src(jsDest + '/**/*.js').pipe(gulp.dest(publicFolderPath + '/js'));
+gulp.task('build:html', function() {
+	return gulp.src(htmlFiles).pipe(gulp.dest(buildPath));
 });
 
-gulp.task('copy:html', function() {
-	return gulp.src('views/**/*.html').pipe(gulp.dest(publicFolderPath));
+gulp.task('clean', function() {
+	return gulp.src(buildPath + '/*', {read: false}).pipe(clean());
 })
 
-gulp.task('copy', ['copy:js', 'copy:html']);
+gulp.task('build', ['lint', 'build:js', 'build:html']);
+
+gulp.task('copy', function() {
+	return gulp.src(buildPath + '/**/*').pipe(gulp.dest(publicFolderPath));
+});
 
 gulp.task('lint', function() {
 	return gulp.src(allJsFiles)
