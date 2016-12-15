@@ -11,4 +11,10 @@ public class MainDialogController {
     public String vxmlDialog(Model model) {
         return "dialog.xml";
     }
+
+    @RequestMapping("/joke")
+    public String getJoke(Model model) {
+        model.addAttribute("joke","Dobry dowcip");
+        return "joke.xml";
+    }
 }
