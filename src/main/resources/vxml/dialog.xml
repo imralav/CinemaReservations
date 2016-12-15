@@ -13,7 +13,7 @@
   </script>
   <form id="MainMenu">
     <block>
-      <prompt>Dzień dobry. <value expr="utilsService.getJoke"></value></prompt>
+      <prompt>Dzień dobry. <value expr="utilsService.getJoke()"></value></prompt>
       <goto next="#Joke"/>
     </block>
   </form>

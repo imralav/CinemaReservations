@@ -7,8 +7,12 @@ angular.module('CinemaReservations').service('UtilsService', function($http) {
 		});
 	}
 	
+	function getJoke() {
+		return "Dobry dowcip.";
+	}
+	
 	return {
-		genericGet: genericGet
-		getJoke: "Dobry dowcip."
+		genericGet: genericGet,
+		getJoke: getJoke
 	};
 });
