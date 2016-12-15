@@ -44,13 +44,13 @@ when(customerRepository.save(any(Customer.class))).then(AdditionalAnswers.return
 ## Fetching data from backend to VXML
 VXML allows to fetch XML data from backend. It can then be retrieving using JS DOM methods. Fetching:
 ```Xml
-    <data name="jokeResponse" src="joke" />
-    <assign name="document.jokeResponse" expr="jokeResponse.documentElement" />
-    <prompt>Dzień dobry. <value expr="dialogContext.getData(jokeResponse, 'joke')"/></prompt>
+<data name="jokeResponse" src="joke" />
+<assign name="document.jokeResponse" expr="jokeResponse.documentElement" />
+<prompt>Dzień dobry. <value expr="dialogContext.getData(jokeResponse, 'joke')"/></prompt>
 ```
 JS DOM usage:
 ```JavaScript
-    function getData(doc, tagName) {
-        return doc.getElementsByTagName(tagName).item(0).firstChild.data;
-    }
+function getData(doc, tagName) {
+    return doc.getElementsByTagName(tagName).item(0).firstChild.data;
+}
 ```
