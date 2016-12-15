@@ -9,12 +9,14 @@ var rename = require('gulp-rename');
 var uglify = require('gulp-uglify'); 
 
 var publicFolderPath = '../src/main/resources/public';
-var jsFiles = 'js/**/*.js';
+var allJsFiles = 'js/**/*.js';
+var baseJsFiles = 'js/*.js';
 var jsDest = 'build';
 
 gulp.task('build:js', function() {  
 	var paths = mainBowerFiles();
-	paths.push(jsFiles);
+	paths.push(baseJsFiles);
+	paths.push(allJsFiles);
 	return gulp.src(paths)
 	    .pipe(concat('scripts.js'))
 	    .pipe(rename('scripts.min.js'))
@@ -35,7 +37,7 @@ gulp.task('copy:html', function() {
 gulp.task('copy', ['copy:js', 'copy:html']);
 
 gulp.task('lint', function() {
-	return gulp.src(jsFiles)
+	return gulp.src(allJsFiles)
 			.pipe(jshint())
 			.pipe(jshint.reporter('jshint-stylish'))
 			.pipe(jshint.reporter('fail'));
@@ -58,7 +60,7 @@ gulp.task('test', function(done) {
 
 gulp.task('watch', function(done) {
 	var watchOptions = { debounceDelay: 1000 };
-	gulp.watch(jsFiles, watchOptions, ['lint', 'test']);
+	gulp.watch(allJsFiles, watchOptions, ['lint', 'test']);
 	gulp.watch('test/**/*.js', watchOptions, ['test']);
 });
 
