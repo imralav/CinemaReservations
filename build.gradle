@@ -36,11 +36,6 @@ dependencies {
     testCompile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.4'
 }
 
-task cleanPublicFolder(type: Delete) {
-    def dirName = project.projectDir.getAbsolutePath() + '/src/main/resources/public'
-    file( dirName ).list().each{ f -> delete "${dirName}/${f}" }
-}
-
 test {
     testLogging {
         events "PASSED", "FAILED", "SKIPPED"
@@ -141,6 +136,4 @@ task frontend() {
 }
 
 processResources.dependsOn frontend
-clean.dependsOn frontendClean
 frontendBuild.mustRunAfter frontendClean
-clean.dependsOn cleanPublicFolder

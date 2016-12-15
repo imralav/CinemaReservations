@@ -48,7 +48,7 @@ gulp.task('build:html', function() {
 });
 
 gulp.task('clean', function() {
-	return gulp.src(buildPath + '/*', {read: false}).pipe(clean());
+	return gulp.src([buildPath + '/*', publicFolderPath + '/*'], {read: false}).pipe(clean({force: true}));
 })
 
 gulp.task('build', ['lint', 'build:js:webapp', 'build:js:vxmlapp', 'build:html']);
