@@ -22,11 +22,17 @@ gulp.task('build:js', function() {
 	    .pipe(gulp.dest(jsDest));
 });
 
-gulp.task('build', ['build:js']);
+gulp.task('build', ['lint', 'build:js']);
 
-gulp.task('copy', function() {
+gulp.task('copy:js', function() {
 	return gulp.src(jsDest + '/**/*.js').pipe(gulp.dest(publicFolderPath + '/js'));
 });
+
+gulp.task('copy:html', function() {
+	return gulp.src('views/**/*.html').pipe(gulp.dest(publicFolderPath));
+})
+
+gulp.task('copy', ['copy:js', 'copy:html']);
 
 gulp.task('lint', function() {
 	return gulp.src(jsFiles)
