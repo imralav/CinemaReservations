@@ -33,7 +33,7 @@ gulp.task('build:js:webapp', function() {
 
 gulp.task('build:js:vxmlapp', function() {
 	var paths = [];
-	paths.push('bower_components/jquery/dist/jquery.js');
+//	paths.push('bower_components/jquery/dist/jquery.js');
 	paths.push('vxmlapp/js/**/*.js');
 	gutil.log('Building paths:\n', gutil.colors.magenta(paths.join('\n')));
 	return gulp.src(paths)
