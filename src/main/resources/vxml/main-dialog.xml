@@ -8,11 +8,11 @@
     </script>
     <form id="MainMenu">
         <block>
-            <data name="joke" src="joke" />
-            <log expr="'Received: ' + joke"/>
-            <assign name="document.joke" expr="joke.documentElement" />
-            <log expr="'Document element: ' + joke"/>
-            <prompt>Dzień dobry.</prompt>
+            <data name="document.jokeResponse" src="joke" />
+            <log expr="'Received: ' + document.jokeResponse"/>
+            <assign name="document.jokeResponse" expr="document.jokeResponse" />
+            <log expr="'Document element: ' + document.jokeResponse"/>
+            <prompt>Dzień dobry. <value expr="getData(document.jokeResponse 'joke')"/></prompt>
             <goto next="#Joke" />
         </block>
     </form>
