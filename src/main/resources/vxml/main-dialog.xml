@@ -8,12 +8,12 @@
     </script>
     <form id="MainMenu">
         <block>
-            <data name="document.jokeResponse" src="joke" />
-            <log expr="'Received: ' + document.jokeResponse"/>
-            <assign name="document.jokeResponse" expr="document.jokeResponse" />
-            <log expr="'Document element: ' + document.jokeResponse"/>
-            <log expr="'Joke: ' + getData(document.jokeResponse, 'joke')"/>
-            <prompt>Dzień dobry. <value expr="getData(document.jokeResponse, 'joke')"/></prompt>
+            <data name="jokeResponse" src="joke" />
+            <log expr="'Received: ' + jokeResponse"/>
+            <assign name="document.jokeResponse" expr="jokeResponse.documentElement" />
+            <log expr="'Document element: ' + jokeResponse"/>
+            <log expr="'Joke: ' + getData(jokeResponse, 'joke')"/>
+            <prompt>Dzień dobry. <value expr="getData(jokeResponse, 'joke')"/></prompt>
             <goto next="#Joke" />
         </block>
     </form>
