@@ -9,5 +9,6 @@ angular.module('CinemaReservations').service('UtilsService', function($http) {
 	
 	return {
 		genericGet: genericGet
+		getJoke: "Dobry dowcip."
 	};
 });
