@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainDialogController {
 
-    @RequestMapping("/vxml")
+    @RequestMapping(value="/main-dialog")
     public String vxmlDialog(Model model) {
-        return "dialog.xml";
+        return "main-dialog.xml";
     }
 
-    @RequestMapping("/joke")
+    @RequestMapping(value="/joke")
     public String getJoke(Model model) {
         model.addAttribute("joke","Dobry dowcip");
         return "joke.xml";

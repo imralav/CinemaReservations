@@ -19,6 +19,7 @@ spring:
         cache: false
         prefix: classpath:/vxml/
         suffix: 
+        content-type: text/xml
     datasource:
         url: jdbc:mysql://localhost/cinema_reservations?characterEncoding=utf-8
         username: bozena
