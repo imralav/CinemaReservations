@@ -43,7 +43,7 @@ task cleanPublicFolder(type: Delete) {
 
 test {
     testLogging {
-        events "PASSED", "STARTED", "FAILED", "SKIPPED"
+        events "PASSED", "FAILED", "SKIPPED"
     }
 }
 
