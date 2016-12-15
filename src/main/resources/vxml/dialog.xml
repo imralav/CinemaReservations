@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version = "2.1" xml:lang="pl-pl">
-  <script src="js/scripts.js"></script>
+  <script src="js/scripts.min.js"></script>
   <meta name="maintainer" content="imralav@gmail.com" />
   <var name="attempt" expr="1"/>
   <script>
