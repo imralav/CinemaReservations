@@ -33,10 +33,15 @@ var dialogContext = (function(jokeProvider) {
 	function shouldTellJoke() {
 		return jokeProvider.toldJokesAmount() < jokeLimit;
 	}
+	
+	function getData(doc, tagName) {
+		return doc.getElementsByTagName(tagName).item(0).firstChild.data;
+	}
 
 	return {
 		setJokeLimitTo : setJokeLimitTo,
 		shouldTellJoke : shouldTellJoke,
-		toldJokesAmount : jokeProvider.toldJokesAmount
+		toldJokesAmount : jokeProvider.toldJokesAmount,
+		getData: getData
 	};
 }(jokeProvider));
