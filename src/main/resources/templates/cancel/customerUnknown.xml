@@ -2,9 +2,19 @@
 <vxml version="2.1" xml:lang="pl-pl">
     <meta name="maintainer" content="imralav@gmail.com" />
     <form>
-        <block>
-            <prompt>W systemie nie istnieje rezerwacja na podany kod użytkownika.</prompt>
-            <goto next="cancel"/>
-        </block>
+        <field name="customerCode" type="numbers">
+            <prompt>Podaj numer klienta uzyskany podczas rezerwacji.</prompt>
+            <filled>
+                <submit next="/cv/cancel" />
+            </filled>
+            <nomatch>
+                <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </nomatch>
+            <noinput>
+                <prompt>Nie usłyszano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </noinput>
+        </field>
     </form>
 </vxml>
