@@ -1,11 +1,10 @@
 package pl.com.imralav.vxml.controllers;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/cancel")
@@ -18,9 +17,8 @@ public class CancelDialogController {
     }
 
     @RequestMapping("/passCustomerCode")
-    public String passCustomerCode(HttpServletRequest request) {
-        LOGGER.info("Request attributes passed: {}", request.getAttributeNames());
-        LOGGER.info("Request params passed: {}", request.getParameterMap());
+    public String passCustomerCode(@RequestParam(required=false) String customerCode) {
+        LOGGER.info("Checking customer code: {}", customerCode);
         return "cancel/customerUnknown";
     }
 }
