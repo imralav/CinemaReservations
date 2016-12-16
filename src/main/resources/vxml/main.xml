@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="pl-pl">
+    <script src="js/vxmlapp.min.js"></script>
+    <meta name="maintainer" content="imralav@gmail.com" />
+    <form id="MainMenu">
+        <field name="selection">
+            <prompt bargein="false">
+                Witamy w systemie rezerwacji biletów
+                kina Ardia.
+                Powiedz REZERWACJA, by przejść do rezerwacji
+                biletów,
+                ANULUJ, by przejść do wycofania starej
+                rezerwacji
+                lub KONIEC, by zakończyć rozmowę.
+            </prompt>
+            <grammar xml:lang="pl-pl" root="mainMenuGrammar">
+                <rule id="mainMenuGrammar">
+                    <one-of>
+                        <item> rezerwacja </item>
+                        <item> anuluj </item>
+                        <item> koniec </item>
+                    </one-of>
+                </rule>
+            </grammar>
+            <nomatch>
+                <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </nomatch>
+            <noinput>
+                <prompt>Nie usłyszano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </noinput>
+            <filled>
+                <if cond="menuChoice=='rezerwacja'">
+                    <goto next="reservation"/>
+                <elseif cond="menuChoice=='anuluj'" />
+                    <goto next="cancel" />
+                <else/>
+                    <goto next="farewell"/>
+                </if>
+            </filled>
+        </field>
+    </form>
+</vxml>

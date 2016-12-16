@@ -1,4 +1,4 @@
-package pl.com.imralav.vxml.controllers;
+package pl.com.imralav.vxml.controllers.rest;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

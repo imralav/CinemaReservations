@@ -13,21 +13,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(MainDialogController.class)
-public class MainDialogControllerTest {
+@WebMvcTest(CancelDialogController.class)
+public class CancelDialogControllerIntegrationTest {
 
     @Autowired
-    private MockMvc mockMvc;
+    MockMvc mockMvc;
 
     @Test
-    public void shouldReturnMainDialog() throws Exception {
-        mockMvc.perform(get("/main-dialog")).andExpect(status().isOk())
-               .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_XML));
-    }
-
-    @Test
-    public void shouldReturnFarewell() throws Exception {
-        mockMvc.perform(get("/farewell")).andExpect(status().isOk())
+    public void shouldReturnMainCancelDialog() throws Exception {
+        mockMvc.perform(get("/cancel")).andExpect(status().isOk())
                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_XML));
     }
 }

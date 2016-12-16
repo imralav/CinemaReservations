@@ -9,12 +9,11 @@ public class MainDialogController {
 
     @RequestMapping(value="/main-dialog")
     public String vxmlDialog(Model model) {
-        return "main-dialog.xml";
+        return "main.xml";
     }
 
-    @RequestMapping(value="/joke")
-    public String getJoke(Model model) {
-        model.addAttribute("joke","Dobry dowcip");
-        return "joke.xml";
+    @RequestMapping(value="/farewell")
+    public String farewell() {
+        return "farewell.xml";
     }
 }
