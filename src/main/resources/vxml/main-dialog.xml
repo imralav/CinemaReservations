@@ -9,7 +9,7 @@
     <form id="MainMenu">
         <block>
             <data name="jokeResponse" src="joke" />
-            <log expr="'Received: ' + jokeResponse"/>
+            <log expr="'Received: ' + JSON.stringify(jokeResponse)"/>
             <assign name="document.jokeResponse" expr="jokeResponse.documentElement" />
             <log expr="'Document element: ' + jokeResponse"/>
             <log expr="'Joke: ' + dialogContext.getData(jokeResponse, 'joke')"/>
