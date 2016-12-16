@@ -2,7 +2,7 @@
 <vxml version="2.1" xml:lang="pl-pl">
     <meta name="maintainer" content="imralav@gmail.com" />
     <form>
-        <field name="customerCode" type="digits?length=4">
+        <field name="customerCode" type="digits?minlength=1;maxlength=9">
             <prompt>Podaj kod klienta uzyskany podczas rezerwacji.</prompt>
             <filled>
                 <submit next="cancel/passCustomerCode" />
