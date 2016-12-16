@@ -2,9 +2,10 @@
 <vxml version="2.1" xml:lang="pl-pl">
     <meta name="maintainer" content="imralav@gmail.com" />
     <form>
-        <field name="customerCode" type="numbers">
+        <field name="customerCode" type="number">
             <prompt>Podaj numer klienta uzyskany podczas rezerwacji.</prompt>
             <filled>
+                <prompt>Sprawdzam numer <say-as interpret-as="number"><value expr="customerCode"/></say-as>.</prompt>
                 <submit next="/cv/cancel" />
             </filled>
             <nomatch>

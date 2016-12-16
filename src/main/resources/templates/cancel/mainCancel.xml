@@ -5,6 +5,7 @@
         <field name="customerCode" type="digits?minlength=1;maxlength=9">
             <prompt>Podaj kod klienta uzyskany podczas rezerwacji.</prompt>
             <filled>
+                <prompt>Sprawdzam kod <say-as interpret-as="digits"><value expr="customerCode"/></say-as>.</prompt>
                 <submit next="cancel/passCustomerCode" />
             </filled>
             <nomatch>
