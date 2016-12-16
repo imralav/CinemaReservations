@@ -2,8 +2,10 @@
 <vxml version="2.1" xml:lang="pl-pl">
     <script src="js/vxmlapp.min.js"></script>
     <meta name="maintainer" content="imralav@gmail.com" />
-    <form id="MainMenu">
-        <block>Anulujemy.</block>
-        <goto next="/farewell"/>
+    <form>
+        <block>
+            <prompt>Podaj kod klienta uzyskany podczas rezerwacji.</prompt>
+            <goto next="farewell" />
+        </block>
     </form>
 </vxml>
