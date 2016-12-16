@@ -31,9 +31,9 @@
                 <reprompt />
             </noinput>
             <filled>
-                <if cond="menuChoice=='rezerwacja'">
+                <if cond="selection == 'rezerwacja'">
                     <goto next="reservation"/>
-                <elseif cond="menuChoice=='anuluj'" />
+                <elseif cond="selection == 'anuluj'" />
                     <goto next="cancel" />
                 <else/>
                     <goto next="farewell"/>
