@@ -4,6 +4,6 @@
     <meta name="maintainer" content="imralav@gmail.com" />
     <form id="MainMenu">
         <block>Anulujemy.</block>
-        <goto next="farewell"/>
+        <goto next="/farewell"/>
     </form>
 </vxml>

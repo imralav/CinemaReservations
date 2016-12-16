@@ -4,7 +4,7 @@
     <meta name="maintainer" content="imralav@gmail.com" />
     <form id="MainMenu">
         <field name="selection">
-            <prompt bargein="false">
+            <prompt>
                 Witamy w systemie rezerwacji biletów
                 kina Ardia.
                 Powiedz REZERWACJA, by przejść do rezerwacji
