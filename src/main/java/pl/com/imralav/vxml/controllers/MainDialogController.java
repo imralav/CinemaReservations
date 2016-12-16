@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainDialogController {
 
-    @RequestMapping(value="/main-dialog")
+    @RequestMapping("/main")
     public String vxmlDialog(Model model) {
-        return "main.xml";
+        return "mainDialog";
     }
 
-    @RequestMapping(value="/farewell")
+    @RequestMapping("/farewell")
     public String farewell() {
-        return "farewell.xml";
+        return "farewellDialog";
     }
 }

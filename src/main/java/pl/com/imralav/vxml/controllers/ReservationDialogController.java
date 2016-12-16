@@ -3,12 +3,11 @@ package pl.com.imralav.vxml.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/reservation")
 @Controller
-public class ResevationDialogController {
+public class ReservationDialogController {
 
-    @RequestMapping
+    @RequestMapping("/reservation")
     public String mainDialog() {
-        return "reservation/main.xml";
+        return "reservation/mainReservation";
     }
 }
