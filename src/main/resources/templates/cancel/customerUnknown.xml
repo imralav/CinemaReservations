@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="pl-pl">
+    <meta name="maintainer" content="imralav@gmail.com" />
+    <form>
+        <block>
+            <prompt>W systemie nie istnieje rezerwacja na podany kod użytkownika.</prompt>
+            <goto next="farewell"/>
+        </block>
+    </form>
+</vxml>

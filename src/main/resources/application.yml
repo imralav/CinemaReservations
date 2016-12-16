@@ -4,7 +4,7 @@
 
 # LOGGING
 logging:
-    file: cinema.log
+    file: logs/cinema.log
 
 # ----------------------------------------
 # WEB PROPERTIES

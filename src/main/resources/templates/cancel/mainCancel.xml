@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" xml:lang="pl-pl">
-    <script src="js/vxmlapp.min.js"></script>
     <meta name="maintainer" content="imralav@gmail.com" />
     <form>
-        <block>
+        <field name="customerCode" type="digits?length=4">
             <prompt>Podaj kod klienta uzyskany podczas rezerwacji.</prompt>
-            <goto next="farewell" />
-        </block>
+            <filled>
+                <submit next="cancel/passCustomerCode" />
+            </filled>
+            <nomatch>
+                <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </nomatch>
+            <noinput>
+                <prompt>Nie usłyszano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </noinput>
+        </field>
     </form>
 </vxml>
