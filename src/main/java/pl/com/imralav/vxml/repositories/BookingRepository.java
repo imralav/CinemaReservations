@@ -8,4 +8,6 @@ import pl.com.imralav.vxml.entities.Booking;
 @Repository
 public interface BookingRepository extends PagingAndSortingRepository<Booking, Integer>{
 
+    Booking findByCustomerCode(int customerCode);
+
 }

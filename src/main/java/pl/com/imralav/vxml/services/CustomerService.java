@@ -34,4 +34,8 @@ public class CustomerService {
     public Iterable<Customer> findAll() {
         return customerRepository.findAll();
     }
+
+    public boolean doesCustomerExistForCode(int customerCode) {
+        return customerRepository.doesExistForCode(customerCode);
+    }
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="pl-pl">
+    <meta name="maintainer" content="imralav@gmail.com" />
+    <script src="/cv/js/vxmlapp.min.js"></script>
+    <form>
+        <block>
+            <prompt></prompt>
+        </block>
+    </form>
+</vxml>

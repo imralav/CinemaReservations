@@ -4,8 +4,8 @@
     <script src="/cv/js/vxmlapp.min.js"></script>
     <form>
         <field name="customerCode">
-            <grammar xml:lang="pl-pl" root="cyferki" type="application/srgs+xml" tag-format="semantics/1.0">
-                <rule id="cyferki" scope="public">
+            <grammar xml:lang="pl-pl" root="digits" version="1.0" type="application/srgs+xml" tag-format="semantics/1.0">
+                <rule id="digits" scope="public">
                     <tag>out="";</tag>
                     <item repeat="1-4">
                         <ruleref uri="#digit"/>
@@ -29,13 +29,7 @@
             </grammar>
             <prompt>Podaj kod klienta uzyskany podczas rezerwacji.</prompt>
             <filled>
-                <prompt>Sprawdzam kod <value expr="customerCode"/>.</prompt>
-                <prompt>Po przetworzeniu <say-as interpret-as="digits"><value expr="digitsService.get()"/></say-as>.</prompt>
-                
-                <log expr="'Customer code: ' + customerCode"/>
-                <log expr="'Digits: ' + digitsService.get()"/>
-<!--                 <submit next="cancel/passCustomerCode" /> -->
-                <clear/>
+                <submit next="cancel/passCustomerCode" />
             </filled>
             <nomatch>
                 <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>

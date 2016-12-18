@@ -28,4 +28,13 @@ public class BookingRepositoryIntegrationTest {
         assertThat(findOne.getSeat().getId()).isEqualTo(1);
         assertThat(findOne.getShowing().getId()).isEqualTo(1);
     }
+
+    @Test
+    public void shouldFindByCustomerId() {
+        //given
+        //when
+        Booking result = bookingRepository.findByCustomerCode(1234);
+        //then
+        assertThat(result.getCustomer().getId()).isEqualTo(1);
+    }
 }

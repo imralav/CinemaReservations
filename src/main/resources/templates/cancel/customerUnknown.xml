@@ -3,41 +3,8 @@
     <meta name="maintainer" content="imralav@gmail.com" />
     <script src="/cv/js/vxmlapp.min.js"></script>
     <form>
-        <field name="customerCode">
-            <grammar xml:lang="pl-pl" root="cyferki" type="application/srgs+xml">
-                <rule id="cyferki" scope="public">
-                    <item repeat="1-4">
-                        <ruleref uri="#digit"/>
-                    </item>
-                </rule>
-                <rule id="digit" scope="public">
-                    <one-of>
-                        <item>zero <tag>digitsService.add(0);</tag></item>
-                        <item>jeden <tag>digitsService.add(1);</tag></item>
-                        <item>dwa <tag>digitsService.add(2);</tag></item>
-                        <item>trzy <tag>digitsService.add(3);</tag></item>
-                        <item>cztery <tag>digitsService.add(4);</tag></item>
-                        <item>pięć <tag>digitsService.add(5);</tag></item>
-                        <item>sześć <tag>digitsService.add(6);</tag></item>
-                        <item>siedem <tag>digitsService.add(7);</tag></item>
-                        <item>osiem <tag>digitsService.add(8);</tag></item>
-                        <item>dziewięć <tag>digitsService.add(9);</tag></item>
-                    </one-of>
-                </rule>
-            </grammar>
-            <prompt>Podaj numer klienta uzyskany podczas rezerwacji.</prompt>
-            <filled>
-                <prompt>Sprawdzam numer <say-as interpret-as="number"><value expr="customerCode"/></say-as>.</prompt>
-                <submit next="/cv/cancel" />
-            </filled>
-            <nomatch>
-                <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
-                <reprompt />
-            </nomatch>
-            <noinput>
-                <prompt>Nie usłyszano wyboru, proszę spróbować ponownie.</prompt>
-                <reprompt />
-            </noinput>
-        </field>
+        <block>
+            <prompt></prompt>
+        </block>
     </form>
 </vxml>

@@ -1,5 +1,8 @@
 package pl.com.imralav.vxml.entities;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -63,7 +66,6 @@ public class Booking {
     public void setShowing(Showing showing) {
         this.showing = showing;
     }
-
 
     @Override
     public String toString() {
