@@ -16,6 +16,14 @@ public class Seat {
 
     private Integer rowNumber;
 
+    public Seat() {}
+
+    public Seat(int seatNumber, int rowNumber) {
+        this.seatNumber = seatNumber;
+        this.rowNumber = rowNumber;
+    }
+
+
     public Integer getId() {
         return id;
     }

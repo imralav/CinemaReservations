@@ -34,11 +34,11 @@ public class BookingRepositoryIntegrationTest {
         //when
         Booking findOne = bookingRepository.findOne(1);
         //then
-        assertThat(findOne.getSeat()).hasSize(2);
-        assertThat(findOne.getSeat()).extracting(seat -> {
+        assertThat(findOne.getSeats()).hasSize(2);
+        assertThat(findOne.getSeats()).extracting(seat -> {
             return seat.getSeatNumber();
         }).containsExactly(2,3);
-        assertThat(findOne.getSeat()).extracting(seat -> {
+        assertThat(findOne.getSeats()).extracting(seat -> {
             return seat.getRowNumber();
         }).containsExactly(2,2);
     }

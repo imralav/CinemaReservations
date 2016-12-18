@@ -34,6 +34,10 @@ public class Showing {
         return movie;
     }
 
+    public String getMovieTitle() {
+        return movie.getTitle();
+    }
+
 
     public void setMovie(Movie movie) {
         this.movie = movie;

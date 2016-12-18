@@ -1,11 +1,14 @@
 package pl.com.imralav.vxml.entities;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -21,8 +24,8 @@ public class Booking {
     private Customer customer;
 
     @ManyToMany
-    @JoinTable(name="booking_seats")
-    private List<Seat> seat;
+    @JoinTable(name = "booking_seats", inverseJoinColumns=@JoinColumn(name="SEAT_ID", referencedColumnName="ID"))
+    private List<Seat> seats;
 
     @ManyToOne
     private Showing showing;
@@ -52,28 +55,34 @@ public class Booking {
         return showing;
     }
 
+    public LocalDate getShowingDate() {
+        return showing.getShowingDatetime().toLocalDate();
+    }
 
+    public LocalTime getShowingTime() {
+        return showing.getShowingDatetime().toLocalTime();
+    }
 
     public void setShowing(Showing showing) {
         this.showing = showing;
     }
 
-
-
-    public List<Seat> getSeat() {
-        return seat;
+    public String getMovieTitle() {
+        return showing.getMovieTitle();
     }
 
+    public List<Seat> getSeats() {
+        return seats;
+    }
 
-
-    public void setSeat(List<Seat> seat) {
-        this.seat = seat;
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
     }
 
 
     @Override
     public String toString() {
-        return "Booking [id=" + id + ", customer=" + customer + ", seat=" + seat + ", showing=" + showing + "]";
+        return "Booking [id=" + id + ", customer=" + customer + ", seats=" + seats + ", showing=" + showing + "]";
     }
 
 
@@ -83,7 +92,7 @@ public class Booking {
         int result = 1;
         result = prime * result + ((customer == null) ? 0 : customer.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((seat == null) ? 0 : seat.hashCode());
+        result = prime * result + ((seats == null) ? 0 : seats.hashCode());
         result = prime * result + ((showing == null) ? 0 : showing.hashCode());
         return result;
     }
@@ -115,11 +124,11 @@ public class Booking {
         } else if (!id.equals(other.id)) {
             return false;
         }
-        if (seat == null) {
-            if (other.seat != null) {
+        if (seats == null) {
+            if (other.seats != null) {
                 return false;
             }
-        } else if (!seat.equals(other.seat)) {
+        } else if (!seats.equals(other.seats)) {
             return false;
         }
         if (showing == null) {
