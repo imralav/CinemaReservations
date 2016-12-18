@@ -50,6 +50,7 @@ var digitsService = (function() {
 	var digits = "";
 	function addDigit(digit) {
 		digits += digit;
+		return digits;
 	}
 	function getDigits() {
 		return digits;
@@ -57,5 +58,5 @@ var digitsService = (function() {
 	return {
 		add: addDigit,
 		get: getDigits
-	}
+	};
 }());
