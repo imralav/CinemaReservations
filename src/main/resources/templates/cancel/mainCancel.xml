@@ -12,16 +12,16 @@
                 </rule>
                 <rule id="digit" scope="public">
                     <one-of>
-                        <item>zero <tag>digitsService.add(0);</tag></item>
-                        <item>jeden <tag>digitsService.add(1);</tag></item>
-                        <item>dwa <tag>digitsService.add(2);</tag></item>
-                        <item>trzy <tag>digitsService.add(3);</tag></item>
-                        <item>cztery <tag>digitsService.add(4);</tag></item>
-                        <item>pięć <tag>digitsService.add(5);</tag></item>
-                        <item>sześć <tag>digitsService.add(6);</tag></item>
-                        <item>siedem <tag>digitsService.add(7);</tag></item>
-                        <item>osiem <tag>digitsService.add(8);</tag></item>
-                        <item>dziewięć <tag>digitsService.add(9);</tag></item>
+                        <item>zero <tag>digitsService.add('0');</tag></item>
+                        <item>jeden <tag>digitsService.add('1');</tag></item>
+                        <item>dwa <tag>digitsService.add('2');</tag></item>
+                        <item>trzy <tag>digitsService.add('3');</tag></item>
+                        <item>cztery <tag>digitsService.add('4');</tag></item>
+                        <item>pięć <tag>digitsService.add('5');</tag></item>
+                        <item>sześć <tag>digitsService.add('6');</tag></item>
+                        <item>siedem <tag>digitsService.add('7');</tag></item>
+                        <item>osiem <tag>digitsService.add('8');</tag></item>
+                        <item>dziewięć <tag>digitsService.add('9');</tag></item>
                     </one-of>
                 </rule>
             </grammar>
