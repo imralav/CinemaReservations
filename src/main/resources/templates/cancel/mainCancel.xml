@@ -12,16 +12,16 @@
                 </rule>
                 <rule id="digit" scope="public">
                     <one-of>
-                        <item>zero <tag>digitsService.add('0');</tag></item>
-                        <item>jeden <tag>digitsService.add('1');</tag></item>
-                        <item>dwa <tag>digitsService.add('2');</tag></item>
-                        <item>trzy <tag>digitsService.add('3');</tag></item>
-                        <item>cztery <tag>digitsService.add('4');</tag></item>
-                        <item>pięć <tag>digitsService.add('5');</tag></item>
-                        <item>sześć <tag>digitsService.add('6');</tag></item>
-                        <item>siedem <tag>digitsService.add('7');</tag></item>
-                        <item>osiem <tag>digitsService.add('8');</tag></item>
-                        <item>dziewięć <tag>digitsService.add('9');</tag></item>
+                        <item>zero <tag>customerCode+='0'; digitsService.add('0')</tag></item>
+                        <item>jeden <tag>customerCode+='1'; digitsService.add('1')</tag></item>
+                        <item>dwa <tag>customerCode+='2'; digitsService.add('2')</tag></item>
+                        <item>trzy <tag>customerCode+='3'; digitsService.add('3')</tag></item>
+                        <item>cztery <tag>customerCode+='4'; digitsService.add('4')</tag></item>
+                        <item>pięć <tag>customerCode+='5'; digitsService.add('5')</tag></item>
+                        <item>sześć <tag>customerCode+='6'; digitsService.add('6')</tag></item>
+                        <item>siedem <tag>customerCode+='7'; digitsService.add('7')</tag></item>
+                        <item>osiem <tag>customerCode+='8'; digitsService.add('8')</tag></item>
+                        <item>dziewięć <tag>customerCode+='9'; digitsService.add('9')</tag></item>
                     </one-of>
                 </rule>
             </grammar>
