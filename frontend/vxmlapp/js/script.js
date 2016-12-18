@@ -45,3 +45,17 @@ var dialogContext = (function(jokeProvider) {
 		getData: getData
 	};
 }(jokeProvider));
+
+var digitsService = (function() {
+	var digits = "";
+	function addDigit(digit) {
+		digits += digit;
+	}
+	function getDigits() {
+		return digits;
+	}
+	return {
+		add: addDigit,
+		get: getDigits
+	}
+}());

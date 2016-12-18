@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" xml:lang="pl-pl">
     <meta name="maintainer" content="imralav@gmail.com" />
+    <script src="/cv/js/vxmlapp.min.js"></script>
     <form>
-        <field name="customerCode" type="digits?minlength=1;maxlength=9">
+        <field name="customerCode">
+            <grammar mode="voice" xml:lang="pl-pl" root="digits">
+                <rule id="digits">
+                    <item repeat="1-4">
+                        <one-of>
+                            <ruleref uri="#digit"/>
+                        </one-of>
+                    </item>
+                </rule>
+                <rule id="digit">
+                    <one-of>
+                        <item>zero <tag>digitsService.add(0);</tag></item>
+                        <item>jeden <tag>digitsService.add(1);</tag></item>
+                        <item>dwa <tag>digitsService.add(2);</tag></item>
+                        <item>trzy <tag>digitsService.add(3);</tag></item>
+                        <item>cztery <tag>digitsService.add(4);</tag></item>
+                        <item>pięć <tag>digitsService.add(5);</tag></item>
+                        <item>sześć <tag>digitsService.add(6);</tag></item>
+                        <item>siedem <tag>digitsService.add(7);</tag></item>
+                        <item>osiem <tag>digitsService.add(8);</tag></item>
+                        <item>dziewięć <tag>digitsService.add(9);</tag></item>
+                    </one-of>
+                </rule>
+            </grammar>
             <prompt>Podaj kod klienta uzyskany podczas rezerwacji.</prompt>
             <filled>
                 <prompt>Sprawdzam kod <say-as interpret-as="digits"><value expr="customerCode"/></say-as>.</prompt>
+                <prompt>Po przetworzeniu <say-as interpret-as="digits"><value expr="digitsService.get()"/></say-as>.</prompt>
                 <submit next="cancel/passCustomerCode" />
             </filled>
             <nomatch>

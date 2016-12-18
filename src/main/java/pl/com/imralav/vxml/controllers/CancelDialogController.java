@@ -19,6 +19,6 @@ public class CancelDialogController {
     @RequestMapping("/passCustomerCode")
     public String passCustomerCode(@RequestParam(required=false) String customerCode) {
         LOGGER.info("Checking customer code: {}", customerCode);
-        return "cancel/customerUnknown";
+        return "redirect:/cancel";
     }
 }
