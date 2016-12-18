@@ -15,7 +15,6 @@ import pl.com.imralav.vxml.entities.Booking;
 import pl.com.imralav.vxml.entities.Customer;
 import pl.com.imralav.vxml.entities.Genre;
 import pl.com.imralav.vxml.entities.Movie;
-import pl.com.imralav.vxml.entities.Seat;
 import pl.com.imralav.vxml.entities.Showing;
 import pl.com.imralav.vxml.entities.dtos.BookingDto;
 
@@ -40,7 +39,6 @@ public class BookingServiceTest {
         Booking booking = new Booking();
         booking.setId(1);
         booking.setCustomer(prepareDummyCustomer());
-        booking.setSeat(prepareSeat());
         booking.setShowing(prepareShowing());
         // when
         BookingDto result = instance.toDto(booking);
@@ -55,14 +53,6 @@ public class BookingServiceTest {
         customer.setId(1);
         customer.setCode(1234);
         return customer;
-    }
-
-    private Seat prepareSeat() {
-        Seat seat = new Seat();
-        seat.setId(1);
-        seat.setRowNumber(1);
-        seat.setSeatNumber(1);
-        return seat;
     }
 
     private Showing prepareShowing() {

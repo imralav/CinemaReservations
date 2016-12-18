@@ -1,12 +1,13 @@
 package pl.com.imralav.vxml.entities;
 
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -19,8 +20,9 @@ public class Booking {
     @ManyToOne
     private Customer customer;
 
-    @ManyToOne
-    private Seat seat;
+    @ManyToMany
+    @JoinTable(name="booking_seats")
+    private List<Seat> seat;
 
     @ManyToOne
     private Showing showing;
@@ -46,17 +48,6 @@ public class Booking {
     }
 
 
-    public Seat getSeat() {
-        return seat;
-    }
-
-
-    public void setSeat(Seat seat) {
-        this.seat = seat;
-    }
-
-
-
     public Showing getShowing() {
         return showing;
     }
@@ -66,6 +57,19 @@ public class Booking {
     public void setShowing(Showing showing) {
         this.showing = showing;
     }
+
+
+
+    public List<Seat> getSeat() {
+        return seat;
+    }
+
+
+
+    public void setSeat(List<Seat> seat) {
+        this.seat = seat;
+    }
+
 
     @Override
     public String toString() {

@@ -25,8 +25,22 @@ public class BookingRepositoryIntegrationTest {
         //then
         assertThat(findOne).isNotNull();
         assertThat(findOne.getCustomer().getId()).isEqualTo(1);
-        assertThat(findOne.getSeat().getId()).isEqualTo(1);
         assertThat(findOne.getShowing().getId()).isEqualTo(1);
+    }
+
+    @Test
+    public void shouldHaveManySeats() {
+        //given
+        //when
+        Booking findOne = bookingRepository.findOne(1);
+        //then
+        assertThat(findOne.getSeat()).hasSize(2);
+        assertThat(findOne.getSeat()).extracting(seat -> {
+            return seat.getSeatNumber();
+        }).containsExactly(2,3);
+        assertThat(findOne.getSeat()).extracting(seat -> {
+            return seat.getRowNumber();
+        }).containsExactly(2,2);
     }
 
     @Test
