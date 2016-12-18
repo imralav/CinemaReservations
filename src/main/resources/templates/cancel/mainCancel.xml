@@ -27,8 +27,11 @@
             </grammar>
             <prompt>Podaj kod klienta uzyskany podczas rezerwacji.</prompt>
             <filled>
-                <prompt>Sprawdzam kod <say-as interpret-as="digits"><value expr="customerCode"/></say-as>.</prompt>
+                <prompt>Sprawdzam kod <value expr="customerCode"/>.</prompt>
                 <prompt>Po przetworzeniu <say-as interpret-as="digits"><value expr="digitsService.get()"/></say-as>.</prompt>
+                
+                <log expr="'Customer code: ' + customerCode"/>
+                <log expr="'Digits: ' + digitsService.get()"/>
                 <submit next="cancel/passCustomerCode" />
             </filled>
             <nomatch>
