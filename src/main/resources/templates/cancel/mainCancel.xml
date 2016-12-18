@@ -4,15 +4,15 @@
     <script src="/cv/js/vxmlapp.min.js"></script>
     <form>
         <field name="customerCode">
-            <grammar mode="voice" xml:lang="pl-pl" root="digits">
-                <rule id="digits">
+            <grammar xml:lang="pl-pl" root="cyferki" type="application/srgs+xml">
+                <rule id="cyferki" scope="public">
                     <item repeat="1-4">
                         <one-of>
                             <ruleref uri="#digit"/>
                         </one-of>
                     </item>
                 </rule>
-                <rule id="digit">
+                <rule id="digit" scope="public">
                     <one-of>
                         <item>zero <tag>digitsService.add(0);</tag></item>
                         <item>jeden <tag>digitsService.add(1);</tag></item>
