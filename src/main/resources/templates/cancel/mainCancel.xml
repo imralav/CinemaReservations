@@ -4,24 +4,26 @@
     <script src="/cv/js/vxmlapp.min.js"></script>
     <form>
         <field name="customerCode">
-            <grammar xml:lang="pl-pl" root="cyferki" type="application/srgs+xml">
+            <grammar xml:lang="pl-pl" root="cyferki" type="application/srgs+xml" tag-format="semantics/1.0">
                 <rule id="cyferki" scope="public">
+                    <tag>out="";</tag>
                     <item repeat="1-4">
                         <ruleref uri="#digit"/>
+                        <tag>out+=rules.latest();</tag>
                     </item>
                 </rule>
                 <rule id="digit" scope="public">
                     <one-of>
-                        <item>zero <tag>out.customerCode="0"</tag></item>
-                        <item>jeden <tag>out.customerCode="1"</tag></item>
-                        <item>dwa <tag>out.customerCode="2"</tag></item>
-                        <item>trzy <tag>out.customerCode="3"</tag></item>
-                        <item>cztery <tag>out.customerCode="4"</tag></item>
-                        <item>pięć <tag>out.customerCode="5"</tag></item>
-                        <item>sześć <tag>out.customerCode="6"</tag></item>
-                        <item>siedem <tag>out.customerCode="7"</tag></item>
-                        <item>osiem <tag>out.customerCode="8"</tag></item>
-                        <item>dziewięć <tag>out.customerCode="9"</tag></item>
+                        <item>0</item>
+                        <item>1</item>
+                        <item>2</item>
+                        <item>3</item>
+                        <item>4</item>
+                        <item>5</item>
+                        <item>6</item>
+                        <item>7</item>
+                        <item>8</item>
+                        <item>9</item>
                     </one-of>
                 </rule>
             </grammar>
@@ -32,7 +34,8 @@
                 
                 <log expr="'Customer code: ' + customerCode"/>
                 <log expr="'Digits: ' + digitsService.get()"/>
-                <submit next="cancel/passCustomerCode" />
+<!--                 <submit next="cancel/passCustomerCode" /> -->
+                <clear/>
             </filled>
             <nomatch>
                 <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
