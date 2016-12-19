@@ -11,7 +11,7 @@
             <grammar src="/cv/grammars/boolean.xml"/>
             <prompt>Czy powrócić do początku rozmowy?</prompt>
             <filled>
-                <if cond="shouldGoBack">
+                <if cond="shouldGoBack=='tak'">
                     <goto next="/cv/main"/>
                 <else/>
                     <goto next="/cv/farewell"/>

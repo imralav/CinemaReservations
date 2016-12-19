@@ -3,13 +3,33 @@
     <script src="js/vxmlapp.min.js"></script>
     <meta name="maintainer" content="imralav@gmail.com" />
     <form>
-        <field name="showingDate" type="date">
-            <prompt>Proszę podać datę seansu.</prompt>
+        <field name="showingDate">
+            <grammar src="/cv/grammars/date.xml"/>
+            <prompt>Proszę podać numer dnia i nazwę miesiąca, na przykład: 10 styczeń.</prompt>
+            <nomatch>
+                <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </nomatch>
+            <noinput>
+                <prompt>Nie usłyszano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </noinput>
+        </field>
+        <field name="dateConfirmed">
+            <grammar src="/cv/grammars/boolean.xml"/>
+            <prompt>Czy data się zgadza?
+                    Dzień: <value expr="showingDate.day"/>.
+                    Miesiąc: <value expr="showingDate.month.text"/>.
+                    Rok: <value expr="showingDate.year"/>.</prompt>
+            <log expr="JSON.stringify(showingDate)"/>
             <filled>
-                <block>
-                    <prompt>Podana data to: <say-as interpret-as="date"><value expr="showingDate"/></say-as></prompt>
-                    <clear/>
-                </block>
+                <if cond="dateConfirmed=='tak';">
+                    <prompt>Przekierowanie do prompta wyboru.</prompt>
+<!--                     <submit next="/cv/reservation/choicePrompt" namelist="showingDate.date"/> -->
+                <else/>
+                    <prompt>Zwykły klir.</prompt>
+                </if>
+                <clear/>
             </filled>
             <nomatch>
                 <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>

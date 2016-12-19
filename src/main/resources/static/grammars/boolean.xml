@@ -5,14 +5,8 @@
     xmlns="http://www.w3.org/2001/06/grammar">
     <rule id="boolean" scope="public">
         <one-of>
-            <item>
-                tak
-                <tag>out=true;</tag>
-            </item>
-            <item>
-                nie
-                <tag>out=false;</tag>
-            </item>
+            <item>tak</item>
+            <item>nie</item>
         </one-of>
     </rule>
 

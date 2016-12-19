@@ -1,0 +1,86 @@
+<?xml version= "1.0"?>
+
+<grammar mode="voice"
+         type="application/srgs+xml"
+         root="root_rule"
+         tag-format="semantics/1.0"
+         version="1.0"
+         xml:lang="pl-pl"
+         xmlns="http://www.w3.org/2001/06/grammar">
+  <rule id="root_rule" scope="public">
+    <item>
+        <tag>out.year=2016;</tag>
+        <ruleref uri="#day"/><tag>out.day=rules.day;</tag>
+        <ruleref uri="#month"/><tag>out.month=rules.month;</tag>
+        <item repeat="0-1">
+            <ruleref uri="#year"/><tag>out.year=rules.year;</tag>
+        </item>
+        <tag>out.date=out.day+'.'+out.month.code+'.'+out.year;</tag>
+    </item>
+  </rule>
+  
+  <rule id="day" scope="public">
+    <one-of>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+    </one-of>
+  </rule>
+  
+  <rule id="month" scope="public">
+    <one-of>
+        <item>
+            <one-of>
+                <item>styczeń</item>
+                <item>stycznia</item>
+            </one-of>
+            <tag>out.text='styczeń';
+                out.code=1;</tag>
+        </item>
+        <item>
+            <one-of>
+                <item>luty</item>
+                <item>lutego</item>
+            </one-of>
+            <tag>out.text='luty';
+                out.code=2;</tag>
+        </item>
+    </one-of>
+  </rule>
+  
+  <rule id="year" scope="public">
+    <one-of>
+        <item>2016</item>
+        <item>2017</item>
+    </one-of>
+  </rule>
+
+</grammar>

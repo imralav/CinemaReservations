@@ -20,6 +20,11 @@
             <grammar src="/cv/grammars/boolean.xml"/>
             <prompt>Czy na pewno anulować tę rezerwację?</prompt>
             <filled>
+                <if cond="shouldCancel=='tak'">
+                    <assign name="shouldCancel" expr="true"/>
+                <else />
+                    <assign name="shouldCancel" expr="false"/>
+                </if>
                 <submit next="/cv/cancel/attemptCancel" namelist="customerCode shouldCancel" />
             </filled>
             <nomatch>
