@@ -28,7 +28,7 @@
                 <if cond="shouldGoBack">
                     <goto next="/cv/main"/>
                 <else/>
-                    <exit/>
+                    <goto next="/cv/farewell"/>
                 </if>
             </filled>
             <nomatch>
