@@ -40,6 +40,6 @@ public class CustomerService {
     }
 
     public void deleteByCustomerCode(int customerCode) {
-
+        customerRepository.deleteByCode(customerCode);
     }
 }

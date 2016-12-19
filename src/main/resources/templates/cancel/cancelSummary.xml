@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="pl-pl">
+    <meta name="maintainer" content="imralav@gmail.com" />
+    <script src="/cv/js/vxmlapp.min.js"></script>
+    <form>
+        <block>
+            <prompt th:if="${bookingCancelled}">Rezerwacja została anulowana.</prompt>
+            <prompt th:if="${not bookingCancelled}">Rezerwacja została zachowana.</prompt>
+        </block>
+        <field name="shouldGoBack">
+            <grammar xml:lang="pl-pl" root="boolean" version="1.0"
+                type="application/srgs+xml" tag-format="semantics/1.0">
+                <rule id="boolean" scope="public">
+                    <one-of>
+                        <item>
+                            tak
+                            <tag>out=true;</tag>
+                        </item>
+                        <item>
+                            nie
+                            <tag>out=false;</tag>
+                        </item>
+                    </one-of>
+                </rule>
+            </grammar>
+            <prompt>Czy powrócić do początku rozmowy?</prompt>
+            <filled>
+                <if cond="shouldGoBack">
+                    <goto next="/cv/main"/>
+                <else/>
+                    <exit/>
+                </if>
+            </filled>
+            <nomatch>
+                <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </nomatch>
+            <noinput>
+                <prompt>Nie usłyszano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </noinput>
+        </field>
+    </form>
+</vxml>

@@ -36,6 +36,6 @@ public class BookingService {
     }
 
     public void deleteByCustomerCode(int customerCode) {
-
+        bookingRepository.deleteByCustomerCode(customerCode);
     }
 }
