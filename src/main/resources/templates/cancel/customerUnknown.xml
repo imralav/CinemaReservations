@@ -9,7 +9,7 @@
     </script>
     <form>
         <block>
-            <prompt>Nie znaleziono rezerwacji o kodzie użytkownika <value expr="injectSpaces(customerCode)"/></prompt>
+            <prompt>Nie znaleziono rezerwacji o kodzie użytkownika <value expr="injectSpaces(customerCode)"/>.</prompt>
             <prompt>Po sekundzie nastąpi powrót do głównego menu.</prompt>
             <break time="1000ms"/>
             <goto next="/cv/main"/>
