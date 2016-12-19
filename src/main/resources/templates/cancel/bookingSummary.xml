@@ -12,7 +12,7 @@
         <block>
             <prompt>
                     Rezerwacja na podany kod to: Film: <value expr="booking.movieTitle"/>,
-                    dnia: <value expr="booking.readableShowingDate"/>, na godzinę: <value expr="booking.readableShowingTime"/>,
+                    dnia: <value expr="booking.readableDate"/>, na godzinę: <value expr="booking.readableTime"/>,
                     miejsca: <value expr="booking.readableSeats"/>.
             </prompt>
         </block>
