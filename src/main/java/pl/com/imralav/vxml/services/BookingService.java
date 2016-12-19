@@ -40,6 +40,6 @@ public class BookingService {
     }
 
     public boolean doesExistForCustomerCode(int customerCode) {
-        return bookingRepository.findByCustomerCode(customerCode) != null;
+        return bookingRepository.doesExistForCustomerCode(customerCode);
     }
 }

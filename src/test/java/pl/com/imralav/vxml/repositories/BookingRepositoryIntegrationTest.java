@@ -84,4 +84,15 @@ public class BookingRepositoryIntegrationTest {
         assertThat(showingRepository.exists(showing.getId()));
         assertThat(bookingRepository.exists(booking.getId())).isFalse();
     }
+
+    @Test
+    public void shouldCheckExistanceBasedOnCustomerCode() {
+        //given
+        //when
+        boolean result1 = bookingRepository.doesExistForCustomerCode(1234);
+        boolean result2 = bookingRepository.doesExistForCustomerCode(3333);
+        //then
+        assertThat(result1).isTrue();
+        assertThat(result2).isFalse();
+    }
 }
