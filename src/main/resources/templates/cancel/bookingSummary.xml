@@ -17,10 +17,7 @@
             </prompt>
         </block>
         <field name="shouldCancel">
-            <grammar mode="voice" xml:lang="pl-pl" tag-format="semantics/1.0"
-                version="1.0" root="boolean">
-                <ruleref uri="/cv/grammars/boolean.xml" />
-            </grammar>
+            <grammar src="/cv/grammars/boolean.xml" type="application/srgs+xml"/>
             <prompt>Czy na pewno anulować tę rezerwację?</prompt>
             <filled>
                 <submit next="/cv/cancel/attemptCancel" namelist="customerCode shouldCancel" />

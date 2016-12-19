@@ -8,10 +8,7 @@
             <prompt th:if="${not bookingCancelled}">Rezerwacja została zachowana.</prompt>
         </block>
         <field name="shouldGoBack">
-            <grammar mode="voice" xml:lang="pl-pl" tag-format="semantics/1.0"
-                version="1.0" root="boolean">
-                <ruleref uri="/cv/grammars/boolean.xml" />
-            </grammar>
+            <grammar src="/cv/grammars/boolean.xml" type="application/srgs+xml"/>
             <prompt>Czy powrócić do początku rozmowy?</prompt>
             <filled>
                 <if cond="shouldGoBack">
