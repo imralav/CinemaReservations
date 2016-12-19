@@ -17,13 +17,9 @@
             </prompt>
         </block>
         <field name="shouldCancel">
-            <grammar xml:lang="pl-pl" root="boolean" version="1.0" type="application/srgs+xml" tag-format="semantics/1.0">
-                <rule id="boolean" scope="public">
-                    <one-of>
-                        <item>tak <tag>out=true;</tag></item>
-                        <item>nie <tag>out=false;</tag></item>
-                    </one-of>
-                </rule>
+            <grammar mode="voice" xml:lang="pl-pl" tag-format="semantics/1.0"
+                version="1.0" root="boolean">
+                <ruleref uri="/cv/grammars/boolean.xml" />
             </grammar>
             <prompt>Czy na pewno anulować tę rezerwację?</prompt>
             <filled>
