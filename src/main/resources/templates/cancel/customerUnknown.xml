@@ -12,7 +12,7 @@
             <prompt>Nie znaleziono rezerwacji o kodzie użytkownika <value expr="injectSpaces(customerCode)"/></prompt>
             <prompt>Po sekundzie nastąpi powrót do głównego menu.</prompt>
             <break time="1000ms"/>
-            <goto next="/cv"/>
+            <goto next="/cv/main"/>
         </block>
     </form>
 </vxml>
