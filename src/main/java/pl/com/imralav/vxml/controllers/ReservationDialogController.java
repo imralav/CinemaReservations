@@ -4,10 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/reservation")
 public class ReservationDialogController {
 
-    @RequestMapping("/reservation")
-    public String mainDialog() {
-        return "reservation/mainReservation";
+    @RequestMapping("/collectShowingDate")
+    public String showingDatePrompt() {
+        return "reservation/showingDatePrompt";
     }
 }

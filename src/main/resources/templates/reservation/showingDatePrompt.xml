@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="pl-pl">
+    <script src="js/vxmlapp.min.js"></script>
+    <meta name="maintainer" content="imralav@gmail.com" />
+    <form>
+        <field name="showingDate" type="date">
+            <prompt>Proszę podać datę seansu.</prompt>
+            <filled>
+                <block>
+                    <prompt>Podana data to: <say-as interpret-as="date"><value expr="showingDate"/></say-as></prompt>
+                    <clear/>
+                </block>
+            </filled>
+            <nomatch>
+                <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </nomatch>
+            <noinput>
+                <prompt>Nie usłyszano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </noinput>
+        </field>
+    </form>
+</vxml>
