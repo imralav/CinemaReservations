@@ -3,6 +3,6 @@
     <script src="js/vxmlapp.min.js"></script>
     <meta name="maintainer" content="imralav@gmail.com" />
     <form>
-        <block>Dziękuję za uwagę, do usłyszenia!</block>
+        <block>Dziękuję za uwagę, zapraszam ponownie!</block>
     </form>
 </vxml>

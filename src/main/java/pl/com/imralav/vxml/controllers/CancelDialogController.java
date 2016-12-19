@@ -30,13 +30,22 @@ public class CancelDialogController {
     }
 
     @RequestMapping("/passCustomerCode")
-    public String passCustomerCode(@RequestParam(required=false) String customerCodeText, Model model) {
-        LOGGER.info("Checking customer code: {}", customerCodeText);
+    public String passCustomerCode(@RequestParam(required=true, name="customerCode") String customerCodeText, Model model) {
+        LOGGER.trace("Checking customer code: {}", customerCodeText);
         int customerCode = Integer.parseInt(customerCodeText);
         if(customerService.doesCustomerExistForCode(customerCode)) {
-            Booking booking = bookingService.findByCustomerCode(customerCode);
-            BookingDto bookingDto = bookingService.toDto(booking);
+            updateModelForExistingCustomer(model, customerCode);
+            return "cancel/bookingSummary";
+        } else {
+            model.addAttribute("customerCode", customerCodeText);
+            return "cancel/customerUnknown";
         }
-        return "redirect:/cancel";
+    }
+
+    private void updateModelForExistingCustomer(Model model, int customerCode) {
+        Booking booking = bookingService.findByCustomerCode(customerCode);
+        BookingDto bookingDto = bookingService.toDto(booking);
+        model.addAttribute("booking", bookingDto);
+        model.addAttribute("customerCode", customerCode + "");
     }
 }

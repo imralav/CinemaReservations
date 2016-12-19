@@ -2,9 +2,33 @@
 <vxml version="2.1" xml:lang="pl-pl">
     <meta name="maintainer" content="imralav@gmail.com" />
     <script src="/cv/js/vxmlapp.min.js"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+            var booking = /*[[${booking}]]*/ null;
+            var customerCode = /*[[${customerCode}]]*/ 0000;
+        /*]]>*/
+    </script>
     <form>
         <block>
-            <prompt></prompt>
+            <prompt>
+                    Rezerwacja na podany kod to: Film: <value expr="booking.movieTitle"/>,
+                    dnia: <value expr="booking.readableShowingDate"/>, na godzinę: <value expr="booking.readableShowingTime"/>,
+                    miejsca: <value expr="booking.readableSeats"/>.
+            </prompt>
         </block>
+        <field name="shouldCancel" type="boolean">
+            <prompt>Czy na pewno anulować tę rezerwację?</prompt>
+            <filled>
+                <submit next="cancel/cancelBooking" namelist="customerCode shouldCancel" />
+            </filled>
+            <nomatch>
+                <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </nomatch>
+            <noinput>
+                <prompt>Nie usłyszano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </noinput>
+        </field>
     </form>
 </vxml>

@@ -2,9 +2,17 @@
 <vxml version="2.1" xml:lang="pl-pl">
     <meta name="maintainer" content="imralav@gmail.com" />
     <script src="/cv/js/vxmlapp.min.js"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+            var customerCode = /*[[${customerCode}]]*/;
+        /*]]>*/
+    </script>
     <form>
         <block>
-            <prompt></prompt>
+            <prompt>Nie znaleziono rezerwacji o kodzie użytkownika <value expr="injectSpaces(customerCode)"/></prompt>
+            <prompt>Po sekundzie nastąpi powrót do głównego menu.</prompt>
+            <break time="1000ms"/>
+            <goto next="/cv"/>
         </block>
     </form>
 </vxml>
