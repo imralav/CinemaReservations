@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" xml:lang="pl-pl">
-    <script src="/cv/js/vxmlapp.min.js"></script>
     <meta name="maintainer" content="imralav@gmail.com" />
     <form>
         <field name="showingDate">
@@ -24,12 +23,11 @@
             <log expr="JSON.stringify(showingDate)"/>
             <filled>
                 <if cond="dateConfirmed=='tak';">
-                    <prompt>Przekierowanie do prompta wyboru.</prompt>
-<!--                     <submit next="/cv/reservation/choicePrompt" namelist="showingDate.date"/> -->
+                    <assign name="date" expr="showingDate.date"/>
+                    <submit next="/cv/reservation/choicePrompt" namelist="date"/>
                 <else/>
-                    <prompt>Zwykły klir.</prompt>
+                    <clear/>
                 </if>
-                <clear/>
             </filled>
             <nomatch>
                 <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
