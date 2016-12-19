@@ -35,7 +35,7 @@ public class CancelDialogController {
     public String passCustomerCode(@RequestParam(required=true, name="customerCode") String customerCodeText, Model model) {
         LOGGER.trace("Checking customer code: {}", customerCodeText);
         int customerCode = Integer.parseInt(customerCodeText);
-        if(customerService.doesCustomerExistForCode(customerCode)) {
+        if(customerService.doesCustomerExistForCode(customerCode) && bookingService.doesExistForCustomerCode(customerCode)) {
             updateModelForExistingCustomer(model, customerCode);
             return "cancel/bookingSummary";
         } else {

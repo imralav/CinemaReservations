@@ -38,4 +38,8 @@ public class BookingService {
     public void deleteByCustomerCode(int customerCode) {
         bookingRepository.deleteByCustomerCode(customerCode);
     }
+
+    public boolean doesExistForCustomerCode(int customerCode) {
+        return bookingRepository.findByCustomerCode(customerCode) != null;
+    }
 }
