@@ -27,7 +27,7 @@
             </grammar>
             <prompt>Czy na pewno anulować tę rezerwację?</prompt>
             <filled>
-                <submit next="cancel/cancelBooking" namelist="customerCode shouldCancel" />
+                <submit next="/cv/cancel/attemptCancel" namelist="customerCode shouldCancel" />
             </filled>
             <nomatch>
                 <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>

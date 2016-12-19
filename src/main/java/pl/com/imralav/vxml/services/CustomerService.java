@@ -38,4 +38,8 @@ public class CustomerService {
     public boolean doesCustomerExistForCode(int customerCode) {
         return customerRepository.doesExistForCode(customerCode);
     }
+
+    public void deleteByCustomerCode(int customerCode) {
+
+    }
 }

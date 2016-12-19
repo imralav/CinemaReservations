@@ -43,4 +43,17 @@ public class CustomerRepositoryIntegrationTest {
         assertThat(customerRepository.doesExistForCode(9999)).isFalse();
     }
 
+    @Test
+    public void shouldCorrectlyDeleteByCustomerCode() {
+        //given
+        Customer customer = new Customer();
+        customer.setCode(8888);
+        customer = customerRepository.save(customer);
+        assertThat(customerRepository.doesExistForCode(8888)).isTrue();
+        //when
+        customerRepository.deleteByCode(8888);
+        //then
+        assertThat(customerRepository.doesExistForCode(8888)).isFalse();
+    }
+
 }

@@ -10,4 +10,6 @@ public interface BookingRepository extends PagingAndSortingRepository<Booking, I
 
     Booking findByCustomerCode(int customerCode);
 
+    void deleteByCustomerCode(int customerCode);
+
 }

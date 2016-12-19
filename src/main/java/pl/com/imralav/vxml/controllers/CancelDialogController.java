@@ -42,6 +42,17 @@ public class CancelDialogController {
         }
     }
 
+    @RequestMapping("/attemptCancel")
+    public String attemptCancel(@RequestParam(name="customerCode") String customerCodeText, @RequestParam Boolean shouldCancel, Model model) {
+        if(shouldCancel) {
+            LOGGER.info("Cancelling booking for customerCode: {}", customerCodeText);
+            int customerCode = Integer.parseInt(customerCodeText);
+            bookingService.deleteByCustomerCode(customerCode);
+            customerService.deleteByCustomerCode(customerCode);
+        }
+        return "cancel/cancelSummary";
+    }
+
     private void updateModelForExistingCustomer(Model model, int customerCode) {
         Booking booking = bookingService.findByCustomerCode(customerCode);
         BookingDto bookingDto = bookingService.toDto(booking);

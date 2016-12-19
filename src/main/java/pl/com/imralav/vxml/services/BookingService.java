@@ -34,4 +34,8 @@ public class BookingService {
         dto.setReadableSeats(readableSeatsBuilder.buildFor(booking.getSeats()));
         return dto;
     }
+
+    public void deleteByCustomerCode(int customerCode) {
+
+    }
 }

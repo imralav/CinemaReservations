@@ -2,6 +2,7 @@ package pl.com.imralav.vxml.entities;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ public class Booking {
 
     @ManyToMany
     @JoinTable(name = "booking_seats", inverseJoinColumns=@JoinColumn(name="SEAT_ID", referencedColumnName="ID"))
-    private List<Seat> seats;
+    private List<Seat> seats = new ArrayList<>();
 
     @ManyToOne
     private Showing showing;
@@ -34,7 +35,6 @@ public class Booking {
     public Integer getId() {
         return id;
     }
-
 
     public void setId(Integer id) {
         this.id = id;
@@ -77,6 +77,10 @@ public class Booking {
 
     public void setSeats(List<Seat> seats) {
         this.seats = seats;
+    }
+
+    public void addSeat(Seat seat) {
+        this.seats.add(seat);
     }
 
 
