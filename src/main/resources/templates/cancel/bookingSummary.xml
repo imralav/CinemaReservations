@@ -11,7 +11,7 @@
     <form>
         <block>
             <prompt>
-                    Rezerwacja na podany kod to: Film: <value expr="booking.movieTitle"/>,
+                    Rezerwacja na kod <value expr="injectSpaces(customerCode)"/> to: Film: <value expr="booking.movieTitle"/>,
                     dnia: <value expr="booking.readableDate"/>, na godzinę: <value expr="booking.readableTime"/>,
                     miejsca: <value expr="booking.readableSeats"/>.
             </prompt>
