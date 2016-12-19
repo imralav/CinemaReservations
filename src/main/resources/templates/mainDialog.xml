@@ -32,7 +32,7 @@
             </noinput>
             <filled>
                 <if cond="selection == 'rezerwacja'">
-                    <goto next="reservation"/>
+                    <goto next="reservation/collectShowingDate"/>
                 <elseif cond="selection == 'anuluj'" />
                     <goto next="cancel" />
                 <else/>
