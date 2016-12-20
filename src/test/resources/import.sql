@@ -12,7 +12,7 @@ INSERT INTO GENRE (NAME) VALUES ('thriller');
 INSERT INTO GENRE (NAME) VALUES ('familijny');
 INSERT INTO GENRE (NAME) VALUES ('dokumentalny');
 
-INSERT INTO MOVIE (TITLE, GENRE_ID) VALUES ('Koszmar z ulicy Wiązów', 1);
+INSERT INTO MOVIE (TITLE, GENRE_ID) VALUES ('Koszmar z ulicy Wiazow', 1);
 INSERT INTO MOVIE (TITLE, GENRE_ID) VALUES ('Nie zadzieraj z fryzjerem', 2);
 INSERT INTO MOVIE (TITLE, GENRE_ID) VALUES ('Hugo', 7);
 INSERT INTO MOVIE (TITLE, GENRE_ID) VALUES ('Świat według kiepskich', 8);

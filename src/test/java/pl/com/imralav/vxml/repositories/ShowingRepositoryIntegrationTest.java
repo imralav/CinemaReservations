@@ -54,6 +54,6 @@ public class ShowingRepositoryIntegrationTest {
         List<Showing> findByShowingDatetimeBetween = showingRepository.findByShowingDatetimeBetween(from, to);
         //then
         assertThat(findByShowingDatetimeBetween).hasSize(2);
-        assertThat(findByShowingDatetimeBetween).extracting(Showing::getMovieTitle).contains("Koszmar z ulicy Wiązów", "Nie zadzieraj z fryzjerem");
+        assertThat(findByShowingDatetimeBetween).extracting(Showing::getMovieTitle).contains("Koszmar z ulicy Wiazow", "Nie zadzieraj z fryzjerem");
     }
 }

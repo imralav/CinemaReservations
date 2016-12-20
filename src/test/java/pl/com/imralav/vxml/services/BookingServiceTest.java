@@ -27,6 +27,9 @@ public class BookingServiceTest {
     @Spy
     private ReadableSeatsBuilder readableSeatsBuilder;
 
+    @Spy
+    private DateTimeService dateTimeService;
+
     @InjectMocks
     private BookingService instance;
 
