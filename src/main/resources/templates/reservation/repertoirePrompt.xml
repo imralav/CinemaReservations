@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="pl-pl">
+    <meta name="maintainer" content="imralav@gmail.com" />
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+            var date = /*[[${date}]]*/ null;
+            var movieTitles = /*[[${movieTitles}]]*/ null;
+        /*]]>*/
+    </script>
+    <form>
+        <field name="choice">
+            <grammar xml:lang="pl-pl" root="MOVIE_TITLES">
+                <rule id="MOVIE_TITLES">
+                    <one-of>
+                        <item>powtórz</item>
+                        <item>powrót</item>
+                        <item th:each="showing : ${showings}" th:inline="text">
+                            [[${showing.getMovieTitle()}]]
+                            <tag th:inline="javascript">
+                                /*<![CDATA[*/
+                                    out=/*[[${showing.id}]]*/ null;
+                                /*]]>*/
+                            </tag>
+                        </item>
+                    </one-of>
+                </rule>
+            </grammar>
+            <prompt>
+                W dniu: <value expr="date"/> gramy następujące filmy: <value expr="movieTitles"/>. 
+                Wypowiedz nazwę filmu, by przejść do rezerwacji.
+                Powiedz POWTÓRZ, by usłyszeć listę filmów jeszcze raz lub
+                POWRÓT, by wrócić do poprzedniego wyboru
+            </prompt>
+            <filled>
+                <if cond="choice==='powtórz'">
+                    <clear/>
+                <elseif cond="choice==='powrót'"/>
+                    <goto next="/cv/reservation/collectShowingDate"/>
+                <else/>
+                    <prompt>Przejście do wyboru czasu seansu</prompt>
+                    <clear/>
+<!--                     <submit next="/cv/reservation/collectShowingTime" namelist="date choice"/> -->
+                </if>
+            </filled>
+            <nomatch>
+                <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </nomatch>
+            <noinput>
+                <prompt>Nie usłyszano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </noinput>
+        </field>
+    </form>
+</vxml>
