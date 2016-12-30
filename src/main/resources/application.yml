@@ -11,7 +11,7 @@ logging:
 # ----------------------------------------
 # EMBEDDED SERVER CONFIGURATION
 server:
-    context-path: /cv
+    context-path: /cr
 
 # THYMELEAF (ThymeleafAutoConfiguration)
 spring:
