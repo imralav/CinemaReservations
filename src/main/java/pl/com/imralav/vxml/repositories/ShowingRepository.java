@@ -13,4 +13,6 @@ public interface ShowingRepository extends PagingAndSortingRepository<Showing, I
 
     List<Showing> findByShowingDatetimeBetween(LocalDateTime from, LocalDateTime to);
 
+    List<Showing> findByShowingDatetimeBetweenAndMovieId(LocalDateTime from, LocalDateTime to, int movieId);
+
 }

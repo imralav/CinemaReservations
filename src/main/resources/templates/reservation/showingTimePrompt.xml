@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="pl-pl">
+    <meta name="maintainer" content="imralav@gmail.com" />
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+            var date = /*[[${date}]]*/ null;
+            var movieTitle = /*[[${movieTitle}]]*/ null;
+        /*]]>*/
+    </script>
+    <form>
+        <field name="choice">
+            <grammar xml:lang="pl-pl" root="TIME_INDEXES">
+                <rule id="TIME_INDEXES">
+                    <one-of>
+                        <item th:each="showing,itrStatus : ${showings}" th:inline="text">
+                            [[${itrStatus.index}]]
+                            <tag th:inline="javascript">
+                                /*<![CDATA[*/
+                                    out=/*[[${showing.id}]]*/ null;
+                                /*]]>*/
+                            </tag>
+                        </item>
+                        <item>powtórz</item>
+                        <item>powrót</item>
+                    </one-of>
+                </rule>
+            </grammar>
+            <prompt>W wybranum dniu film <value expr="movieTitle"/> ma następujące seanse:</prompt>
+            <prompt th:each="showing,itrStatus : ${showings}" th:text="${itrStatus.index} + ' ' + ${showing.readableTime} + '.'"></prompt>
+            <prompt>Wypowiedz numer seansu, lub POWTÓRZ, by przeczytać listę seansów ponownie lub POWRÓT, by wrócić do wyboru nazwy filmu.</prompt>
+            <filled>
+                <if cond="choice==='powtórz'">
+                <elseif cond="choice==='powrót'"/>
+                <else/>
+                </if>
+            </filled>
+        </field>
+    </form>
+</vxml>

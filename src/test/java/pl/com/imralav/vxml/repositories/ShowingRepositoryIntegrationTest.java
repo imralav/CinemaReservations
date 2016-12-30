@@ -56,4 +56,17 @@ public class ShowingRepositoryIntegrationTest {
         assertThat(findByShowingDatetimeBetween).hasSize(2);
         assertThat(findByShowingDatetimeBetween).extracting(Showing::getMovieTitle).contains("Koszmar z ulicy Wiazow", "Nie zadzieraj z fryzjerem");
     }
+
+    @Test
+    public void shouldFindShowingBetweenDatesAndByMovieId() {
+        //given
+        LocalDateTime from = LocalDate.of(2016, 12, 25).atStartOfDay();
+        LocalDateTime to = from.plusDays(1);
+        Integer movieId = 1;
+        //when
+        List<Showing> findByShowingDatetimeBetween = showingRepository.findByShowingDatetimeBetweenAndMovieId(from, to, movieId);
+        //then
+        assertThat(findByShowingDatetimeBetween).hasSize(1);
+        assertThat(findByShowingDatetimeBetween).extracting(Showing::getMovieTitle).contains("Koszmar z ulicy Wiazow");
+    }
 }

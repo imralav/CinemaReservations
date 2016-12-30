@@ -18,7 +18,7 @@
                             [[${showing.getMovieTitle()}]]
                             <tag th:inline="javascript">
                                 /*<![CDATA[*/
-                                    out=/*[[${showing.id}]]*/ null;
+                                    out=/*[[${showing.movie.id}]]*/ null;
                                 /*]]>*/
                             </tag>
                         </item>
@@ -37,9 +37,7 @@
                 <elseif cond="choice==='powrót'"/>
                     <goto next="/cv/reservation/collectShowingDate"/>
                 <else/>
-                    <prompt>Przejście do wyboru czasu seansu</prompt>
-                    <clear/>
-<!--                     <submit next="/cv/reservation/collectShowingTime" namelist="date choice"/> -->
+                    <submit next="/cv/reservation/collectShowingTime" namelist="date choice"/>
                 </if>
             </filled>
             <nomatch>

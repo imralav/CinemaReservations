@@ -1,6 +1,8 @@
 package pl.com.imralav.vxml.entities;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -47,6 +49,13 @@ public class Showing {
         return showingDatetime;
     }
 
+    public LocalDate getShowingDate() {
+        return showingDatetime.toLocalDate();
+    }
+
+    public LocalTime getShowingTime() {
+        return showingDatetime.toLocalTime();
+    }
 
     public void setShowingDatetime(LocalDateTime showingDatetime) {
         this.showingDatetime = showingDatetime;

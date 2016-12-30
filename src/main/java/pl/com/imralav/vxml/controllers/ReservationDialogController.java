@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import pl.com.imralav.vxml.entities.Showing;
+import pl.com.imralav.vxml.entities.dtos.ShowingDto;
 import pl.com.imralav.vxml.services.DateTimeService;
 import pl.com.imralav.vxml.services.ShowingService;
 
@@ -56,7 +57,16 @@ public class ReservationDialogController {
     }
 
     @RequestMapping("/collectShowingTime")
-    public String collectShowingTime(@RequestParam(name="date") String dateText, @RequestParam(name="choice") Integer showingId, Model model) {
-        return "";
+    public String collectShowingTime(@RequestParam(name="date") String dateText, @RequestParam(name="choice") Integer movieId, Model model) {
+        LOGGER.info("Collecting showing time for date {} and movie id {}", dateText, movieId);
+        LocalDate date = dateTimeService.reformat(dateText).fromReadable().toDate();
+        LOGGER.info("Retrieving showings for date {} and movie id {}", date, movieId);
+        List<Showing> showings = showingService.findForDateAndMovieId(date, movieId);
+        LOGGER.info("Converting showings to dtos");
+        List<ShowingDto> showingDtos = showingService.toDto(showings);
+        model.addAttribute("date", dateText);
+        model.addAttribute("showings", showingDtos);
+        model.addAttribute("movieTitle", showingDtos.get(0).getMovieTitle());
+        return "reservation/showingTimePrompt";
     }
 }
