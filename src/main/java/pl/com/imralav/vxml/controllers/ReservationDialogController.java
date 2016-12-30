@@ -69,4 +69,10 @@ public class ReservationDialogController {
         model.addAttribute("movieTitle", showingDtos.get(0).getMovieTitle());
         return "reservation/showingTimePrompt";
     }
+
+    @RequestMapping("/seatsPrompt")
+    public String seatsAmount(@RequestParam(name="choice") Integer showingId, Model model) {
+        model.addAttribute("showingId", showingId);
+        return "reservation/seatsPrompt";
+    }
 }

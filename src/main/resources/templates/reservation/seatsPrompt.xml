@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="pl-pl">
+    <meta name="maintainer" content="imralav@gmail.com" />
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+            var showingId = /*[[${showingId}]]*/ null;
+        /*]]>*/
+    </script>
+    <form>
+        <field name="choice">
+            <grammar xml:lang="pl-pl" root="SEATS_AMOUNT">
+                <rule id="SEATS_AMOUNT">
+                    <one-of>
+                        <item>
+                            <one-of>
+                                <item>1</item>
+                                <item>jedno</item>
+                                <tag>out=1;</tag>
+                            </one-of>
+                        </item>
+                        <item>2</item>
+                        <item>3</item>
+                        <item>4</item>
+                        <item>5</item>
+                    </one-of>
+                </rule>
+            </grammar>
+            <prompt>Ile zarezerwować miejsc? Maksymalnie 5.</prompt>
+            <filled>
+                
+            </filled>
+            <nomatch>
+                <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </nomatch>
+            <noinput>
+                <prompt>Nie usłyszano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </noinput>
+        </field>
+    </form>
+</vxml>

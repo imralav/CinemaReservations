@@ -32,12 +32,20 @@
                 <if cond="choice==='powtórz'">
                     <clear/>
                 <elseif cond="choice==='powrót'"/>
-                    <goto next="/cr/reservation/choicePrompt"/>
+                    <goto next="/cv/reservation/choicePrompt"/>
                 <else/>
                     <prompt>Wybrałeś seans o id <value expr="choice"/>. Tymczasowy klir.</prompt>
                     <clear/>
                 </if>
             </filled>
+            <nomatch>
+                <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </nomatch>
+            <noinput>
+                <prompt>Nie usłyszano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </noinput>
         </field>
     </form>
 </vxml>
