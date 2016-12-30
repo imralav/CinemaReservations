@@ -1,6 +1,7 @@
 # ----------------------------------------
 # CORE PROPERTIES
 # ----------------------------------------
+
 # LOGGING
 logging:
     file: logs/cinema.log
