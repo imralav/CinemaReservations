@@ -13,7 +13,7 @@
                 <rule id="TIME_INDEXES">
                     <one-of>
                         <item th:each="showing,itrStatus : ${showings}" th:inline="text">
-                            [[${itrStatus.index}]]
+                            [[(${itrStatus.index}+1)]]
                             <tag th:inline="javascript">
                                 /*<![CDATA[*/
                                     out=/*[[${showing.id}]]*/ null;
@@ -26,7 +26,7 @@
                 </rule>
             </grammar>
             <prompt>W wybranum dniu film <value expr="movieTitle"/> ma następujące seanse:</prompt>
-            <prompt th:each="showing,itrStatus : ${showings}" th:text="${itrStatus.index} + ' ' + ${showing.readableTime} + '.'"></prompt>
+            <prompt th:each="showing,itrStatus : ${showings}" th:text="(${itrStatus.index}+1) + ' ' + ${showing.readableTime} + '.'"></prompt>
             <prompt>Wypowiedz numer seansu, lub POWTÓRZ, by przeczytać listę seansów ponownie lub POWRÓT, by wrócić do początku rezerwacji.</prompt>
             <filled>
                 <if cond="choice==='powtórz'">
@@ -34,8 +34,7 @@
                 <elseif cond="choice==='powrót'"/>
                     <goto next="/cv/reservation/choicePrompt"/>
                 <else/>
-                    <prompt>Wybrałeś seans o id <value expr="choice"/>. Tymczasowy klir.</prompt>
-                    <clear/>
+                    <submit next="/cv/reservation/seatsPrompt"/>
                 </if>
             </filled>
             <nomatch>

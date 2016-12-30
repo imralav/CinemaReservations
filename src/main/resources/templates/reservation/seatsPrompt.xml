@@ -27,7 +27,8 @@
             </grammar>
             <prompt>Ile zarezerwować miejsc? Maksymalnie 5.</prompt>
             <filled>
-                
+                <prompt>Szukanie propozycji, tymczasowy kliir. <break time="1000ms"/></prompt>
+                <clear/>
             </filled>
             <nomatch>
                 <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
