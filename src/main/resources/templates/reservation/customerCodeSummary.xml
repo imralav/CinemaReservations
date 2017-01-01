@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="pl-pl">
+    <meta name="maintainer" content="imralav@gmail.com" />
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+            var customerCode = /*[[${customerCode}]]*/ null;
+        /*]]>*/
+    </script>
+    <form>
+        <block>
+            <prompt>Twój kod do odbioru biletów to <value expr="injectSpaces(customerCode)"/>.</prompt>
+            <prompt>Będzie wymagany do odebrania biletów lub anulowania rezerwacji. Życzymy udanego seansu.</prompt>
+            <goto next="/cv/farewell"/>
+        </block>
+    </form>
+</vxml>
