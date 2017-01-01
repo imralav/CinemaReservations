@@ -108,8 +108,9 @@ public class ReservationDialogController {
         List<Seat> selectedSeats = prepareSelectedSeats(showingId, selectedSeatsAmount);
         booking.setSeats(selectedSeats);
         BookingDto dto = bookingService.toDto(booking);
+        List<Integer> seatIds = selectedSeats.stream().map(Seat::getId).collect(Collectors.toList());
         model.addAttribute("bookingSummary", dto);
-        model.addAttribute("seats", selectedSeats);
+        model.addAttribute("seatIds", seatIds);
         model.addAttribute("showingId", showingId);
         return "reservation/summary";
     }
