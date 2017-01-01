@@ -5,6 +5,7 @@
         /*<![CDATA[*/
             var booking = /*[[${bookingSummary}]]*/ null;
             var seats = /*[[${seats}]]*/ [];
+            var showingId = /*[[${showingId}]]*/ null;
         /*]]>*/
     </script>
     <form>
@@ -24,7 +25,7 @@
             <prompt>Ile zarezerwować miejsc? Maksymalnie 5.</prompt>
             <filled>
                 <if cond="choice==='tak'">
-                    <submit next="/cv/reservation/finalize" namelist="booking seats"/>
+                    <submit next="/cv/reservation/finalize" namelist="showingId seats" method="POST"/>
                 <else/>
                     <goto next="/cv/main"/>
                 </if>

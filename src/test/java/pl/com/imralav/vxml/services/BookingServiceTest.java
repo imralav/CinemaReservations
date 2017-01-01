@@ -66,6 +66,7 @@ public class BookingServiceTest {
         assertThat(result.getReadableDate()).isEqualToIgnoringCase(readableDate);
         assertThat(result.getReadableTime()).isEqualTo(readableTime);
         assertThat(result.getReadableSeats()).isEqualTo("1, 2 w rzędzie 1, 1, 2 w rzędzie 2");
+        assertThat(result.getShowingId()).isEqualTo(1);
     }
 
     private Customer prepareDummyCustomer() {
@@ -105,15 +106,5 @@ public class BookingServiceTest {
         seats.add(new Seat(1, 2));
         seats.add(new Seat(2, 2));
         return seats;
-    }
-
-    @Test
-    public void shouldConvertToBooking() {
-        //given
-
-        //when
-        Booking result = instance.toEntity(bookingDtoMock);
-        //then
-
     }
 }

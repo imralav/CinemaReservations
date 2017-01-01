@@ -30,11 +30,8 @@ public class BookingService {
         String readableTime = dateTimeService.toReadable(booking.getShowingTime());
         dto.setReadableTime(readableTime);
         dto.setReadableSeats(readableSeatsBuilder.buildFor(booking.getSeats()));
+        dto.setShowingId(booking.getShowing().getId());
         return dto;
-    }
-
-    public Booking toEntity(BookingDto dto) {
-        return null;
     }
 
     public void deleteByCustomerCode(int customerCode) {

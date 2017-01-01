@@ -10,9 +10,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import pl.com.imralav.vxml.entities.Booking;
@@ -20,6 +21,7 @@ import pl.com.imralav.vxml.entities.Customer;
 import pl.com.imralav.vxml.entities.Seat;
 import pl.com.imralav.vxml.entities.Showing;
 import pl.com.imralav.vxml.entities.dtos.BookingDto;
+import pl.com.imralav.vxml.entities.dtos.FinalizeDto;
 import pl.com.imralav.vxml.entities.dtos.ShowingDto;
 import pl.com.imralav.vxml.services.BookingService;
 import pl.com.imralav.vxml.services.CustomerService;
@@ -106,6 +108,7 @@ public class ReservationDialogController {
         BookingDto dto = bookingService.toDto(booking);
         model.addAttribute("bookingSummary", dto);
         model.addAttribute("seats", selectedSeats);
+        model.addAttribute("showingId", showingId);
         return "reservation/summary";
     }
 
@@ -115,14 +118,18 @@ public class ReservationDialogController {
         return emptySeats;
     }
 
-    @RequestMapping("/finalize")
+    @RequestMapping(path = "/finalize", method=RequestMethod.POST)
     @Transactional
-    public String finalizeReservation(@RequestParam(name="booking") BookingDto bookingDto, @RequestParam List<Seat> seats, ExtendedModelMap model) {
+    public String finalizeReservation(@RequestBody FinalizeDto finalizeDto, Model model) {
+        Integer showingId = finalizeDto.getShowingId();
+        List<Seat> seats = finalizeDto.getSeats();
+        LOGGER.info("Finalizing reservation of showing id {} with seats {}", showingId, seats);
         Customer customer = customerService.generateNewCustomer();
         model.addAttribute("customerCode", customer.getCode());
-        Booking entity = bookingService.toEntity(bookingDto);
-        entity.setSeats(seats);
-        bookingService.save(entity);
+        Showing showing = showingService.findOne(showingId);
+        Booking booking = bookingProvider.provideFor(seats, customer, showing);
+        LOGGER.info("Attempting to save the following booking: {}", booking);
+        bookingService.save(booking);
         return "reservation/customerCodeSummary";
     }
 }

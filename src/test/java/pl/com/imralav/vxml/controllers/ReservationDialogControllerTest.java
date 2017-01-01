@@ -23,6 +23,7 @@ import pl.com.imralav.vxml.entities.Customer;
 import pl.com.imralav.vxml.entities.Seat;
 import pl.com.imralav.vxml.entities.Showing;
 import pl.com.imralav.vxml.entities.dtos.BookingDto;
+import pl.com.imralav.vxml.entities.dtos.FinalizeDto;
 import pl.com.imralav.vxml.services.BookingService;
 import pl.com.imralav.vxml.services.CustomerService;
 import pl.com.imralav.vxml.services.ShowingService;
@@ -76,7 +77,6 @@ public class ReservationDialogControllerTest {
         given(bookingProvider.provideEmptyBooking()).willReturn(bookingMock);
         given(bookingServiceMock.toDto(any(Booking.class))).willReturn(bookingDtoMock);
         given(customerServiceMock.generateNewCustomer()).willReturn(customerMock);
-        given(bookingServiceMock.toEntity(bookingDtoMock)).willReturn(bookingMock);
     }
 
     @Test
@@ -113,8 +113,9 @@ public class ReservationDialogControllerTest {
         customerCode = 1234;
         given(customerMock.getCode()).willReturn(customerCode);
         List<Seat> seats = Collections.emptyList();
+        FinalizeDto finalizeDto = new FinalizeDto(showingId, seats);
         //when
-        instance.finalizeReservation(bookingDtoMock, seats, modelSpy);
+        instance.finalizeReservation(finalizeDto, modelSpy);
         Integer customerCode = (Integer)modelSpy.asMap().get("customerCode");
         //then
         assertThat(customerCode).isEqualTo(customerCode);
@@ -125,9 +126,10 @@ public class ReservationDialogControllerTest {
     public void shouldUpdateBookingWhenFinalizingReservation() {
         //given
         List<Seat> seats = Collections.emptyList();
+        FinalizeDto finalizeDto = new FinalizeDto(showingId, seats);
         //when
-        instance.finalizeReservation(bookingDtoMock, seats, modelSpy);
+        instance.finalizeReservation(finalizeDto, modelSpy);
         //then
-        verify(bookingServiceMock).save(bookingMock);
+        verify(bookingServiceMock).save(any(Booking.class));
     }
 }

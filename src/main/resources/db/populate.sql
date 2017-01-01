@@ -18,8 +18,7 @@ INSERT INTO movie (TITLE, GENRE_ID) VALUES
 ('Koszmar z ulicy Wiązów', 1),
 ('Nie zadzieraj z fryzjerem', 2),
 ('Hugo', 7),
-('Świat według kiepskich', 8),
-('Ojciec Chrzestny', 7);
+('Świat według kiepskich', 8);
 
 
 -- populate available seat. There are 3 rows of 5 seats each
@@ -65,7 +64,4 @@ INSERT INTO booking (CUSTOMER_ID, SHOWING_ID) VALUES
 INSERT INTO booking_seats (BOOKING_ID, SEAT_ID) VALUES
 (1, 1),
 (1, 2),
-(1, 3),
-(2, 3),
-(2, 4),
-(2, 5);
+(1, 3);
