@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,8 +20,8 @@ import pl.com.imralav.vxml.entities.Customer;
 import pl.com.imralav.vxml.entities.Seat;
 import pl.com.imralav.vxml.entities.Showing;
 import pl.com.imralav.vxml.entities.dtos.BookingDto;
-import pl.com.imralav.vxml.entities.dtos.FinalizeDto;
 import pl.com.imralav.vxml.entities.dtos.ShowingDto;
+import pl.com.imralav.vxml.repositories.SeatRepository;
 import pl.com.imralav.vxml.services.BookingService;
 import pl.com.imralav.vxml.services.CustomerService;
 import pl.com.imralav.vxml.services.DateTimeService;
@@ -48,6 +47,9 @@ public class ReservationDialogController {
 
     @Autowired
     private BookingProvider bookingProvider;
+
+    @Autowired
+    private SeatRepository seatRepository;
 
     @RequestMapping("/collectShowingDate")
     public String showingDatePrompt() {
@@ -120,12 +122,11 @@ public class ReservationDialogController {
 
     @RequestMapping(path = "/finalize", method=RequestMethod.POST)
     @Transactional
-    public String finalizeReservation(@RequestBody FinalizeDto finalizeDto, Model model) {
-        Integer showingId = finalizeDto.getShowingId();
-        List<Seat> seats = finalizeDto.getSeats();
-        LOGGER.info("Finalizing reservation of showing id {} with seats {}", showingId, seats);
+    public String finalizeReservation(@RequestParam Integer showingId, @RequestParam List<Integer> seatIds, Model model) {
+        LOGGER.info("Finalizing reservation of showing id {} with seat ids {}", showingId, seatIds);
         Customer customer = customerService.generateNewCustomer();
         model.addAttribute("customerCode", customer.getCode());
+        List<Seat> seats = seatRepository.findAll(seatIds);
         Showing showing = showingService.findOne(showingId);
         Booking booking = bookingProvider.provideFor(seats, customer, showing);
         LOGGER.info("Attempting to save the following booking: {}", booking);
