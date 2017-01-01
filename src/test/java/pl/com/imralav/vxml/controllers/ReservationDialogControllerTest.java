@@ -6,6 +6,10 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Mockito.verify;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.assertj.core.internal.Lists;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,6 +63,7 @@ public class ReservationDialogControllerTest {
         showingId = 1;
         selectedSeats = 3;
         given(showingServiceMock.findOne(showingId)).willReturn(showingMock);
+        given(showingServiceMock.findEmptySeatsForShowingId(showingId)).willReturn(Collections.emptyList());
         given(bookingProvider.provideEmptyBooking()).willReturn(bookingMock);
         given(bookingServiceMock.toDto(any(Booking.class))).willReturn(bookingDtoMock);
     }

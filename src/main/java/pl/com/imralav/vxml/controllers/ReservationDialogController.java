@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import pl.com.imralav.vxml.entities.Booking;
+import pl.com.imralav.vxml.entities.Seat;
 import pl.com.imralav.vxml.entities.Showing;
 import pl.com.imralav.vxml.entities.dtos.BookingDto;
 import pl.com.imralav.vxml.entities.dtos.ShowingDto;
@@ -83,6 +84,7 @@ public class ReservationDialogController {
     @RequestMapping("/seatsPrompt")
     public String seatsAmount(@RequestParam(name="choice") Integer showingId, Model model) {
         model.addAttribute("showingId", showingId);
+        //TODO: check amount of empty seats, redirect to error dialog if there are none, otherwise set maxSeats value to available amount
         return "reservation/seatsPrompt";
     }
 
@@ -91,8 +93,16 @@ public class ReservationDialogController {
         Showing showing = showingService.findOne(showingId);
         Booking booking = bookingProvider.provideEmptyBooking();
         booking.setShowing(showing);
+        List<Seat> availableSeats = prepareAvailableSeats(showingId, selectedSeats);
+        booking.setSeats(availableSeats);
         BookingDto dto = bookingService.toDto(booking);
         model.addAttribute("bookingSummary", dto);
         return "";
+    }
+
+    private List<Seat> prepareAvailableSeats(Integer showingId, Integer selectedSeats) {
+        List<Seat> emptySeats = showingService.findEmptySeatsForShowingId(showingId);
+        emptySeats = emptySeats.stream().limit(selectedSeats).collect(Collectors.toList());
+        return emptySeats;
     }
 }
