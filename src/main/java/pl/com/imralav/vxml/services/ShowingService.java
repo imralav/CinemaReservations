@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import pl.com.imralav.vxml.entities.Seat;
 import pl.com.imralav.vxml.entities.Showing;
 import pl.com.imralav.vxml.entities.dtos.ShowingDto;
 import pl.com.imralav.vxml.repositories.ShowingRepository;
@@ -57,4 +58,15 @@ public class ShowingService {
         }).collect(Collectors.toList());
     }
 
+    public Showing findOne(Integer id) {
+        return showingRepository.findOne(id);
+    }
+
+    public int findEmptySeatsAmountForShowingId(Integer showingId) {
+        return showingRepository.findEmptySeatsAmountForShowingId(showingId);
+    }
+
+    public List<Seat> findEmptySeatsForShowingId(Integer showingId) {
+        return showingRepository.findEmptySeatsForShowingId(showingId);
+    }
 }

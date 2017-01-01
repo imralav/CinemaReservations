@@ -2,6 +2,8 @@ package pl.com.imralav.vxml.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -108,5 +110,25 @@ public class ShowingServiceTest {
         assertThat(result.getMovieTitle()).isEqualTo(movieTitle);
         assertThat(result.getReadableDate()).isEqualToIgnoringCase("10 stycznia 2016");
         assertThat(result.getReadableTime()).isEqualTo("21:00");
+    }
+
+    @Test
+    public void shouldDelegateFindOneToRepository() {
+        //given
+        //when
+        int id = 1;
+        instance.findOne(id);
+        //then
+        verify(showingRepositoryMock, times(id)).findOne(id);
+    }
+
+    @Test
+    public void shouldDelegateFindingEmptySeatAmountToRepository() {
+        //given
+        //when
+        int id = 1;
+        instance.findEmptySeatsAmountForShowingId(id);
+        //then
+        verify(showingRepositoryMock, times(id)).findEmptySeatsAmountForShowingId(id);
     }
 }

@@ -3,9 +3,11 @@ package pl.com.imralav.vxml.repositories;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import pl.com.imralav.vxml.entities.Seat;
 import pl.com.imralav.vxml.entities.Showing;
 
 @Repository
@@ -14,5 +16,15 @@ public interface ShowingRepository extends PagingAndSortingRepository<Showing, I
     List<Showing> findByShowingDatetimeBetween(LocalDateTime from, LocalDateTime to);
 
     List<Showing> findByShowingDatetimeBetweenAndMovieId(LocalDateTime from, LocalDateTime to, int movieId);
+
+    @Query("SELECT seat FROM Seat seat WHERE seat.id NOT IN ("
+            + "SELECT bs.id FROM Booking b, IN(b.seats) bs WHERE b.showing.id = ?1"
+            + ") ORDER BY seat.rowNumber ASC, seat.seatNumber ASC")
+    List<Seat> findEmptySeatsForShowingId(Integer showingId);
+
+    @Query("SELECT count(seat) FROM Seat seat WHERE seat.id NOT IN ("
+            + "SELECT bs.id FROM Booking b, IN(b.seats) bs WHERE b.showing.id = ?1"
+            + ")")
+    int findEmptySeatsAmountForShowingId(Integer showingId);
 
 }

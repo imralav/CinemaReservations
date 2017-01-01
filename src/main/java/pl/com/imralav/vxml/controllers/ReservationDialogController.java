@@ -12,10 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import pl.com.imralav.vxml.entities.Booking;
 import pl.com.imralav.vxml.entities.Showing;
+import pl.com.imralav.vxml.entities.dtos.BookingDto;
 import pl.com.imralav.vxml.entities.dtos.ShowingDto;
+import pl.com.imralav.vxml.services.BookingService;
 import pl.com.imralav.vxml.services.DateTimeService;
 import pl.com.imralav.vxml.services.ShowingService;
+import pl.com.imralav.vxml.services.providers.BookingProvider;
 
 @Controller
 @RequestMapping("/reservation")
@@ -27,6 +31,12 @@ public class ReservationDialogController {
 
     @Autowired
     private ShowingService showingService;
+
+    @Autowired
+    private BookingService bookingService;
+
+    @Autowired
+    private BookingProvider bookingProvider;
 
     @RequestMapping("/collectShowingDate")
     public String showingDatePrompt() {
@@ -74,5 +84,15 @@ public class ReservationDialogController {
     public String seatsAmount(@RequestParam(name="choice") Integer showingId, Model model) {
         model.addAttribute("showingId", showingId);
         return "reservation/seatsPrompt";
+    }
+
+    @RequestMapping("/showSummary")
+    public String showReservationSummary(@RequestParam Integer showingId, @RequestParam(name="choice") Integer selectedSeats, Model model) {
+        Showing showing = showingService.findOne(showingId);
+        Booking booking = bookingProvider.provideEmptyBooking();
+        booking.setShowing(showing);
+        BookingDto dto = bookingService.toDto(booking);
+        model.addAttribute("bookingSummary", dto);
+        return "";
     }
 }

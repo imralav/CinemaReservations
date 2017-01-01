@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import pl.com.imralav.vxml.entities.Seat;
 import pl.com.imralav.vxml.entities.Showing;
 
 @RunWith(SpringRunner.class)
@@ -68,5 +69,35 @@ public class ShowingRepositoryIntegrationTest {
         //then
         assertThat(findByShowingDatetimeBetween).hasSize(1);
         assertThat(findByShowingDatetimeBetween).extracting(Showing::getMovieTitle).contains("Koszmar z ulicy Wiazow");
+    }
+
+    @Test
+    public void shouldFindNoEmptySeatsForShowingWithId1() {
+        //given
+        Integer showingId = 1;
+        //when
+        List<Seat> results = showingRepository.findEmptySeatsForShowingId(showingId);
+        //then
+        assertThat(results).isEmpty();
+    }
+
+    @Test
+    public void shouldFindAllAvailableSeatsForShowingWithId2() {
+        //given
+        Integer showingId = 2;
+        //when
+        List<Seat> results = showingRepository.findEmptySeatsForShowingId(showingId);
+        //then
+        assertThat(results).hasSize(2);
+    }
+
+    @Test
+    public void shouldFindAmountOfEmptySeats() {
+        //given
+        Integer showingId = 2;
+        //when
+        int result = showingRepository.findEmptySeatsAmountForShowingId(showingId);
+        //then
+        assertThat(result).isEqualTo(2);
     }
 }
