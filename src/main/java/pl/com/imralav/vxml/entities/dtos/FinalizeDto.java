@@ -8,6 +8,10 @@ public class FinalizeDto {
     private Integer showingId;
     private List<Seat> seats;
 
+    public FinalizeDto() {
+
+    }
+
     public FinalizeDto(Integer showingId, List<Seat> seats) {
         this.showingId = showingId;
         this.seats = seats;
