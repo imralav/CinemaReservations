@@ -15,8 +15,8 @@
                             <one-of>
                                 <item>1</item>
                                 <item>jedno</item>
-                                <tag>out=1;</tag>
                             </one-of>
+                            <tag>out=1;</tag>
                         </item>
                         <item>2</item>
                         <item>3</item>
