@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="pl-pl">
+    <meta name="maintainer" content="imralav@gmail.com" />
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+            var booking = /*[[${bookingSummary}]]*/ null;
+        /*]]>*/
+    </script>
+    <form>
+        <field name="choice">
+            <grammar xml:lang="pl-pl" root="ROOT_RULE">
+                <rule id="ROOT_RULE">
+                    <one-of>
+                        <item>tak</item>
+                        <item>powrót</item>
+                    </one-of>
+                </rule>
+            </grammar>
+            <prompt>Dokonujemy rezerwacji w dniu: <value expr="booking.readableDate"/>,</prompt>
+            <prompt>na film: <value expr="booking.movieTitle"/> o godzinie <value expr="booking.readableTime"/>.</prompt>
+            <prompt>Wybrane miejsca to: <value expr="booking.readableSeats"/>.</prompt>
+            <prompt>Powiedz TAK, jesli podsumowanie się zgadza lub powiedz POWRÓT, by dokonać rezerwacji od zera.</prompt>
+            <prompt>Ile zarezerwować miejsc? Maksymalnie 5.</prompt>
+            <filled>
+                <if cond="choice==='tak'">
+<!--                     <submit next="/cv/reservation/finalize" namelist="booking"/> -->
+                    <prompt>Tymczasowy klir przed zapisaniem rezerwacji.</prompt>
+                    <clear/>
+                <else/>
+                    <goto next="/cv/main"/>
+                </if>
+            </filled>
+            <nomatch>
+                <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </nomatch>
+            <noinput>
+                <prompt>Nie usłyszano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </noinput>
+        </field>
+    </form>
+</vxml>

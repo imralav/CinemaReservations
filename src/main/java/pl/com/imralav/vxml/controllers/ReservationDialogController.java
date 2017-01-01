@@ -97,7 +97,7 @@ public class ReservationDialogController {
         booking.setSeats(availableSeats);
         BookingDto dto = bookingService.toDto(booking);
         model.addAttribute("bookingSummary", dto);
-        return "";
+        return "reservation/summary";
     }
 
     private List<Seat> prepareAvailableSeats(Integer showingId, Integer selectedSeats) {
