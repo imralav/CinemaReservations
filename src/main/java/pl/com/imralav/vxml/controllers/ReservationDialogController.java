@@ -21,10 +21,10 @@ import pl.com.imralav.vxml.entities.Seat;
 import pl.com.imralav.vxml.entities.Showing;
 import pl.com.imralav.vxml.entities.dtos.BookingDto;
 import pl.com.imralav.vxml.entities.dtos.ShowingDto;
-import pl.com.imralav.vxml.repositories.SeatRepository;
 import pl.com.imralav.vxml.services.BookingService;
 import pl.com.imralav.vxml.services.CustomerService;
 import pl.com.imralav.vxml.services.DateTimeService;
+import pl.com.imralav.vxml.services.SeatService;
 import pl.com.imralav.vxml.services.ShowingService;
 import pl.com.imralav.vxml.services.providers.BookingProvider;
 
@@ -49,7 +49,7 @@ public class ReservationDialogController {
     private BookingProvider bookingProvider;
 
     @Autowired
-    private SeatRepository seatRepository;
+    private SeatService seatService;
 
     @RequestMapping("/collectShowingDate")
     public String showingDatePrompt() {
@@ -108,7 +108,7 @@ public class ReservationDialogController {
         List<Seat> selectedSeats = prepareSelectedSeats(showingId, selectedSeatsAmount);
         booking.setSeats(selectedSeats);
         BookingDto dto = bookingService.toDto(booking);
-        List<Integer> seatIds = selectedSeats.stream().map(Seat::getId).collect(Collectors.toList());
+        List<Integer> seatIds = seatService.extractIds(selectedSeats);
         model.addAttribute("bookingSummary", dto);
         model.addAttribute("seatIds", seatIds);
         model.addAttribute("showingId", showingId);
@@ -127,7 +127,7 @@ public class ReservationDialogController {
         LOGGER.info("Finalizing reservation of showing id {} with seat ids {}", showingId, seatIds);
         Customer customer = customerService.generateNewCustomer();
         model.addAttribute("customerCode", customer.getCode());
-        List<Seat> seats = seatRepository.findAll(seatIds);
+        List<Seat> seats = seatService.findAll(seatIds);
         Showing showing = showingService.findOne(showingId);
         Booking booking = bookingProvider.provideFor(seats, customer, showing);
         LOGGER.info("Attempting to save the following booking: {}", booking);
