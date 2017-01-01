@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -33,14 +34,21 @@ public class BookingServiceTest {
     @InjectMocks
     private BookingService instance;
 
+    @Mock
+    private BookingDto bookingDtoMock;
 
     private String movieTitle;
     private LocalDateTime showingDateTime;
+
+    private String readableDate;
+    private String readableTime;
 
     @Before
     public void setup() {
         movieTitle = "title";
         showingDateTime = LocalDateTime.of(2000, 1, 10, 10, 10);
+        readableDate = "10 stycznia 2000";
+        readableTime = "10:10";
     }
 
     @Test
@@ -55,8 +63,8 @@ public class BookingServiceTest {
         BookingDto result = instance.toDto(booking);
         // then
         assertThat(result.getMovieTitle()).isEqualTo(movieTitle);
-        assertThat(result.getReadableDate()).isEqualToIgnoringCase("10 stycznia 2000");
-        assertThat(result.getReadableTime()).isEqualTo("10:10");
+        assertThat(result.getReadableDate()).isEqualToIgnoringCase(readableDate);
+        assertThat(result.getReadableTime()).isEqualTo(readableTime);
         assertThat(result.getReadableSeats()).isEqualTo("1, 2 w rzędzie 1, 1, 2 w rzędzie 2");
     }
 
@@ -97,5 +105,15 @@ public class BookingServiceTest {
         seats.add(new Seat(1, 2));
         seats.add(new Seat(2, 2));
         return seats;
+    }
+
+    @Test
+    public void shouldConvertToBooking() {
+        //given
+
+        //when
+        Booking result = instance.toEntity(bookingDtoMock);
+        //then
+
     }
 }

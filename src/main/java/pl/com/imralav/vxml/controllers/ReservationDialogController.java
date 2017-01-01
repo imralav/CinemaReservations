@@ -4,20 +4,25 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import pl.com.imralav.vxml.entities.Booking;
+import pl.com.imralav.vxml.entities.Customer;
 import pl.com.imralav.vxml.entities.Seat;
 import pl.com.imralav.vxml.entities.Showing;
 import pl.com.imralav.vxml.entities.dtos.BookingDto;
 import pl.com.imralav.vxml.entities.dtos.ShowingDto;
 import pl.com.imralav.vxml.services.BookingService;
+import pl.com.imralav.vxml.services.CustomerService;
 import pl.com.imralav.vxml.services.DateTimeService;
 import pl.com.imralav.vxml.services.ShowingService;
 import pl.com.imralav.vxml.services.providers.BookingProvider;
@@ -35,6 +40,9 @@ public class ReservationDialogController {
 
     @Autowired
     private BookingService bookingService;
+
+    @Autowired
+    private CustomerService customerService;
 
     @Autowired
     private BookingProvider bookingProvider;
@@ -89,20 +97,32 @@ public class ReservationDialogController {
     }
 
     @RequestMapping("/showSummary")
-    public String showReservationSummary(@RequestParam Integer showingId, @RequestParam(name="choice") Integer selectedSeats, Model model) {
+    public String showReservationSummary(@RequestParam Integer showingId, @RequestParam(name="choice") Integer selectedSeatsAmount, Model model) {
         Showing showing = showingService.findOne(showingId);
         Booking booking = bookingProvider.provideEmptyBooking();
         booking.setShowing(showing);
-        List<Seat> availableSeats = prepareAvailableSeats(showingId, selectedSeats);
-        booking.setSeats(availableSeats);
+        List<Seat> selectedSeats = prepareSelectedSeats(showingId, selectedSeatsAmount);
+        booking.setSeats(selectedSeats);
         BookingDto dto = bookingService.toDto(booking);
         model.addAttribute("bookingSummary", dto);
+        model.addAttribute("seats", selectedSeats);
         return "reservation/summary";
     }
 
-    private List<Seat> prepareAvailableSeats(Integer showingId, Integer selectedSeats) {
+    private List<Seat> prepareSelectedSeats(Integer showingId, Integer selectedSeats) {
         List<Seat> emptySeats = showingService.findEmptySeatsForShowingId(showingId);
         emptySeats = emptySeats.stream().limit(selectedSeats).collect(Collectors.toList());
         return emptySeats;
+    }
+
+    @RequestMapping("/finalize")
+    @Transactional
+    public String finalizeReservation(@RequestParam(name="booking") BookingDto bookingDto, @RequestParam List<Seat> seats, ExtendedModelMap model) {
+        Customer customer = customerService.generateNewCustomer();
+        model.addAttribute("customerCode", customer.getCode());
+        Booking entity = bookingService.toEntity(bookingDto);
+        entity.setSeats(seats);
+        bookingService.save(entity);
+        return "reservation/customerCodeSummary";
     }
 }

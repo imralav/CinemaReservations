@@ -33,11 +33,19 @@ public class BookingService {
         return dto;
     }
 
+    public Booking toEntity(BookingDto dto) {
+        return null;
+    }
+
     public void deleteByCustomerCode(int customerCode) {
         bookingRepository.deleteByCustomerCode(customerCode);
     }
 
     public boolean doesExistForCustomerCode(int customerCode) {
         return bookingRepository.doesExistForCustomerCode(customerCode);
+    }
+
+    public Booking save(Booking entity) {
+        return bookingRepository.save(entity);
     }
 }

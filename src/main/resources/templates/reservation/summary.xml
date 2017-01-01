@@ -4,6 +4,7 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
             var booking = /*[[${bookingSummary}]]*/ null;
+            var seats = /*[[${seats}]]*/ [];
         /*]]>*/
     </script>
     <form>
@@ -23,9 +24,7 @@
             <prompt>Ile zarezerwować miejsc? Maksymalnie 5.</prompt>
             <filled>
                 <if cond="choice==='tak'">
-<!--                     <submit next="/cv/reservation/finalize" namelist="booking"/> -->
-                    <prompt>Tymczasowy klir przed zapisaniem rezerwacji.</prompt>
-                    <clear/>
+                    <submit next="/cv/reservation/finalize" namelist="booking seats"/>
                 <else/>
                     <goto next="/cv/main"/>
                 </if>

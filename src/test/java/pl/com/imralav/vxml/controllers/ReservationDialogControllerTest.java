@@ -9,7 +9,6 @@ import static org.mockito.Mockito.verify;
 import java.util.Collections;
 import java.util.List;
 
-import org.assertj.core.internal.Lists;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,10 +19,12 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ExtendedModelMap;
 
 import pl.com.imralav.vxml.entities.Booking;
+import pl.com.imralav.vxml.entities.Customer;
 import pl.com.imralav.vxml.entities.Seat;
 import pl.com.imralav.vxml.entities.Showing;
 import pl.com.imralav.vxml.entities.dtos.BookingDto;
 import pl.com.imralav.vxml.services.BookingService;
+import pl.com.imralav.vxml.services.CustomerService;
 import pl.com.imralav.vxml.services.ShowingService;
 import pl.com.imralav.vxml.services.providers.BookingProvider;
 
@@ -40,6 +41,9 @@ public class ReservationDialogControllerTest {
     private BookingService bookingServiceMock;
 
     @Mock
+    private CustomerService customerServiceMock;
+
+    @Mock
     private BookingProvider bookingProvider;
 
     @InjectMocks
@@ -54,9 +58,14 @@ public class ReservationDialogControllerTest {
     @Mock
     private BookingDto bookingDtoMock;
 
+    @Mock
+    private Customer customerMock;
+
     private Integer showingId;
 
     private Integer selectedSeats;
+
+    private Integer customerCode;
 
     @Before
     public void setup() {
@@ -66,6 +75,8 @@ public class ReservationDialogControllerTest {
         given(showingServiceMock.findEmptySeatsForShowingId(showingId)).willReturn(Collections.emptyList());
         given(bookingProvider.provideEmptyBooking()).willReturn(bookingMock);
         given(bookingServiceMock.toDto(any(Booking.class))).willReturn(bookingDtoMock);
+        given(customerServiceMock.generateNewCustomer()).willReturn(customerMock);
+        given(bookingServiceMock.toEntity(bookingDtoMock)).willReturn(bookingMock);
     }
 
     @Test
@@ -80,11 +91,43 @@ public class ReservationDialogControllerTest {
     @Test
     public void shouldBuildBookingWithShowingAndSeatsListWhenShowingReservationSummary() {
         //given
-        Integer showingId = 1;
         //when
         instance.showReservationSummary(showingId, selectedSeats, modelSpy);
         //then
         verify(bookingMock).setShowing(showingMock);
         verify(bookingMock).setSeats(anyListOf(Seat.class));
+    }
+
+    @Test
+    public void shouldInjectSeatIdsToModelWhenShowingReservationSummar() {
+        //given
+        //when
+        instance.showReservationSummary(showingId, selectedSeats, modelSpy);
+        //then
+        assertThat(modelSpy.containsAttribute("seatIds"));
+    }
+
+    @Test
+    public void shouldGenerateAndInjectCustomerCodeWhenFinalizingReservation() {
+        //given
+        customerCode = 1234;
+        given(customerMock.getCode()).willReturn(customerCode);
+        List<Seat> seats = Collections.emptyList();
+        //when
+        instance.finalizeReservation(bookingDtoMock, seats, modelSpy);
+        Integer customerCode = (Integer)modelSpy.asMap().get("customerCode");
+        //then
+        assertThat(customerCode).isEqualTo(customerCode);
+        verify(customerServiceMock).generateNewCustomer();
+    }
+
+    @Test
+    public void shouldUpdateBookingWhenFinalizingReservation() {
+        //given
+        List<Seat> seats = Collections.emptyList();
+        //when
+        instance.finalizeReservation(bookingDtoMock, seats, modelSpy);
+        //then
+        verify(bookingServiceMock).save(bookingMock);
     }
 }
