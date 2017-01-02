@@ -27,4 +27,7 @@ public class SeatService {
         }).collect(Collectors.joining(","));
     }
 
+    public long count() {
+        return seatRepository.count();
+    }
 }

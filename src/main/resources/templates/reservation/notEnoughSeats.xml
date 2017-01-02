@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="pl-pl">
+    <meta name="maintainer" content="imralav@gmail.com" />
+    <form>
+        <block>
+            <prompt>Wszystkie miejsca na wybrany seans są zajęte, za chwilę nastąpi przekierowanie do początku dialogu.<break time="500ms"/></prompt>
+            <goto next="/cv/main"/>
+        </block>
+    </form>
+</vxml>

@@ -96,8 +96,13 @@ public class ReservationDialogController {
     @RequestMapping("/seatsPrompt")
     public String seatsAmount(@RequestParam(name="choice") Integer showingId, Model model) {
         model.addAttribute("showingId", showingId);
-        //TODO: check amount of empty seats, redirect to error dialog if there are none, otherwise set maxSeats value to available amount
-        return "reservation/seatsPrompt";
+        int emptySeatsAmount = showingService.findEmptySeatsAmountForShowingId(showingId);
+        if(emptySeatsAmount > 0) {
+            model.addAttribute("maxSeats", emptySeatsAmount);
+            return "reservation/seatsPrompt";
+        } else {
+            return "reservation/notEnoughSeats";
+        }
     }
 
     @RequestMapping("/showSummary")
