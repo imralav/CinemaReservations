@@ -1,8 +1,6 @@
 INSERT INTO customer (CODE) VALUES
 (1234),
-(3124),
-(3123),
-(3213);
+(3124);
 
 INSERT INTO genre (NAME) VALUES
 ('horror'),
@@ -15,9 +13,10 @@ INSERT INTO genre (NAME) VALUES
 ('dokumentalny');
 
 INSERT INTO movie (TITLE, GENRE_ID) VALUES 
+('Hugo', 7),
+('Mafia', 7),
 ('Koszmar z ulicy Wiązów', 1),
 ('Nie zadzieraj z fryzjerem', 2),
-('Hugo', 7),
 ('Świat według kiepskich', 8);
 
 
@@ -39,29 +38,37 @@ INSERT INTO seat (SEAT_NUMBER, ROW_NUMBER) VALUES
 (4, 3),
 (5, 3);
 
--- insert horrors each day at 21 o'clock
 INSERT INTO showing (MOVIE_ID, SHOWING_DATETIME) VALUES
-(1, '2016-12-25 21:00:00'),
-(1, '2016-12-26 21:00:00'),
-(1, '2016-12-27 21:00:00'),
-(1, '2016-12-28 21:00:00'),
-(1, '2016-12-29 21:00:00'),
-(1, '2016-12-30 21:00:00');
-
--- insert comedies each day at 15 o'clock
-INSERT INTO showing (MOVIE_ID, SHOWING_DATETIME) VALUES
-(2, '2016-12-25 15:00:00'),
-(2, '2016-12-26 15:00:00'),
-(2, '2016-12-27 15:00:00'),
-(2, '2016-12-28 15:00:00'),
-(2, '2016-12-29 15:00:00'),
-(2, '2016-12-30 15:00:00');
+(1, '2017-1-25 21:00:00'),
+(1, '2017-1-26 21:00:00'),
+(1, '2017-1-27 21:00:00'),
+(1, '2017-1-28 21:00:00'),
+(1, '2017-1-29 21:00:00'),
+(1, '2017-1-30 21:00:00');
 
 INSERT INTO booking (CUSTOMER_ID, SHOWING_ID) VALUES
 (1, 1),
-(2, 7);
+(2, 2);
 
 INSERT INTO booking_seats (BOOKING_ID, SEAT_ID) VALUES
 (1, 1),
 (1, 2),
-(1, 3);
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(1, 7),
+(1, 8),
+(1, 9),
+(1, 10),
+(1, 11),
+(1, 12),
+(1, 13),
+(1, 14),
+(1, 15); -- customer 1 took all the seats for showing 1 in booking 1 --
+
+
+INSERT INTO booking_seats (BOOKING_ID, SEAT_ID) VALUES
+(2, 1),
+(2, 2),
+(2, 3); -- customer 2 took only 3 seats for showing 2 in booking 2 --
