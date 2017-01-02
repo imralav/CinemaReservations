@@ -9,7 +9,7 @@
          xmlns="http://www.w3.org/2001/06/grammar">
   <rule id="root_rule" scope="public">
     <item>
-        <tag>out.year=2016;</tag>
+        <tag>out.year=2017;</tag>
         <ruleref uri="#day"/><tag>out.day=rules.day;</tag>
         <ruleref uri="#month"/><tag>out.month=rules.month;</tag>
         <item repeat="0-1">
@@ -160,6 +160,7 @@
     <one-of>
         <item>2016</item>
         <item>2017</item>
+        <item>2018</item>
     </one-of>
   </rule>
 
