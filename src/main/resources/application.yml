@@ -26,3 +26,9 @@ spring:
         driverClassName: com.mysql.jdbc.Driver
     jpa:
         show-sql: true
+
+# ----------------------------------------
+# OTHER PROPERTIES
+# ----------------------------------------
+logrequestfilter:
+    paths: /reservation/*
