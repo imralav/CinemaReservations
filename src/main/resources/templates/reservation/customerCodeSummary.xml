@@ -4,7 +4,7 @@
     <script src="/cv/js/vxmlapp.min.js"></script>
     <script th:inline="javascript">
         /*<![CDATA[*/
-            var customerCode = /*[[${customerCode}]]*/ null;
+            var customerCode = /*[[${customerCode}]]*/ '0000';
         /*]]>*/
     </script>
     <form>

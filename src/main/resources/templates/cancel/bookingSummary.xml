@@ -5,7 +5,7 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
             var booking = /*[[${booking}]]*/ null;
-            var customerCode = /*[[${customerCode}]]*/ 0000;
+            var customerCode = /*[[${customerCode}]]*/ '0000';
         /*]]>*/
     </script>
     <form>

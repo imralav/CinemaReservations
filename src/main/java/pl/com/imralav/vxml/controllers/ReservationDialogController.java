@@ -126,7 +126,7 @@ public class ReservationDialogController {
     public String finalizeReservation(@RequestParam Integer showingId, @RequestParam(name="seatIds") String unparsedSeatIds, Model model) {
         LOGGER.info("Finalizing reservation of showing id {} with seat ids {}", showingId, unparsedSeatIds);
         Customer customer = customerService.generateNewCustomer();
-        model.addAttribute("customerCode", customer.getCode());
+        model.addAttribute("customerCode", Integer.toString(customer.getCode()));
         List<Seat> seats = seatService.findAll(unparsedSeatIds);
         Showing showing = showingService.findOne(showingId);
         Booking booking = bookingProvider.provideFor(seats, customer, showing);
