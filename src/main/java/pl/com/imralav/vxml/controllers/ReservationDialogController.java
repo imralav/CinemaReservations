@@ -137,11 +137,4 @@ public class ReservationDialogController {
         bookingService.save(booking);
         return "reservation/customerCodeSummary";
     }
-
-    @RequestMapping("/test")
-    @ResponseBody
-    public ResponseEntity<Seat> requestBodyTest(@RequestBody Seat seat) {
-        LOGGER.info("Getting seat: {}", seat);
-        return ResponseEntity.ok(seat);
-    }
 }

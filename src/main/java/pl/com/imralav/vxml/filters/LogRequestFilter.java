@@ -1,6 +1,5 @@
 package pl.com.imralav.vxml.filters;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
 import java.util.function.Consumer;
