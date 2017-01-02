@@ -26,5 +26,4 @@ public interface ShowingRepository extends PagingAndSortingRepository<Showing, I
             + "SELECT bs.id FROM Booking b, IN(b.seats) bs WHERE b.showing.id = ?1"
             + ")")
     int findEmptySeatsAmountForShowingId(Integer showingId);
-
 }

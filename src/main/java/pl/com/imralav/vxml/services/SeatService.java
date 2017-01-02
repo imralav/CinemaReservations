@@ -1,5 +1,6 @@
 package pl.com.imralav.vxml.services;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +16,8 @@ public class SeatService {
     @Autowired
     private SeatRepository seatRepository;
 
-    public List<Seat> findAll(List<Integer> seatIds) {
+    public List<Seat> findAll(String unparsedSeatIds) {
+        List<Integer> seatIds = Arrays.stream(unparsedSeatIds.split(",")).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
         return seatRepository.findAll(seatIds);
     }
 

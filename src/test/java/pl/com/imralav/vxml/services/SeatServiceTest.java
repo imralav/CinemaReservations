@@ -37,4 +37,15 @@ public class SeatServiceTest {
         // then
         assertThat(results).containsExactly(1, 2, 3);
     }
+
+    @Test
+    public void shouldParseIdsFromStringWhenFindAll() {
+        //given
+        List<Seat> seats = Arrays.asList(seat1Mock, seat1Mock, seat1Mock);
+        given(seatRepository.findAll(Arrays.asList(1,2,3))).willReturn(seats);
+        //when
+        List<Seat> results = instance.findAll("1,2,3");
+        //then
+        assertThat(results).isEqualTo(seats);
+    }
 }

@@ -4,7 +4,7 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
             var booking = /*[[${bookingSummary}]]*/ null;
-            var seatIds = /*[[${seatIds}]]*/ [];
+            var seatIds = /*[[${seatIds}]]*/ null;
             var showingId = /*[[${showingId}]]*/ null;
         /*]]>*/
     </script>

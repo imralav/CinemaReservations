@@ -7,7 +7,6 @@ import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Mockito.verify;
 
 import java.util.Collections;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -115,9 +114,8 @@ public class ReservationDialogControllerTest {
         //given
         customerCode = 1234;
         given(customerMock.getCode()).willReturn(customerCode);
-        List<Integer> seats = Collections.emptyList();
         //when
-        instance.finalizeReservation(showingId, seats, modelSpy);
+        instance.finalizeReservation(showingId, "1,2", modelSpy);
         Integer customerCode = (Integer)modelSpy.asMap().get("customerCode");
         //then
         assertThat(customerCode).isEqualTo(customerCode);
@@ -127,9 +125,8 @@ public class ReservationDialogControllerTest {
     @Test
     public void shouldUpdateBookingWhenFinalizingReservation() {
         //given
-        List<Integer> seats = Collections.emptyList();
         //when
-        instance.finalizeReservation(showingId, seats, modelSpy);
+        instance.finalizeReservation(showingId, "1,2", modelSpy);
         //then
         verify(bookingServiceMock).save(any(Booking.class));
     }

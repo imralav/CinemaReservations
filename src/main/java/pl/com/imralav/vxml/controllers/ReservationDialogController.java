@@ -123,11 +123,11 @@ public class ReservationDialogController {
 
     @RequestMapping(path = "/finalize", method=RequestMethod.POST)
     @Transactional
-    public String finalizeReservation(@RequestParam Integer showingId, @RequestParam List<Integer> seatIds, Model model) {
-        LOGGER.info("Finalizing reservation of showing id {} with seat ids {}", showingId, seatIds);
+    public String finalizeReservation(@RequestParam Integer showingId, @RequestParam(name="seatIds") String unparsedSeatIds, Model model) {
+        LOGGER.info("Finalizing reservation of showing id {} with seat ids {}", showingId, unparsedSeatIds);
         Customer customer = customerService.generateNewCustomer();
         model.addAttribute("customerCode", customer.getCode());
-        List<Seat> seats = seatService.findAll(seatIds);
+        List<Seat> seats = seatService.findAll(unparsedSeatIds);
         Showing showing = showingService.findOne(showingId);
         Booking booking = bookingProvider.provideFor(seats, customer, showing);
         LOGGER.info("Attempting to save the following booking: {}", booking);
