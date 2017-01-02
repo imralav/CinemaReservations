@@ -116,7 +116,7 @@ public class ReservationDialogControllerTest {
         given(customerMock.getCode()).willReturn(customerCode);
         //when
         instance.finalizeReservation(showingId, "1,2", modelSpy);
-        Integer customerCode = (Integer)modelSpy.asMap().get("customerCode");
+        String customerCode = (String)modelSpy.asMap().get("customerCode");
         //then
         assertThat(customerCode).isEqualTo(customerCode);
         verify(customerServiceMock).generateNewCustomer();
