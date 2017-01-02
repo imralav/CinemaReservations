@@ -33,9 +33,9 @@ public class SeatServiceTest {
         given(seat1Mock.getId()).willReturn(1, 2, 3);
         List<Seat> seats = Arrays.asList(seat1Mock, seat1Mock, seat1Mock);
         // when
-        List<Integer> results = instance.extractIds(seats);
+        String results = instance.extractIds(seats);
         // then
-        assertThat(results).containsExactly(1, 2, 3);
+        assertThat(results).isEqualTo("1,2,3");
     }
 
     @Test

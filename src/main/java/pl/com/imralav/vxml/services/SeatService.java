@@ -21,8 +21,10 @@ public class SeatService {
         return seatRepository.findAll(seatIds);
     }
 
-    public List<Integer> extractIds(List<Seat> seats) {
-        return seats.stream().mapToInt(Seat::getId).boxed().collect(Collectors.toList());
+    public String extractIds(List<Seat> seats) {
+        return seats.stream().map(seat -> {
+            return Integer.toString(seat.getId());
+        }).collect(Collectors.joining(","));
     }
 
 }
