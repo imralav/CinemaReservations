@@ -47,24 +47,8 @@ public class LogRequestFilter extends AbstractRequestLoggingFilter {
     protected void beforeRequest(HttpServletRequest request, String message) {
         LOGGER.info("New {} request from: {}", request.getMethod(), request.getRequestURI());
         LOGGER.info("Standard message: {}", message);
-        logHeaders(request);
         logParameters(request);
         logPayload(request);
-        logAttributes(request);
-    }
-
-    private void logHeaders(HttpServletRequest request) {
-        LOGGER.info("Headers:");
-        forEachRemaining(request.getHeaderNames(), name -> {
-            LOGGER.info(NAME_VALUE_FORMAT, name, request.getHeader(name));
-        });
-    }
-
-    private void logAttributes(HttpServletRequest request) {
-        LOGGER.info("Attributes:");
-        forEachRemaining(request.getAttributeNames(), name -> {
-            LOGGER.info(NAME_VALUE_FORMAT, name, request.getAttribute(name));
-        });
     }
 
     private void logParameters(HttpServletRequest request) {
@@ -89,12 +73,6 @@ public class LogRequestFilter extends AbstractRequestLoggingFilter {
                 }
                 LOGGER.info("{}", payload);
             }
-        }
-    }
-
-    private <T> void forEachRemaining(Enumeration<T> e, Consumer<? super T> c) {
-        while(e.hasMoreElements()) {
-            c.accept(e.nextElement());
         }
     }
 
