@@ -91,6 +91,23 @@
             </tbody>
         </table>
     </div>
+    <div>
+        <h3>Bookings Seats <input type="button" ng-click="refreshBookings()" value="refresh"/></h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>BOOKING_ID</th>
+                    <th>SEAT_ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="bs in bookingSeats | orderBy: 'bookingId' ">
+                    <td>{{bs.bookingId}}</td>
+                    <td>{{bs.seatId}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 	<script src="js/webapp.min.js"></script>
 </body>

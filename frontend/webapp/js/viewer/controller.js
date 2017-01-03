@@ -12,9 +12,19 @@ angular.module('CinemaReservations')
 			  $scope.movies = movies;
 		  });
 	  }
+	  function prepareBookingSeats(bookings) {
+		  var bookingSeats = [];
+		  bookings.forEach(function(booking) {
+			booking.seats.forEach(function(seat) {
+				bookingSeats.push({bookingId: booking.id, seatId: seat.id}); 
+			});
+		  });
+		  return bookingSeats;
+	  }
 	  function refreshBookings() {
 		  bookingService.getBookings(function(bookings) {
 			  $scope.bookings = bookings;
+			  $scope.bookingSeats = prepareBookingSeats(bookings);
 		  });
 	  }
 	  function refreshSeats() {
