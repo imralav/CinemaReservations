@@ -53,6 +53,24 @@
             </tbody>
         </table>
     </div>
+        <h3>Seats <input type="button" ng-click="refreshSeats()" value="refresh"/></h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>SEAT_NUMBER</th>
+                    <th>ROW_NUMBER</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="seat in seats | orderBy: 'id' ">
+                    <td>{{seat.id}}</td>
+                    <td>{{seat.seatNumber}}</td>
+                    <td>{{seat.rowNumber}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 	<script src="js/webapp.min.js"></script>
 </body>
