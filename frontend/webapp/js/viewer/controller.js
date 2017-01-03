@@ -37,14 +37,18 @@ angular.module('CinemaReservations')
 			  $scope.showings = showings;
 		  });
 	  }
-	  refreshCustomers();
-	  refreshMovies();
-	  refreshBookings();
-	  refreshSeats();
-	  refreshShowings();
+	  function refreshAll() {
+		  refreshCustomers();
+		  refreshMovies();
+		  refreshBookings();
+		  refreshSeats();
+		  refreshShowings();
+	  }
+	  refreshAll();
 	  $scope.refreshCustomers = refreshCustomers;
 	  $scope.refreshMovies = refreshMovies;
 	  $scope.refreshBookings = refreshBookings;
 	  $scope.refreshSeats = refreshSeats;
 	  $scope.refreshShowings = refreshShowings;
+	  $scope.refreshAll = refreshAll;
   }]);

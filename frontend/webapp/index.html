@@ -1,6 +1,16 @@
 <html ng-app="CinemaReservations">
+<head>
+	<style>
+		.table-view {
+		  display: inline-block;
+		  border: 1px solid black;
+		  padding: 5px;
+		}
+	</style>
+</head>
 <body ng-controller="ViewerController">
-	<div>
+    <input type="button" ng-click="refreshAll()" value="Refresh all!"/>
+	<div class="table-view">
 		<h3>Customers <input type="button" ng-click="refreshCustomers()" value="refresh"/></h3>
 		<table>
 			<thead>
@@ -17,7 +27,7 @@
 			</tbody>
 		</table>
 	</div>
-    <div>
+    <div class="table-view">
         <h3>Movies <input type="button" ng-click="refreshMovies()" value="refresh"/></h3>
         <table>
             <thead>
@@ -34,7 +44,7 @@
             </tbody>
         </table>
     </div>
-    <div>
+    <div class="table-view">
         <h3>Bookings <input type="button" ng-click="refreshBookings()" value="refresh"/></h3>
         <table>
             <thead>
@@ -53,7 +63,7 @@
             </tbody>
         </table>
     </div>
-    <div>
+    <div class="table-view">
         <h3>Seats <input type="button" ng-click="refreshSeats()" value="refresh"/></h3>
         <table>
             <thead>
@@ -72,7 +82,7 @@
             </tbody>
         </table>
     </div>
-    <div>
+    <div class="table-view">
         <h3>Showings <input type="button" ng-click="refreshShowings()" value="refresh"/></h3>
         <table>
             <thead>
@@ -91,7 +101,7 @@
             </tbody>
         </table>
     </div>
-    <div>
+    <div class="table-view">
         <h3>Bookings Seats <input type="button" ng-click="refreshBookings()" value="refresh"/></h3>
         <table>
             <thead>
