@@ -34,6 +34,25 @@
             </tbody>
         </table>
     </div>
+    <div>
+        <h3>Bookings <input type="button" ng-click="refreshBookings()" value="refresh"/></h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>CUSTOMER_ID</th>
+                    <th>SHOWING_ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="booking in bookings | orderBy: 'id' ">
+                    <td>{{booking.id}}</td>
+                    <td>{{booking.customer.id}}</td>
+                    <td>{{booking.showing.id}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 	<script src="js/webapp.min.js"></script>
 </body>
