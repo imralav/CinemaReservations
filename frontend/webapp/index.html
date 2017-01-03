@@ -10,13 +10,30 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="customer in customers">
+				<tr ng-repeat="customer in customers | orderBy: 'id' ">
 					<td>{{customer.id}}</td>
 					<td>{{customer.code}}</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+    <div>
+        <h3>Movies <input type="button" ng-click="refreshMovies()" value="refresh"/></h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>TITLE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="movie in movies | orderBy: 'id' ">
+                    <td>{{movie.id}}</td>
+                    <td>{{movie.title}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 	<script src="js/webapp.min.js"></script>
 </body>
