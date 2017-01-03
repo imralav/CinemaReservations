@@ -1,6 +1,6 @@
 angular.module('CinemaReservations')
-  .controller('ViewerController', ['$scope', 'CustomerService', 'MovieService', 'BookingService', 'SeatService', 
-                                   function($scope, customerService, moviesService, bookingService, seatService) {
+  .controller('ViewerController', ['$scope', 'CustomerService', 'MovieService', 'BookingService', 'SeatService', 'ShowingService', 
+                                   function($scope, customerService, moviesService, bookingService, seatService, showingService) {
 	  'use strict';
 	  function refreshCustomers() {
 		  customerService.getCustomers(function(customers) {
@@ -22,12 +22,19 @@ angular.module('CinemaReservations')
 			  $scope.seats = seats;
 		  });
 	  }
+	  function refreshShowings() {
+		  showingService.getShowings(function(showings) {
+			  $scope.showings = showings;
+		  });
+	  }
 	  refreshCustomers();
 	  refreshMovies();
 	  refreshBookings();
 	  refreshSeats();
+	  refreshShowings();
 	  $scope.refreshCustomers = refreshCustomers;
 	  $scope.refreshMovies = refreshMovies;
 	  $scope.refreshBookings = refreshBookings;
 	  $scope.refreshSeats = refreshSeats;
+	  $scope.refreshShowings = refreshShowings;
   }]);

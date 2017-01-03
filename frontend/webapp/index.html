@@ -53,6 +53,7 @@
             </tbody>
         </table>
     </div>
+    <div>
         <h3>Seats <input type="button" ng-click="refreshSeats()" value="refresh"/></h3>
         <table>
             <thead>
@@ -67,6 +68,25 @@
                     <td>{{seat.id}}</td>
                     <td>{{seat.seatNumber}}</td>
                     <td>{{seat.rowNumber}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <h3>Showings <input type="button" ng-click="refreshShowings()" value="refresh"/></h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>MOVIE_ID</th>
+                    <th>SHOWING_DATETIME</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="showing in showings | orderBy: 'id' ">
+                    <td>{{showing.id}}</td>
+                    <td>{{showing.movie.id}}</td>
+                    <td>{{showing.showingDatetime.year}}.{{showing.showingDatetime.monthValue}}.{{showing.showingDatetime.dayOfMonth}} {{showing.showingDatetime.hour}}:{{showing.showingDatetime.minute}}:{{showing.showingDatetime.second}}</td>
                 </tr>
             </tbody>
         </table>
