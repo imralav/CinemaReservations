@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" xml:lang="pl-pl">
-    <script src="js/vxmlapp.min.js"></script>
     <meta name="maintainer" content="imralav@gmail.com" />
     <form id="ChooseOrSearch">
         <field name="selection">
@@ -25,9 +24,9 @@
             </noinput>
             <filled>
                 <if cond="selection == 'szukaj'">
-                    <goto next="reservation/collectShowingDate"/>
+                    <goto next="/cv/reservation/collectShowingDate"/>
                 <else/>
-                    <goto next="reservation/mixedInitiativePrompt"/>
+                    <goto next="/cv/reservation/mixedInitiativePrompt"/>
                 </if>
             </filled>
         </field>
