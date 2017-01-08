@@ -21,7 +21,8 @@
             <filled>
                 <if cond="dateConfirmed=='tak';">
                     <assign name="date" expr="showingDate.date"/>
-                    <submit next="/cv/reservation/choicePrompt" namelist="date"/>
+                    <assign name="readableDate" expr="showingDate.readableDate"/>
+                    <submit next="/cv/reservation/choicePrompt" namelist="date readableDate"/>
                 <else/>
                     <clear/>
                 </if>

@@ -4,6 +4,7 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
             var date = /*[[${date}]]*/ null;
+            var readableDate = /*[[${readableDate}]]*/ null;
             var movieTitles = /*[[${movieTitles}]]*/ null;
         /*]]>*/
     </script>
@@ -26,7 +27,7 @@
                 </rule>
             </grammar>
             <prompt>
-                W dniu: <value expr="date"/> gramy następujące filmy: <value expr="movieTitles"/>. 
+                W dniu: <value expr="readableDate"/> gramy następujące filmy: <value expr="movieTitles"/>. 
                 Wypowiedz nazwę filmu, by przejść do rezerwacji.
                 Powiedz POWTÓRZ, by usłyszeć listę filmów jeszcze raz lub
                 POWRÓT, by wrócić do poprzedniego wyboru
@@ -37,7 +38,7 @@
                 <elseif cond="choice==='powrót'"/>
                     <goto next="/cv/reservation/collectShowingDate"/>
                 <else/>
-                    <submit next="/cv/reservation/collectShowingTime" namelist="date choice"/>
+                    <submit next="/cv/reservation/collectShowingTime" namelist="date readableDate choice"/>
                 </if>
             </filled>
             <nomatch>

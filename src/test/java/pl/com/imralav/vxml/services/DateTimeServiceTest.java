@@ -20,6 +20,6 @@ public class DateTimeServiceTest {
         //when
         String result = instance.reformat(initialDate).from(initialFormat).toReadable();
         //then
-        assertThat(result).isEqualTo("10 stycznia 2016");
+        assertThat(result).isEqualTo("dziesiąty stycznia 2016");
     }
 }

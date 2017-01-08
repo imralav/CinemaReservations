@@ -4,6 +4,7 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
             var date = /*[[${date}]]*/ null;
+            var readableDate = /*[[${readableDate}]]*/ null;
             var movieTitle = /*[[${movieTitle}]]*/ null;
         /*]]>*/
     </script>
@@ -34,7 +35,7 @@
                 <elseif cond="choice==='powrót'"/>
                     <goto next="/cv/reservation/choicePrompt"/>
                 <else/>
-                    <submit next="/cv/reservation/seatsPrompt"/>
+                    <submit next="/cv/reservation/seatsPrompt" namelist="readableDate choice"/>
                 </if>
             </filled>
             <nomatch>

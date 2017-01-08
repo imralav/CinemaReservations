@@ -4,6 +4,7 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
             var showingId = /*[[${showingId}]]*/ null;
+            var readableDate = /*[[${readableDate}]]*/ null;
             var maxSeats = /*[[${maxSeats}]]*/ 0;
         /*]]>*/
     </script>
@@ -25,7 +26,7 @@
             </grammar>
             <prompt>Ile zarezerwować miejsc? Maksymalnie <value expr="maxSeats"/>.</prompt>
             <filled>
-                <submit next="/cv/reservation/showSummary" namelist="showingId choice"/>
+                <submit next="/cv/reservation/showSummary" namelist="showingId choice readableDate"/>
             </filled>
             <nomatch>
                 <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>

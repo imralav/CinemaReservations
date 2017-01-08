@@ -51,6 +51,11 @@ public class ReservationDialogController {
     @Autowired
     private SeatService seatService;
 
+    @RequestMapping("/chooseOrSearch")
+    public String chooseOrSearch() {
+        return "reservation/chooseOrSearchPrompt";
+    }
+
     @RequestMapping("/collectShowingDate")
     public String showingDatePrompt() {
         return "reservation/showingDatePrompt";
@@ -64,12 +69,13 @@ public class ReservationDialogController {
     }
 
     @RequestMapping("/showRepertoire")
-    public String showRepertoire(@RequestParam(name="date") String dateText, Model model) {
+    public String showRepertoire(@RequestParam(name="date") String dateText, @RequestParam(name="readableDate") String readableDateText, Model model) {
         LOGGER.info("Displaying repertoire prompt for date {}", dateText);
         LocalDate date = dateTimeService.reformat(dateText).from("d.M.uuuu").toDate();
         List<Showing> showings = showingService.findForDate(date);
         String movieTitles = showings.stream().map(Showing::getMovieTitle).distinct().collect(Collectors.joining(", "));
         model.addAttribute("date", dateTimeService.toReadable(date));
+        model.addAttribute("readableDate", readableDateText);
         model.addAttribute("showings", showings);
         model.addAttribute("movieTitles", movieTitles);
         if(showings.isEmpty()) {
@@ -80,7 +86,7 @@ public class ReservationDialogController {
     }
 
     @RequestMapping("/collectShowingTime")
-    public String collectShowingTime(@RequestParam(name="date") String dateText, @RequestParam(name="choice") Integer movieId, Model model) {
+    public String collectShowingTime(@RequestParam(name="date") String dateText, @RequestParam(name="readableDate") String readableDateText, @RequestParam(name="choice") Integer movieId, Model model) {
         LOGGER.info("Collecting showing time for date {} and movie id {}", dateText, movieId);
         LocalDate date = dateTimeService.reformat(dateText).fromReadable().toDate();
         LOGGER.info("Retrieving showings for date {} and movie id {}", date, movieId);
@@ -88,17 +94,19 @@ public class ReservationDialogController {
         LOGGER.info("Converting showings to dtos");
         List<ShowingDto> showingDtos = showingService.toDto(showings);
         model.addAttribute("date", dateText);
+        model.addAttribute("readableDate", readableDateText);
         model.addAttribute("showings", showingDtos);
         model.addAttribute("movieTitle", showingDtos.get(0).getMovieTitle());
         return "reservation/showingTimePrompt";
     }
 
     @RequestMapping("/seatsPrompt")
-    public String seatsAmount(@RequestParam(name="choice") Integer showingId, Model model) {
+    public String seatsAmount(@RequestParam(name="choice") Integer showingId, @RequestParam(name="readableDate") String readableDateText, Model model) {
         model.addAttribute("showingId", showingId);
         int emptySeatsAmount = showingService.findEmptySeatsAmountForShowingId(showingId);
         if(emptySeatsAmount > 0) {
             model.addAttribute("maxSeats", emptySeatsAmount);
+            model.addAttribute("readableDate", readableDateText);
             return "reservation/seatsPrompt";
         } else {
             return "reservation/notEnoughSeats";
@@ -106,7 +114,7 @@ public class ReservationDialogController {
     }
 
     @RequestMapping("/showSummary")
-    public String showReservationSummary(@RequestParam Integer showingId, @RequestParam(name="choice") Integer selectedSeatsAmount, Model model) {
+    public String showReservationSummary(@RequestParam Integer showingId, @RequestParam(name="choice") Integer selectedSeatsAmount, @RequestParam(name="readableDate") String readableDateText, Model model) {
         Showing showing = showingService.findOne(showingId);
         Booking booking = bookingProvider.provideEmptyBooking();
         booking.setShowing(showing);
@@ -117,6 +125,7 @@ public class ReservationDialogController {
         model.addAttribute("bookingSummary", dto);
         model.addAttribute("seatIds", unparsedSeatIds);
         model.addAttribute("showingId", showingId);
+        model.addAttribute("readableDate", readableDateText);
         return "reservation/summary";
     }
 
@@ -138,5 +147,10 @@ public class ReservationDialogController {
         LOGGER.info("Attempting to save the following booking: {}", booking);
         bookingService.save(booking);
         return "reservation/customerCodeSummary";
+    }
+
+    @RequestMapping("/mixedInitiativePrompt")
+    public String mixedInitiativePrompt() {
+        return "";
     }
 }

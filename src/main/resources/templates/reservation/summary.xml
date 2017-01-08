@@ -4,6 +4,7 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
             var booking = /*[[${bookingSummary}]]*/ null;
+            var readableDate = /*[[${readableDate}]]*/ null;
             var seatIds = /*[[${seatIds}]]*/ null;
             var showingId = /*[[${showingId}]]*/ null;
         /*]]>*/
@@ -18,11 +19,10 @@
                     </one-of>
                 </rule>
             </grammar>
-            <prompt>Dokonujemy rezerwacji w dniu: <value expr="booking.readableDate"/>,</prompt>
+            <prompt>Dokonujemy rezerwacji w dniu: <value expr="readableDate"/>,</prompt>
             <prompt>na film: <value expr="booking.movieTitle"/> o godzinie <value expr="booking.readableTime"/>.</prompt>
             <prompt>Wybrane miejsca to: <value expr="booking.readableSeats"/>.</prompt>
             <prompt>Powiedz TAK, jesli podsumowanie się zgadza lub powiedz POWRÓT, by dokonać rezerwacji od zera.</prompt>
-            <prompt>Ile zarezerwować miejsc? Maksymalnie 5.</prompt>
             <filled>
                 <if cond="choice==='tak'">
                     <submit next="/cv/reservation/finalize" namelist="showingId seatIds" method="POST"/>
