@@ -61,13 +61,6 @@ public class ReservationDialogController {
         return "reservation/showingDatePrompt";
     }
 
-    @RequestMapping("/choicePrompt")
-    public String movieChoicePrompt(@RequestParam String date, Model model) {
-        LOGGER.info("Displaying choice prompt for date {}", date);
-        model.addAttribute("date", date);
-        return "reservation/movieChoicePrompt";
-    }
-
     @RequestMapping("/showRepertoire")
     public String showRepertoire(@RequestParam(name="date") String dateText, @RequestParam(name="readableDate") String readableDateText, Model model) {
         LOGGER.info("Displaying repertoire prompt for date {}", dateText);
