@@ -4,7 +4,7 @@
     <form>
         <field name="showingDate">
             <grammar src="/cv/grammars/date.xml"/>
-            <prompt>Proszę podać numer dnia i nazwę miesiąca, na przykład: 10 styczeń.</prompt>
+            <prompt>Proszę podać numer dnia i nazwę miesiąca, na przykład: pierwszy styczeń lub dwudziestego marca.</prompt>
             <nomatch>
                 <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
                 <reprompt />
@@ -16,7 +16,7 @@
         </field>
         <field name="dateConfirmed">
             <grammar src="/cv/grammars/boolean.xml"/>
-            <prompt>Czy data się zgadza? <value expr="showingDate.readableDate"/></prompt>
+            <prompt>Czy data się zgadza? <value expr="showingDate.readableDate"/>.</prompt>
             <log expr="JSON.stringify(showingDate)"/>
             <filled>
                 <if cond="dateConfirmed=='tak';">
