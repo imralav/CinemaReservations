@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" xml:lang="pl-pl">
     <meta name="maintainer" content="imralav@gmail.com" />
+    <var name="formData" expr="{}"/>
     <form id="main_form">
         <grammar
          type="application/srgs+xml"
@@ -145,6 +146,10 @@
         <filled mode="all">
             <prompt>Wybrane przez Ciebie dane, to:</prompt>
             <prompt>Dzień: <value expr="date.readableDate"/>, godzina: <value expr="time"/>, film: <value expr="title"/></prompt>
+            <assign name="formData.date" expr="date.date"/>
+            <assign name="formData.readableDate" expr="date.readableDate"/>
+            <assign name="formData.time" expr="time"/>
+            <assign name="formData.title" expr="title"/>
             <goto next="#confirmation_form"/>
         </filled>
     </form>
@@ -154,8 +159,10 @@
             <prompt>Czy wszystko się zgadza?</prompt>
             <filled>
                 <if cond="confirmation==='tak'">
-                    <assign name="date" expr="date.date"/>
-                    <assign name="readableDate" expr="date.readableDate"/>
+                    <assign name="date" expr="formData.date"/>
+                    <assign name="readableDate" expr="formData.readableDate"/>
+                    <assign name="time" expr="formData.time"/>
+                    <assign name="title" expr="formData.title"/>
                     <submit next="/cv/reservation/checkMixedInitiativeData" namelist="date readableDate time title"/>
                 <else/>
                     <clear/>
