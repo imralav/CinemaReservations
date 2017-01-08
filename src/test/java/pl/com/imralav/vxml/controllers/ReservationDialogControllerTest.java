@@ -22,7 +22,6 @@ import pl.com.imralav.vxml.entities.Customer;
 import pl.com.imralav.vxml.entities.Seat;
 import pl.com.imralav.vxml.entities.Showing;
 import pl.com.imralav.vxml.entities.dtos.BookingDto;
-import pl.com.imralav.vxml.repositories.MovieRepository;
 import pl.com.imralav.vxml.services.BookingService;
 import pl.com.imralav.vxml.services.CustomerService;
 import pl.com.imralav.vxml.services.MovieService;

@@ -100,4 +100,51 @@ public class ShowingRepositoryIntegrationTest {
         //then
         assertThat(result).isEqualTo(2);
     }
+
+    @Test
+    public void shouldFindByShowingDatetimeAndMovieTitleForCorrectData() {
+        //given
+        LocalDateTime showingDateTime = LocalDateTime.of(2016,  12, 25, 21, 0);
+        String movieTitle = "Koszmar z ulicy wiazow";
+        //when
+        Showing result = showingRepository.findByShowingDatetimeAndMovie_TitleIgnoreCase(showingDateTime, movieTitle);
+        //then
+        assertThat(result).isNotNull();
+        assertThat(result.getMovieTitle()).isEqualToIgnoringCase(movieTitle);
+        assertThat(result.getId()).isEqualTo(2);
+    }
+
+    @Test
+    public void shouldNotFindByShowingDatetimeAndMovieTitleForUnexistingShowing() {
+        //given
+        LocalDateTime showingDateTime = LocalDateTime.of(2015,  12, 25, 21, 0);
+        String movieTitle = "Koszmar z ulicy wiazow";
+        //when
+        Showing result = showingRepository.findByShowingDatetimeAndMovie_TitleIgnoreCase(showingDateTime, movieTitle);
+        //then
+        assertThat(result).isNull();
+    }
+
+    @Test
+    public void shouldCheckShowingExistanceByShowingDatetimeAndMovieTitle() {
+        //given
+        LocalDateTime showingDateTime = LocalDateTime.of(2016,  12, 25, 21, 0);
+        String movieTitle = "Koszmar z ulicy wiazow";
+        //when
+        boolean result = showingRepository.doesExistForShowingDateTimeAndMovieTitle(showingDateTime, movieTitle);
+        //then
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    public void shouldCheckShowingExistanceByShowingDatetimeAndMovieTitleForUnexistingShowing() {
+        //given
+        //given
+        LocalDateTime showingDateTime = LocalDateTime.of(2015,  12, 25, 21, 0);
+        String movieTitle = "Koszmar z ulicy wiazow";
+        //when
+        boolean result = showingRepository.doesExistForShowingDateTimeAndMovieTitle(showingDateTime, movieTitle);
+        //then
+        assertThat(result).isFalse();
+    }
 }

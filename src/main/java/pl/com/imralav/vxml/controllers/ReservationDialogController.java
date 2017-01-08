@@ -1,6 +1,7 @@
 package pl.com.imralav.vxml.controllers;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,18 +22,19 @@ import pl.com.imralav.vxml.entities.Seat;
 import pl.com.imralav.vxml.entities.Showing;
 import pl.com.imralav.vxml.entities.dtos.BookingDto;
 import pl.com.imralav.vxml.entities.dtos.ShowingDto;
-import pl.com.imralav.vxml.repositories.MovieRepository;
 import pl.com.imralav.vxml.services.BookingService;
 import pl.com.imralav.vxml.services.CustomerService;
-import pl.com.imralav.vxml.services.DateTimeService;
 import pl.com.imralav.vxml.services.MovieService;
 import pl.com.imralav.vxml.services.SeatService;
 import pl.com.imralav.vxml.services.ShowingService;
+import pl.com.imralav.vxml.services.datetime.DateTimeService;
 import pl.com.imralav.vxml.services.providers.BookingProvider;
 
 @Controller
 @RequestMapping("/reservation")
 public class ReservationDialogController {
+    private static final String REGULAR_DATE_PATTERN = "d.M.uuuu";
+
     private static final Logger LOGGER = LoggerFactory.getLogger(ReservationDialogController.class);
 
     @Autowired
@@ -69,7 +71,7 @@ public class ReservationDialogController {
     @RequestMapping("/showRepertoire")
     public String showRepertoire(@RequestParam(name="date") String dateText, @RequestParam(name="readableDate") String readableDateText, Model model) {
         LOGGER.info("Displaying repertoire prompt for date {}", dateText);
-        LocalDate date = dateTimeService.reformat(dateText).from("d.M.uuuu").toDate();
+        LocalDate date = dateTimeService.reformatDate(dateText).from(REGULAR_DATE_PATTERN).toDate();
         List<Showing> showings = showingService.findForDate(date);
         String movieTitles = showings.stream().map(Showing::getMovieTitle).distinct().collect(Collectors.joining(", "));
         model.addAttribute("date", dateTimeService.toReadable(date));
@@ -86,7 +88,7 @@ public class ReservationDialogController {
     @RequestMapping("/collectShowingTime")
     public String collectShowingTime(@RequestParam(name="date") String dateText, @RequestParam(name="readableDate") String readableDateText, @RequestParam Integer movieId, Model model) {
         LOGGER.info("Collecting showing time for date {} and movie id {}", dateText, movieId);
-        LocalDate date = dateTimeService.reformat(dateText).fromReadable().toDate();
+        LocalDate date = dateTimeService.reformatDate(dateText).fromReadable().toDate();
         LOGGER.info("Retrieving showings for date {} and movie id {}", date, movieId);
         List<Showing> showings = showingService.findForDateAndMovieId(date, movieId);
         LOGGER.info("Converting showings to dtos");
@@ -100,7 +102,7 @@ public class ReservationDialogController {
     }
 
     @RequestMapping("/seatsPrompt")
-    public String seatsAmount(@RequestParam Integer showingId, @RequestParam(name="readableDate") String readableDateText, Model model) {
+    public String seatsPrompt(@RequestParam Integer showingId, @RequestParam(name="readableDate") String readableDateText, Model model) {
         model.addAttribute("showingId", showingId);
         int emptySeatsAmount = showingService.findEmptySeatsAmountForShowingId(showingId);
         if(emptySeatsAmount > 0) {
@@ -152,5 +154,17 @@ public class ReservationDialogController {
     public String mixedInitiativePrompt(Model model) {
         model.addAttribute("titles", movieService.findAllTitles());
         return "reservation/mixedInitiative";
+    }
+
+    @RequestMapping("/checkMixedInitiativeData")
+    public String checkMixedInitiativeData(@RequestParam(name="date") String dateText, @RequestParam(name="readableDate") String readableDateText, @RequestParam(name="title") String movieTitle, @RequestParam String time, Model model) {
+        LOGGER.info("Checking if showing exists for date {}, time {} and title {}", dateText, time, movieTitle);
+        LocalDateTime showingDatetime = dateTimeService.toDatetime(dateText, time);
+        if(showingService.existsForDatetimeAndMovieTitle(showingDatetime, movieTitle)) {
+            Showing showing = showingService.findByDatetimeAndMovieTitle(showingDatetime, movieTitle);
+            return seatsPrompt(showing.getId(), readableDateText, model);
+        } else {
+            return "reservation/showingDoesntExist";
+        }
     }
 }

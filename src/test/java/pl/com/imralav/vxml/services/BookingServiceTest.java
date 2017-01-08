@@ -21,6 +21,7 @@ import pl.com.imralav.vxml.entities.Movie;
 import pl.com.imralav.vxml.entities.Seat;
 import pl.com.imralav.vxml.entities.Showing;
 import pl.com.imralav.vxml.entities.dtos.BookingDto;
+import pl.com.imralav.vxml.services.datetime.DateTimeService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BookingServiceTest {

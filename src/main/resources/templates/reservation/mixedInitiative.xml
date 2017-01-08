@@ -144,9 +144,30 @@
         </field>
         <filled mode="all">
             <prompt>Wybrane przez Ciebie dane, to:</prompt>
-            <log expr="JSON.stringify(title)"/>
             <prompt>Dzień: <value expr="date.readableDate"/>, godzina: <value expr="time"/>, film: <value expr="title"/></prompt>
-            <clear/>
         </filled>
+    </form>
+    <form>
+        <field name="confirmation">
+            <grammar src="/cv/grammars/boolean.xml"/>
+            <prompt>Czy wszystko się zgadza?</prompt>
+            <filled>
+                <if cond="confirmation==='tak'">
+                    <assign name="date" expr="date.date"/>
+                    <assign name="readableDate" expr="date.readableDate"/>
+                    <submit next="/cv/reservation/checkMixedInitiativeData" namelist="date readableDate time title"/>
+                <else/>
+                    <clear/>
+                </if>
+            </filled>
+            <nomatch>
+                <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </nomatch>
+            <noinput>
+                <prompt>Nie usłyszano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </noinput>
+        </field>
     </form>
 </vxml>

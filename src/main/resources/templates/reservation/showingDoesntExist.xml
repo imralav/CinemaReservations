@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="pl-pl">
+    <meta name="maintainer" content="imralav@gmail.com" />
+    <form>
+        <field name="choice">
+            <grammar xml:lang="pl-pl" root="TIME_INDEXES" mode="voice" type="application/srgs+xml" tag-format="semantics/1.0">
+                <rule id="TIME_INDEXES">
+                    <one-of>
+                        <item>powtórz</item>
+                        <item>koniec</item>
+                    </one-of>
+                </rule>
+            </grammar>
+            <prompt>Nie istnieje seans dla wybranych danych.</prompt>
+            <prompt>Powiedz POWTÓRZ, by wrócić do początku rozmowy lub KONIEC, by zakończyć.</prompt>
+            <filled>
+                <if cond="choice==='powtórz'">
+                    <goto next="/cv/reservation/mixedInitiativePrompt"/>
+                <else/>
+                    <goto next="/cv/farewell"/>
+                </if>
+            </filled>
+            <nomatch>
+                <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </nomatch>
+            <noinput>
+                <prompt>Nie usłyszano wyboru, proszę spróbować ponownie.</prompt>
+                <reprompt />
+            </noinput>
+        </field>
+    </form>
+</vxml>

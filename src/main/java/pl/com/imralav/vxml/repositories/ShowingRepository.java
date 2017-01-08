@@ -26,4 +26,9 @@ public interface ShowingRepository extends PagingAndSortingRepository<Showing, I
             + "SELECT bs.id FROM Booking b, IN(b.seats) bs WHERE b.showing.id = ?1"
             + ")")
     int findEmptySeatsAmountForShowingId(Integer showingId);
+
+    Showing findByShowingDatetimeAndMovie_TitleIgnoreCase(LocalDateTime showingDatetime, String movieTitle);
+
+    @Query("SELECT CASE WHEN COUNT(s) > 0 THEN 'true' ELSE 'false' END FROM Showing s WHERE s.showingDatetime = ?1 and UPPER(s.movie.title) = UPPER(?2)")
+    boolean doesExistForShowingDateTimeAndMovieTitle(LocalDateTime showingDatetime, String movieTitle);
 }

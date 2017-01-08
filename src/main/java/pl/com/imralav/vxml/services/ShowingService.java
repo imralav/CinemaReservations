@@ -14,6 +14,7 @@ import pl.com.imralav.vxml.entities.Seat;
 import pl.com.imralav.vxml.entities.Showing;
 import pl.com.imralav.vxml.entities.dtos.ShowingDto;
 import pl.com.imralav.vxml.repositories.ShowingRepository;
+import pl.com.imralav.vxml.services.datetime.DateTimeService;
 
 @Service
 public class ShowingService {
@@ -73,5 +74,13 @@ public class ShowingService {
 
     public Map<String, Integer> getTimeToShowingIdMap(List<ShowingDto> showingDtos) {
         return showingDtos.stream().collect(Collectors.toMap(ShowingDto::getReadableTime, ShowingDto::getId));
+    }
+
+    public Showing findByDatetimeAndMovieTitle(LocalDateTime showingDatetime, String movieTitle) {
+        return showingRepository.findByShowingDatetimeAndMovie_TitleIgnoreCase(showingDatetime, movieTitle);
+    }
+
+    public boolean existsForDatetimeAndMovieTitle(LocalDateTime showingDatetime, String movieTitle) {
+        return showingRepository.doesExistForShowingDateTimeAndMovieTitle(showingDatetime, movieTitle);
     }
 }

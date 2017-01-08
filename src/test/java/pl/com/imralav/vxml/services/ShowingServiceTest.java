@@ -22,6 +22,7 @@ import pl.com.imralav.vxml.entities.Movie;
 import pl.com.imralav.vxml.entities.Showing;
 import pl.com.imralav.vxml.entities.dtos.ShowingDto;
 import pl.com.imralav.vxml.repositories.ShowingRepository;
+import pl.com.imralav.vxml.services.datetime.DateTimeService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ShowingServiceTest {
