@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" xml:lang="pl-pl">
     <meta name="maintainer" content="imralav@gmail.com" />
-    <form>
+    <form id="main_form">
         <grammar
          type="application/srgs+xml"
          root="root_rule"
@@ -145,9 +145,10 @@
         <filled mode="all">
             <prompt>Wybrane przez Ciebie dane, to:</prompt>
             <prompt>Dzień: <value expr="date.readableDate"/>, godzina: <value expr="time"/>, film: <value expr="title"/></prompt>
+            <goto next="#confirmation_form"/>
         </filled>
     </form>
-    <form>
+    <form id="confirmation_form">
         <field name="confirmation">
             <grammar src="/cv/grammars/boolean.xml"/>
             <prompt>Czy wszystko się zgadza?</prompt>
@@ -158,6 +159,7 @@
                     <submit next="/cv/reservation/checkMixedInitiativeData" namelist="date readableDate time title"/>
                 <else/>
                     <clear/>
+                    <goto next="#main_form"/>
                 </if>
             </filled>
             <nomatch>
