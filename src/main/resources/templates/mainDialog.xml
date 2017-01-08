@@ -32,11 +32,11 @@
             </noinput>
             <filled>
                 <if cond="selection == 'rezerwacja'">
-                    <goto next="reservation/chooseOrSearch"/>
+                    <goto next="/cv/reservation/chooseOrSearch"/>
                 <elseif cond="selection == 'anuluj'" />
-                    <goto next="cancel" />
+                    <goto next="/cv/cancel" />
                 <else/>
-                    <goto next="farewell"/>
+                    <goto next="/cv/farewell"/>
                 </if>
             </filled>
         </field>
