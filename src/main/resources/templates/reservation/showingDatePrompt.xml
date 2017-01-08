@@ -2,7 +2,7 @@
 <vxml version="2.1" xml:lang="pl-pl">
     <meta name="maintainer" content="imralav@gmail.com" />
     <form>
-        <subdialog name="dateChoice" src="subdialog.xml"></subdialog>
+        <subdialog name="dateChoice" src="/cv/subdialogs/dateChoiceSubdialog.xml"></subdialog>
         <field name="dateConfirmed">
             <grammar src="/cv/grammars/boolean.xml"/>
             <prompt>Czy data się zgadza? <value expr="dateChoice.showingDate.readableDate"/>.</prompt>
