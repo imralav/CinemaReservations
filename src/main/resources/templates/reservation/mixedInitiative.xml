@@ -44,11 +44,14 @@
                             <item>na film</item>
                         </one-of>
                     </item>
-                    <one-of>
-                        <item th:each="title : ${titles}" th:text="${title}">Hugo</item>
-                    </one-of>
-                    <tag>out.title=rules.latest();</tag>
+                    <ruleref uri="#movie"/>
+                    <tag>out.title=rules.movie;</tag>
                 </item>
+            </rule>
+            <rule id="movie">
+                <one-of>
+                    <item th:each="title : ${titles}" th:text="${title}">Hugo</item>
+                </one-of>
             </rule>
         </grammar>
         <initial name="initialPrompt">
@@ -141,7 +144,8 @@
         </field>
         <filled mode="all">
             <prompt>Wybrane przez Ciebie dane, to:</prompt>
-            <prompt>Dzień: <value expr="date"/>, czas: <value expr="time"/>, film: <value expr="title"/></prompt>
+            <log expr="JSON.stringify(title)"/>
+            <prompt>Dzień: <value expr="date.readableDate"/>, godzina: <value expr="time"/>, film: <value expr="title"/></prompt>
             <clear/>
         </filled>
     </form>
