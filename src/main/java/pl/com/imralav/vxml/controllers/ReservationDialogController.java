@@ -79,7 +79,7 @@ public class ReservationDialogController {
     }
 
     @RequestMapping("/collectShowingTime")
-    public String collectShowingTime(@RequestParam(name="date") String dateText, @RequestParam(name="readableDate") String readableDateText, @RequestParam(name="choice") Integer movieId, Model model) {
+    public String collectShowingTime(@RequestParam(name="date") String dateText, @RequestParam(name="readableDate") String readableDateText, @RequestParam Integer movieId, Model model) {
         LOGGER.info("Collecting showing time for date {} and movie id {}", dateText, movieId);
         LocalDate date = dateTimeService.reformat(dateText).fromReadable().toDate();
         LOGGER.info("Retrieving showings for date {} and movie id {}", date, movieId);
@@ -89,12 +89,13 @@ public class ReservationDialogController {
         model.addAttribute("date", dateText);
         model.addAttribute("readableDate", readableDateText);
         model.addAttribute("showings", showingDtos);
+        model.addAttribute("timeToShowingIdMap", showingService.getTimeToShowingIdMap(showingDtos));
         model.addAttribute("movieTitle", showingDtos.get(0).getMovieTitle());
         return "reservation/showingTimePrompt";
     }
 
     @RequestMapping("/seatsPrompt")
-    public String seatsAmount(@RequestParam(name="choice") Integer showingId, @RequestParam(name="readableDate") String readableDateText, Model model) {
+    public String seatsAmount(@RequestParam Integer showingId, @RequestParam(name="readableDate") String readableDateText, Model model) {
         model.addAttribute("showingId", showingId);
         int emptySeatsAmount = showingService.findEmptySeatsAmountForShowingId(showingId);
         if(emptySeatsAmount > 0) {

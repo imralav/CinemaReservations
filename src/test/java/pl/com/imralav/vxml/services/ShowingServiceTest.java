@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,6 +40,9 @@ public class ShowingServiceTest {
 
     @Mock
     private Movie movieMock;
+
+    @Mock
+    private ShowingDto showingDtoMock;
 
     @InjectMocks
     private ShowingService instance;
@@ -130,5 +134,18 @@ public class ShowingServiceTest {
         instance.findEmptySeatsAmountForShowingId(id);
         //then
         verify(showingRepositoryMock, times(id)).findEmptySeatsAmountForShowingId(id);
+    }
+
+    @Test
+    public void shouldProduceCorrectTimeToShowingIdMap() {
+        //given
+        given(showingDtoMock.getReadableTime()).willReturn("10:00","12:30");
+        given(showingDtoMock.getId()).willReturn(1, 2);
+        //when
+        Map<String, Integer> timeToShowingIdMap = instance.getTimeToShowingIdMap(Arrays.asList(showingDtoMock, showingDtoMock));
+        //then
+        assertThat(timeToShowingIdMap).hasSize(2);
+        assertThat(timeToShowingIdMap.keySet()).containsExactly("10:00","12:30");
+        assertThat(timeToShowingIdMap.values()).containsExactly(1,2);
     }
 }

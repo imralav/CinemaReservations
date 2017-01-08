@@ -3,6 +3,7 @@ package pl.com.imralav.vxml.services;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
@@ -68,5 +69,9 @@ public class ShowingService {
 
     public List<Seat> findEmptySeatsForShowingId(Integer showingId) {
         return showingRepository.findEmptySeatsForShowingId(showingId);
+    }
+
+    public Map<String, Integer> getTimeToShowingIdMap(List<ShowingDto> showingDtos) {
+        return showingDtos.stream().collect(Collectors.toMap(ShowingDto::getReadableTime, ShowingDto::getId));
     }
 }

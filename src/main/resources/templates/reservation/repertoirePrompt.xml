@@ -38,7 +38,8 @@
                 <elseif cond="choice==='powrót'"/>
                     <goto next="/cv/reservation/collectShowingDate"/>
                 <else/>
-                    <submit next="/cv/reservation/collectShowingTime" namelist="date readableDate choice"/>
+                    <var name="movieId" expr="choice"/>
+                    <submit next="/cv/reservation/collectShowingTime" namelist="date readableDate movieId"/>
                 </if>
             </filled>
             <nomatch>

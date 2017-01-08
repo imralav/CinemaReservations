@@ -6,28 +6,28 @@
             var date = /*[[${date}]]*/ null;
             var readableDate = /*[[${readableDate}]]*/ null;
             var movieTitle = /*[[${movieTitle}]]*/ null;
+            var timeToShowingIdMap = /*[[${timeToShowingIdMap}]]*/ {};
         /*]]>*/
+        function isTimeCorrect(time) {
+            return timeToShowingIdMap[time] != undefined;
+        }
+        function getShowingIdForTime(time) {
+            return timeToShowingIdMap[time];
+        }
     </script>
     <form>
         <field name="choice">
-            <grammar xml:lang="pl-pl" root="TIME_INDEXES">
+            <grammar xml:lang="pl-pl" root="TIME_INDEXES" mode="voice" type="application/srgs+xml" tag-format="semantics/1.0">
                 <rule id="TIME_INDEXES">
                     <one-of>
-                        <item th:each="showing,itrStatus : ${showings}" th:inline="text">
-                            [[(${itrStatus.index}+1)]]
-                            <tag th:inline="javascript">
-                                /*<![CDATA[*/
-                                    out=/*[[${showing.id}]]*/ null;
-                                /*]]>*/
-                            </tag>
-                        </item>
+                        <item><ruleref uri="date.xml"/></item>
                         <item>powtórz</item>
                         <item>powrót</item>
                     </one-of>
                 </rule>
             </grammar>
             <prompt>W wybranum dniu film <value expr="movieTitle"/> ma następujące seanse:</prompt>
-            <prompt th:each="showing,itrStatus : ${showings}" th:text="(${itrStatus.index}+1) + ' ' + ${showing.readableTime} + '.'"></prompt>
+            <prompt th:each="showing : ${showings}" th:text="${showing.readableTime} + '.'"></prompt>
             <prompt>Wypowiedz numer seansu, lub POWTÓRZ, by przeczytać listę seansów ponownie lub POWRÓT, by wrócić do początku rezerwacji.</prompt>
             <filled>
                 <if cond="choice==='powtórz'">
@@ -35,7 +35,13 @@
                 <elseif cond="choice==='powrót'"/>
                     <goto next="/cv/reservation/choicePrompt"/>
                 <else/>
-                    <submit next="/cv/reservation/seatsPrompt" namelist="readableDate choice"/>
+                    <if cond="isTimeCorrect(choice)">
+                        <var name="showingId" expr="getShowingIdForTime(choice)"/>
+                        <submit next="/cv/reservation/seatsPrompt" namelist="readableDate showingId"/>
+                    <else/>
+                        <prompt>O godzinie <value expr="choice"/> nie ma seansu. Spróbuj ponownie.</prompt>
+                        <clear/>
+                    </if>
                 </if>
             </filled>
             <nomatch>
