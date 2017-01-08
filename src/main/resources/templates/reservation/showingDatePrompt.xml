@@ -16,10 +16,7 @@
         </field>
         <field name="dateConfirmed">
             <grammar src="/cv/grammars/boolean.xml"/>
-            <prompt>Czy data się zgadza?
-                    Dzień: <value expr="showingDate.day"/>.
-                    Miesiąc: <value expr="showingDate.month.text"/>.
-                    Rok: <value expr="showingDate.year"/>.</prompt>
+            <prompt>Czy data się zgadza? <value expr="showingDate.readableDate"/></prompt>
             <log expr="JSON.stringify(showingDate)"/>
             <filled>
                 <if cond="dateConfirmed=='tak';">

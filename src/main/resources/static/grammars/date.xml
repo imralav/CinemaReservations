@@ -10,48 +10,386 @@
   <rule id="root_rule" scope="public">
     <item>
         <tag>out.year=2017;</tag>
+        <item repeat="0-1">
+            <one-of>
+                <item>dzień</item>
+                <item>dnia</item>
+            </one-of>
+        </item>
         <ruleref uri="#day"/><tag>out.day=rules.day;</tag>
+        <item repeat="0-1">
+            <one-of>
+                <item>dzień</item>
+                <item>dnia</item>
+            </one-of>
+        </item>
+        <item repeat="0-1">
+            <one-of>
+                <item>miesiąc</item>
+                <item>miesiąca</item>
+            </one-of>
+        </item>
         <ruleref uri="#month"/><tag>out.month=rules.month;</tag>
         <item repeat="0-1">
+            <item repeat="0-1">
+               <one-of>
+                <item>roku</item>
+                <item>rok</item>
+               </one-of>
+            </item>
             <ruleref uri="#year"/><tag>out.year=rules.year;</tag>
+            <item repeat="0-1">
+                rok
+            </item>
         </item>
-        <tag>out.date=out.day+'.'+out.month.code+'.'+out.year;</tag>
+        <tag>out.date=out.day.code+'.'+out.month.code+'.'+out.year;
+            out.readableDate=out.day.text + ' ' + out.month.text + " " + out.year;</tag>
     </item>
   </rule>
   
   <rule id="day" scope="public">
     <one-of>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-        <item>11</item>
-        <item>12</item>
-        <item>13</item>
-        <item>14</item>
-        <item>15</item>
-        <item>16</item>
-        <item>17</item>
-        <item>18</item>
-        <item>19</item>
-        <item>20</item>
-        <item>21</item>
-        <item>22</item>
-        <item>23</item>
-        <item>24</item>
-        <item>25</item>
-        <item>26</item>
-        <item>27</item>
-        <item>28</item>
-        <item>29</item>
-        <item>30</item>
-        <item>31</item>
+        <item>
+            <one-of>
+                <item>1</item>
+                <item>pierwszy</item>
+                <item>pierwszego</item>
+            </one-of>
+            <tag>
+                out.code = 1;
+                out.text = "pierwszy";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>2</item>
+                <item>drugi</item>
+                <item>drugiego</item>
+            </one-of>
+            <tag>
+                out.code = 2;
+                out.text = "drugi";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>3</item>
+                <item>trzeci</item>
+                <item>trzeciego</item>
+            </one-of>
+            <tag>
+                out.code = 3;
+                out.text = "trzeci";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>4</item>
+                <item>czwarty</item>
+                <item>czwartego</item>
+            </one-of>
+            <tag>
+                out.code = 4;
+                out.text = "czwarty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>5</item>
+                <item>piąty</item>
+                <item>piątego</item>
+            </one-of>
+            <tag>
+                out.code = 5;
+                out.text = "piąty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>6</item>
+                <item>szósty</item>
+                <item>szóstego</item>
+            </one-of>
+            <tag>
+                out.code = 6;
+                out.text = "szósty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>7</item>
+                <item>siódmy</item>
+                <item>siódmego</item>
+            </one-of>
+            <tag>
+                out.code = 7;
+                out.text = "siódmy";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>8</item>
+                <item>ósmy</item>
+                <item>ósmego</item>
+            </one-of>
+            <tag>
+                out.code = 8;
+                out.text = "ósmy";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>9</item>
+                <item>dziewiąty</item>
+                <item>dziewiątego</item>
+            </one-of>
+            <tag>
+                out.code = 9;
+                out.text = "dziewiąty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>10</item>
+                <item>dziesiąty</item>
+                <item>dziesiątego</item>
+            </one-of>
+            <tag>
+                out.code = 10;
+                out.text = "dziesiąty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>11</item>
+                <item>jedenasty</item>
+                <item>jedenastego</item>
+            </one-of>
+            <tag>
+                out.code = 11;
+                out.text = "jedenasty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>12</item>
+                <item>dwunastz</item>
+                <item>dwunastego</item>
+            </one-of>
+            <tag>
+                out.code = 12;
+                out.text = "dwunastz";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>13</item>
+                <item>trzynasty</item>
+                <item>trzynastego</item>
+            </one-of>
+            <tag>
+                out.code = 13;
+                out.text = "trzynasty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>14</item>
+                <item>czternasty</item>
+                <item>czternastego</item>
+            </one-of>
+            <tag>
+                out.code = 14;
+                out.text = "czternasty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>15</item>
+                <item>piętnasty</item>
+                <item>piętnastego</item>
+            </one-of>
+            <tag>
+                out.code = 15;
+                out.text = "piętnasty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>16</item>
+                <item>szesnasty</item>
+                <item>szesnastego</item>
+            </one-of>
+            <tag>
+                out.code = 16;
+                out.text = "szesnasty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>17</item>
+                <item>siedemnasty</item>
+                <item>siedemnastegoego</item>
+            </one-of>
+            <tag>
+                out.code = 17;
+                out.text = "siedemnasty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>18</item>
+                <item>osiemnasty</item>
+                <item>osiemnastego</item>
+            </one-of>
+            <tag>
+                out.code = 18;
+                out.text = "osiemnasty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>19</item>
+                <item>dziewiętnasty</item>
+                <item>dziewiętnastego</item>
+            </one-of>
+            <tag>
+                out.code = 19;
+                out.text = "dziewiętnasty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>20</item>
+                <item>dwudziesty</item>
+                <item>dwudziestego</item>
+            </one-of>
+            <tag>
+                out.code = 20;
+                out.text = "dwudziesty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>21</item>
+                <item>dwudziesty pierwszy</item>
+                <item>dwudziestego pierwszego</item>
+            </one-of>
+            <tag>
+                out.code = 21;
+                out.text = "dwudziesty pierwszy";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>22</item>
+                <item>dwudziesty drugi</item>
+                <item>dwudziestego drugiego</item>
+            </one-of>
+            <tag>
+                out.code = 22;
+                out.text = "dwudziesty drugi";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>23</item>
+                <item>dwudziesty trzeci</item>
+                <item>dwudziestego trzeciego</item>
+            </one-of>
+            <tag>
+                out.code = 23;
+                out.text = "dwudziesty trzeci";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>24</item>
+                <item>dwudziesty czwartego</item>
+                <item>dwudziestego czwartego</item>
+            </one-of>
+            <tag>
+                out.code = 24;
+                out.text = "dwudziesty czwarty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>25</item>
+                <item>dwudziesty piąty</item>
+                <item>dwudziestego piątego</item>
+            </one-of>
+            <tag>
+                out.code = 25;
+                out.text = "dwudziesty piąty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>26</item>
+                <item>dwudziesty szósty</item>
+                <item>dwudziestego szóstego</item>
+            </one-of>
+            <tag>
+                out.code = 26;
+                out.text = "dwudziesty szósty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>27</item>
+                <item>dwudziesty siódmy</item>
+                <item>dwudziestego siódmego</item>
+            </one-of>
+            <tag>
+                out.code = 27;
+                out.text = "dwudziesty siódmy";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>28</item>
+                <item>dwudziesty ósmy</item>
+                <item>dwudziestego ósmego</item>
+            </one-of>
+            <tag>
+                out.code = 28;
+                out.text = "dwudziesty ósmy";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>29</item>
+                <item>dwudziesty dziewiąty</item>
+                <item>dwudziestego dziewiątego</item>
+            </one-of>
+            <tag>
+                out.code = 29;
+                out.text = "dwudziesty dziewiąty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>30</item>
+                <item>trzydziesty</item>
+                <item>trzydziestego</item>
+            </one-of>
+            <tag>
+                out.code = 30;
+                out.text = "trzydziesty";
+            </tag>
+        </item>
+        <item>
+            <one-of>
+                <item>31</item>
+                <item>trzydziesty pierwszy</item>
+                <item>trzydziestego pierwszego</item>
+            </one-of>
+            <tag>
+                out.code = 31;
+                out.text = "trzydziesty pierwszy";
+            </tag>
+        </item>
     </one-of>
   </rule>
   
