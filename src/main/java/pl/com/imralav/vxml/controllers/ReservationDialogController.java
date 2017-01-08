@@ -145,6 +145,6 @@ public class ReservationDialogController {
 
     @RequestMapping("/mixedInitiativePrompt")
     public String mixedInitiativePrompt() {
-        return "";
+        return "reservation/mixedInitiative";
     }
 }
