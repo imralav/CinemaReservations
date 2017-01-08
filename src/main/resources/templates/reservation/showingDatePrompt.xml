@@ -2,26 +2,15 @@
 <vxml version="2.1" xml:lang="pl-pl">
     <meta name="maintainer" content="imralav@gmail.com" />
     <form>
-        <field name="showingDate">
-            <grammar src="/cv/grammars/date.xml"/>
-            <prompt>Proszę podać numer dnia i nazwę miesiąca, na przykład: pierwszy styczeń lub dwudziestego marca.</prompt>
-            <nomatch>
-                <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
-                <reprompt />
-            </nomatch>
-            <noinput>
-                <prompt>Nie usłyszano wyboru, proszę spróbować ponownie.</prompt>
-                <reprompt />
-            </noinput>
-        </field>
+        <subdialog name="dateChoice" src="subdialog.xml"></subdialog>
         <field name="dateConfirmed">
             <grammar src="/cv/grammars/boolean.xml"/>
-            <prompt>Czy data się zgadza? <value expr="showingDate.readableDate"/>.</prompt>
-            <log expr="JSON.stringify(showingDate)"/>
+            <prompt>Czy data się zgadza? <value expr="dateChoice.showingDate.readableDate"/>.</prompt>
+            <log expr="JSON.stringify(dateChoice.showingDate)"/>
             <filled>
                 <if cond="dateConfirmed=='tak';">
-                    <assign name="date" expr="showingDate.date"/>
-                    <assign name="readableDate" expr="showingDate.readableDate"/>
+                    <assign name="date" expr="dateChoice.showingDate.date"/>
+                    <assign name="readableDate" expr="dateChoice.showingDate.readableDate"/>
                     <submit next="/cv/reservation/showRepertoire" namelist="date readableDate"/>
                 <else/>
                     <clear/>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version = "2.1" xml:lang="pl-pl">
+ 
+<meta name="maintainer" content="imralav@gmail.com" />
+<form id="dateChoice">
+  <field name="showingDate">
+    <grammar src="/cv/grammars/date.xml"/>
+    <prompt>Proszę podać numer dnia i nazwę miesiąca, na przykład: dziesiąty styczeń.</prompt>
+    <nomatch>
+      <prompt>Nie rozpoznałem wyboru, spróbuj ponownie.   </prompt>
+      <reprompt/>
+    </nomatch>
+    <noinput>
+      <prompt>Nic nie usłyszałem, spróbuj ponownie.   </prompt>
+      <reprompt/>
+    </noinput>
+    <filled>
+      <return namelist="showingDate"/>
+    </filled>
+  </field>
+</form>
+</vxml>
