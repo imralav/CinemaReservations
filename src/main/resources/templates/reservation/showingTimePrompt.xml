@@ -20,7 +20,7 @@
             <grammar xml:lang="pl-pl" root="TIME_INDEXES" mode="voice" type="application/srgs+xml" tag-format="semantics/1.0">
                 <rule id="TIME_INDEXES">
                     <one-of>
-                        <item><ruleref uri="date.xml"/></item>
+                        <item><ruleref uri="/cv/grammar/time.xml"/></item>
                         <item>powtórz</item>
                         <item>powrót</item>
                     </one-of>
