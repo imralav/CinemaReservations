@@ -22,8 +22,10 @@ import pl.com.imralav.vxml.entities.Customer;
 import pl.com.imralav.vxml.entities.Seat;
 import pl.com.imralav.vxml.entities.Showing;
 import pl.com.imralav.vxml.entities.dtos.BookingDto;
+import pl.com.imralav.vxml.repositories.MovieRepository;
 import pl.com.imralav.vxml.services.BookingService;
 import pl.com.imralav.vxml.services.CustomerService;
+import pl.com.imralav.vxml.services.MovieService;
 import pl.com.imralav.vxml.services.SeatService;
 import pl.com.imralav.vxml.services.ShowingService;
 import pl.com.imralav.vxml.services.providers.BookingProvider;
@@ -48,6 +50,9 @@ public class ReservationDialogControllerTest {
 
     @Mock
     private SeatService seatService;
+
+    @Mock
+    private MovieService movieService;
 
     @InjectMocks
     private ReservationDialogController instance;

@@ -2,12 +2,12 @@
 
 <grammar mode="voice"
          type="application/srgs+xml"
-         root="root_rule"
+         root="date"
          tag-format="semantics/1.0"
          version="1.0"
          xml:lang="pl-pl"
          xmlns="http://www.w3.org/2001/06/grammar">
-  <rule id="root_rule" scope="public">
+  <rule id="date" scope="public">
     <item>
         <tag>out.year=2017;</tag>
         <item repeat="0-1">

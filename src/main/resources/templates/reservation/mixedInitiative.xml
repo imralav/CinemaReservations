@@ -2,9 +2,147 @@
 <vxml version="2.1" xml:lang="pl-pl">
     <meta name="maintainer" content="imralav@gmail.com" />
     <form>
-        <block>
-            <prompt>Rezerwujemy.</prompt>
-            <goto next="farewell" />
-        </block>
+        <grammar
+         type="application/srgs+xml"
+         root="root_rule"
+         tag-format="semantics/1.0"
+         version="1.0"
+         xml:lang="pl-pl">
+            <rule id="root_rule" scope="public">
+                <item repeat="0-1">
+                    <item repeat="0-1">
+                        dzień
+                    </item>
+                    <ruleref uri="/cv/grammars/date.xml#day"/>
+                    <tag>out.day = rules.latest();</tag>
+                    <item repeat="0-1">
+                        miesiąc
+                    </item>
+                    <ruleref uri="/cv/grammars/date.xml#month"/>
+                    <tag>out.month = rules.latest();</tag>
+                    <tag>
+                        out.date = {};
+                        out.date.date = out.day.code + "." + out.month.code + ".2017";
+                        out.date.readableDate = out.day.text + " " + out.month.text + " " + 2017;</tag>
+                </item>
+                <item repeat="0-1">
+                    <item repeat="0-1">
+                        <one-of>
+                            <item>na</item>
+                            <item>na godzinę</item>
+                            <item>o</item>
+                            <item>o godzinie</item>
+                        </one-of>
+                    </item>
+                    <ruleref uri="/cv/grammars/time.xml"/>
+                    <tag>out.time=rules.latest();</tag>
+                </item>
+                <item repeat="0-1">
+                    <item repeat="0-1">
+                        <one-of>
+                            <item>na</item>
+                            <item>na film</item>
+                        </one-of>
+                    </item>
+                    <one-of>
+                        <item th:each="title : ${titles}" th:text="${title}">Hugo</item>
+                    </one-of>
+                    <tag>out.title=rules.latest();</tag>
+                </item>
+            </rule>
+        </grammar>
+        <initial name="initialPrompt">
+            <prompt>
+                Podaj datę seansu, godzinę seansu oraz nazwę filmu.
+            </prompt>
+          
+            <nomatch count="1">
+                <prompt>
+                    Nie rozumiem odpowiedzi, spróbuj ponownie.
+                </prompt>
+                <reprompt />
+            </nomatch>
+          
+            <nomatch count="2">
+                <prompt>
+                    Ponownie nie rozumiem odpowiedzi, spróbuj ponownie.
+                </prompt>
+                <reprompt />
+            </nomatch>
+            
+            <nomatch count="3">
+                <prompt>
+                    Trzykrotnie nie rozpoznano odpowiedzi, przechodzę do uproszczonej wersji formularza.
+                </prompt>
+                <assign name="initialPrompt" expr="'exit'"/>
+            </nomatch>
+    
+            <noinput>
+                <prompt>
+                    Nie usłyszałem odpowiedzi, spróbuj ponownie.
+                </prompt>
+                <reprompt />
+            </noinput>
+        </initial>
+        
+    
+        <field name="date">
+            <prompt>
+                Podaj dzień miesiąca
+            </prompt>
+          
+            <nomatch>
+                <prompt>
+                    Nie rozumiem odpowiedzi, spróbuj ponownie.
+                </prompt>
+                <reprompt />
+            </nomatch>
+    
+            <noinput>
+                <prompt>
+                    Nie usłyszałem odpowiedzi, spróbuj ponownie.
+                </prompt>
+                <reprompt />
+            </noinput>
+        </field>
+        <field name="time">
+            <prompt>podaj godzinę </prompt>
+          
+            <nomatch>
+                <prompt>
+                    Nie rozumiem odpowiedzi, spróbuj ponownie.
+                </prompt>
+                <reprompt />
+            </nomatch>
+    
+            <noinput>
+                <prompt>
+                    Nie usłyszałem odpowiedzi, spróbuj ponownie.
+                </prompt>
+                <reprompt />
+            </noinput>
+        </field>
+        <field name="title">
+            <prompt>Podaj nazwę filmu</prompt>
+          
+            <nomatch>
+                <prompt>
+                    Nie rozumiem odpowiedzi, spróbuj ponownie.
+                </prompt>
+                <reprompt />
+            </nomatch>
+    
+            <noinput>
+                <prompt>
+                    Nie usłyszałem odpowiedzi, spróbuj ponownie.
+                </prompt>
+                <reprompt />
+            </noinput>
+        </field>
+        <filled mode="all">
+            <prompt>Wybrane przez Ciebie dane, to:</prompt>
+            <prompt>Dzień: <value expr="date"/>, czas: <value expr="time"/>, film: <value expr="title"/></prompt>
+            <clear/>
+        </filled>
     </form>
 </vxml>
