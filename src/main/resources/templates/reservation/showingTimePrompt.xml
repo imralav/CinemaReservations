@@ -26,9 +26,9 @@
                     </one-of>
                 </rule>
             </grammar>
-            <prompt>W wybranum dniu film <value expr="movieTitle"/> ma następujące seanse:</prompt>
+            <prompt>W wybranum dniu film <value expr="movieTitle"/> gramy w godzinach:</prompt>
             <prompt th:each="showing : ${showings}" th:text="${showing.readableTime} + '.'"></prompt>
-            <prompt>Wypowiedz numer seansu, lub POWTÓRZ, by przeczytać listę seansów ponownie lub POWRÓT, by wrócić do początku rezerwacji.</prompt>
+            <prompt>Wybierz godzinę lub powiedz POWTÓRZ, by przeczytać listę seansów ponownie lub POWRÓT, by wrócić do początku rezerwacji.</prompt>
             <filled>
                 <if cond="choice==='powtórz'">
                     <clear/>
