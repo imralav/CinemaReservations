@@ -2,6 +2,7 @@ package pl.com.imralav.vxml.controllers;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -157,14 +158,21 @@ public class ReservationDialogController {
     }
 
     @RequestMapping("/checkMixedInitiativeData")
-    public String checkMixedInitiativeData(@RequestParam(name="date") String dateText, @RequestParam(name="readableDate") String readableDateText, @RequestParam(name="title") String movieTitle, @RequestParam String time, Model model) {
-        LOGGER.info("Checking if showing exists for date {}, time {} and title {}", dateText, time, movieTitle);
-        LocalDateTime showingDatetime = dateTimeService.toDatetime(dateText, time);
+    public String checkMixedInitiativeData(@RequestParam(name="date") String dateText, @RequestParam(name="readableDate") String readableDateText, @RequestParam(name="title") String movieTitle, @RequestParam(name="time") String timeText, Model model) {
+        LOGGER.info("Checking if showing exists for date {}, time {} and title {}", dateText, timeText, movieTitle);
+        LocalDateTime showingDatetime = parseDateTimeTexts(dateText, timeText);
         if(showingService.existsForDatetimeAndMovieTitle(showingDatetime, movieTitle)) {
             Showing showing = showingService.findByDatetimeAndMovieTitle(showingDatetime, movieTitle);
             return seatsPrompt(showing.getId(), readableDateText, model);
         } else {
             return "reservation/showingDoesntExist";
         }
+    }
+
+    private LocalDateTime parseDateTimeTexts(String dateText, String timeText) {
+        LocalDate date = dateTimeService.reformatDate(dateText).from(REGULAR_DATE_PATTERN).toDate();
+        LocalTime time = dateTimeService.toTime(timeText);
+        LocalDateTime showingDatetime = LocalDateTime.of(date, time);
+        return showingDatetime;
     }
 }
