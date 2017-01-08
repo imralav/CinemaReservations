@@ -2,16 +2,23 @@
 <vxml version="2.1" xml:lang="pl-pl">
     <script src="js/vxmlapp.min.js"></script>
     <meta name="maintainer" content="imralav@gmail.com" />
-    <form id="ChooseOrSearch">
+    <form id="MainMenu">
         <field name="selection">
             <prompt>
-                Jeśli masz wybrany konkretny repertuar, powiedz WYBÓR, jeśli nie, powiedz SZUKAJ, by wyszukać interesujący cię film.
+                Witamy w systemie rezerwacji biletów
+                kina Ardia.
+                Powiedz REZERWACJA, by przejść do rezerwacji
+                biletów,
+                ANULUJ, by przejść do wycofania starej
+                rezerwacji
+                lub KONIEC, by zakończyć rozmowę.
             </prompt>
-            <grammar xml:lang="pl-pl" root="chooseOrSearchGrammar">
-                <rule id="chooseOrSearchGrammar">
+            <grammar xml:lang="pl-pl" root="mainMenuGrammar">
+                <rule id="mainMenuGrammar">
                     <one-of>
-                        <item> wybór </item>
-                        <item> szukaj </item>
+                        <item> rezerwacja </item>
+                        <item> anuluj </item>
+                        <item> koniec </item>
                     </one-of>
                 </rule>
             </grammar>
@@ -24,10 +31,12 @@
                 <reprompt />
             </noinput>
             <filled>
-                <if cond="selection == 'szukaj'">
-                    <goto next="reservation/collectShowingDate"/>
+                <if cond="selection == 'rezerwacja'">
+                    <goto next="reservation/chooseOrSearch"/>
+                <elseif cond="selection == 'anuluj'" />
+                    <goto next="cancel" />
                 <else/>
-                    <goto next="reservation/mixedInitiativePrompt"/>
+                    <goto next="farewell"/>
                 </if>
             </filled>
         </field>
