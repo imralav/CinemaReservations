@@ -70,10 +70,13 @@ public class ReservationDialogControllerTest {
 
     private Integer customerCode;
 
+    private String readableDateText;
+
     @Before
     public void setup() {
         showingId = 1;
         selectedSeats = 3;
+        readableDateText = "readableDate";
         given(showingServiceMock.findOne(showingId)).willReturn(showingMock);
         given(showingServiceMock.findEmptySeatsForShowingId(showingId)).willReturn(Collections.emptyList());
         given(bookingProvider.provideEmptyBooking()).willReturn(bookingMock);
@@ -83,8 +86,7 @@ public class ReservationDialogControllerTest {
 
     @Test
     public void shouldInjectBookingDtoToModelWhenShowingReservationSummary() {
-        //when
-        instance.showReservationSummary(showingId, selectedSeats, modelSpy);
+        instance.showReservationSummary(showingId, selectedSeats, readableDateText, modelSpy);
         BookingDto bookingSummary = (BookingDto)modelSpy.asMap().get("bookingSummary");
         //then
         assertThat(bookingSummary).isNotNull();
@@ -94,7 +96,7 @@ public class ReservationDialogControllerTest {
     public void shouldBuildBookingWithShowingAndSeatsListWhenShowingReservationSummary() {
         //given
         //when
-        instance.showReservationSummary(showingId, selectedSeats, modelSpy);
+        instance.showReservationSummary(showingId, selectedSeats, readableDateText, modelSpy);
         //then
         verify(bookingMock).setShowing(showingMock);
         verify(bookingMock).setSeats(anyListOf(Seat.class));
@@ -104,7 +106,7 @@ public class ReservationDialogControllerTest {
     public void shouldInjectSeatIdsToModelWhenShowingReservationSummar() {
         //given
         //when
-        instance.showReservationSummary(showingId, selectedSeats, modelSpy);
+        instance.showReservationSummary(showingId, selectedSeats, readableDateText, modelSpy);
         //then
         assertThat(modelSpy.containsAttribute("seatIds"));
     }
