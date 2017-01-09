@@ -15,11 +15,11 @@
                     <one-of>
                         <item>powtórz</item>
                         <item>powrót</item>
-                        <item th:each="showing : ${showings}" th:inline="text">
-                            [[${showing.getMovieTitle()}]]
+                        <item th:each="movie : ${movies}" th:inline="text">
+                            [[${movie.title}]]
                             <tag th:inline="javascript">
                                 /*<![CDATA[*/
-                                    out=/*[[${showing.movie.id}]]*/ null;
+                                    out=/*[[${movie.id}]]*/ null;
                                 /*]]>*/
                             </tag>
                         </item>

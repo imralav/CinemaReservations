@@ -22,10 +22,12 @@ import pl.com.imralav.vxml.entities.Customer;
 import pl.com.imralav.vxml.entities.Seat;
 import pl.com.imralav.vxml.entities.Showing;
 import pl.com.imralav.vxml.entities.dtos.BookingDto;
+import pl.com.imralav.vxml.entities.dtos.MovieDto;
 import pl.com.imralav.vxml.entities.dtos.ShowingDto;
 import pl.com.imralav.vxml.services.BookingService;
 import pl.com.imralav.vxml.services.CustomerService;
 import pl.com.imralav.vxml.services.MovieService;
+import pl.com.imralav.vxml.services.ReservationDialogService;
 import pl.com.imralav.vxml.services.SeatService;
 import pl.com.imralav.vxml.services.ShowingService;
 import pl.com.imralav.vxml.services.datetime.DateTimeService;
@@ -59,6 +61,9 @@ public class ReservationDialogController {
     @Autowired
     private SeatService seatService;
 
+    @Autowired
+    private ReservationDialogService repertoireDialogService;
+
     @RequestMapping("/chooseOrSearch")
     public String chooseOrSearch() {
         return "reservation/chooseOrSearchPrompt";
@@ -74,10 +79,11 @@ public class ReservationDialogController {
         LOGGER.info("Displaying repertoire prompt for date {}", dateText);
         LocalDate date = dateTimeService.reformatDate(dateText).from(REGULAR_DATE_PATTERN).toDate();
         List<Showing> showings = showingService.findForDate(date);
+        List<MovieDto> movieDtos = repertoireDialogService.extractMovieDtosFromShowings(showings);
         String movieTitles = showings.stream().map(Showing::getMovieTitle).distinct().collect(Collectors.joining(", "));
         model.addAttribute("date", dateTimeService.toReadable(date));
         model.addAttribute("readableDate", readableDateText);
-        model.addAttribute("showings", showings);
+        model.addAttribute("movies", movieDtos);
         model.addAttribute("movieTitles", movieTitles);
         if(showings.isEmpty()) {
             LOGGER.info("No repertoire for date {}", date);
