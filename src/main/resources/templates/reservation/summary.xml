@@ -27,7 +27,7 @@
                 <if cond="choice==='tak'">
                     <submit next="/cv/reservation/finalize" namelist="showingId seatIds" method="POST"/>
                 <else/>
-                    <goto next="/cv/main"/>
+                    <goto next="/cv/reservation/chooseOrSearch"/>
                 </if>
             </filled>
             <nomatch>
