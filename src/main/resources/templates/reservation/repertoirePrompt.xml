@@ -4,6 +4,7 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
             var date = /*[[${date}]]*/ null;
+            var oldDate = /*[[${oldDate}]]*/ null;
             var readableDate = /*[[${readableDate}]]*/ null;
             var movieTitles = /*[[${movieTitles}]]*/ null;
         /*]]>*/
@@ -39,7 +40,7 @@
                     <goto next="/cv/reservation/collectShowingDate"/>
                 <else/>
                     <var name="movieId" expr="choice"/>
-                    <submit next="/cv/reservation/collectShowingTime" namelist="date readableDate movieId"/>
+                    <submit next="/cv/reservation/collectShowingTime" namelist="oldDate date readableDate movieId"/>
                 </if>
             </filled>
             <nomatch>

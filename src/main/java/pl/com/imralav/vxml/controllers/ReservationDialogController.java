@@ -94,13 +94,14 @@ public class ReservationDialogController {
     }
 
     @RequestMapping("/collectShowingTime")
-    public String collectShowingTime(@RequestParam(name="date") String dateText, @RequestParam(name="readableDate") String readableDateText, @RequestParam Integer movieId, Model model) {
+    public String collectShowingTime(@RequestParam(name="oldDate") String oldDateText, @RequestParam(name="date") String dateText, @RequestParam(name="readableDate") String readableDateText, @RequestParam Integer movieId, Model model) {
         LOGGER.info("Collecting showing time for date {} and movie id {}", dateText, movieId);
         LocalDate date = dateTimeService.reformatDate(dateText).fromReadable().toDate();
         LOGGER.info("Retrieving showings for date {} and movie id {}", date, movieId);
         List<Showing> showings = showingService.findForDateAndMovieId(date, movieId);
         LOGGER.info("Converting showings to dtos");
         List<ShowingDto> showingDtos = showingService.toDto(showings);
+        model.addAttribute("oldDate", oldDateText);
         model.addAttribute("date", dateText);
         model.addAttribute("readableDate", readableDateText);
         model.addAttribute("showings", showingDtos);
