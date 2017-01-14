@@ -29,7 +29,7 @@
             </grammar>
             <prompt>W wybranum dniu film <value expr="movieTitle"/> gramy w godzinach:</prompt>
             <prompt th:each="showing : ${showings}" th:text="${showing.readableTime} + '.'"></prompt>
-            <prompt>Wybierz godzinę lub powiedz POWTÓRZ, by przeczytać listę seansów ponownie lub POWRÓT, by wrócić do poprzedniego wyboru.</prompt>
+            <prompt>Wybierz godzinę lub powiedz POWTÓRZ, by usłyszeć listę godzin ponownie lub POWRÓT, by wrócić do wyboru filmu.</prompt>
             <filled>
                 <if cond="choice==='powtórz'">
                     <clear/>
