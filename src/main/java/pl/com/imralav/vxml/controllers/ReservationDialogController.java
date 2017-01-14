@@ -81,6 +81,7 @@ public class ReservationDialogController {
         List<Showing> showings = showingService.findForDate(date);
         List<MovieDto> movieDtos = repertoireDialogService.extractMovieDtosFromShowings(showings);
         String movieTitles = showings.stream().map(Showing::getMovieTitle).distinct().collect(Collectors.joining(", "));
+        model.addAttribute("oldDate", dateText);
         model.addAttribute("date", dateTimeService.toReadable(date));
         model.addAttribute("readableDate", readableDateText);
         model.addAttribute("movies", movieDtos);
