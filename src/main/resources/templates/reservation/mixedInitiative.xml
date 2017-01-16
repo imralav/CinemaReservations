@@ -15,6 +15,7 @@
                         <item>poprosze</item>
                         <item>seans</item>
                         <item>chciałbym</item>
+                        <item>chciałabym</item>
                         <item>obejrzeć</item>
                         <item>zobaczyć</item>
                     </one-of>
@@ -77,9 +78,12 @@
                             <item>tytuł</item>
                             <item>tytułem</item>
                             <item>tytule</item>
+                            <item>zatytułowany</item>
                             <item>na</item>
                             <item>o</item>
                             <item>pod</item>
+                            <item>nazwą</item>
+                            <item>nazwie</item>
                         </one-of>
                     </item>
                     <ruleref uri="#movie"/>
