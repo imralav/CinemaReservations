@@ -10,13 +10,26 @@
          version="1.0"
          xml:lang="pl-pl">
             <rule id="root_rule" scope="public">
-                <ruleref special="GARBAGE"/>
+                <item repeat="0-">
+                    <one-of>
+                        <item>poprosze</item>
+                        <item>seans</item>
+                        <item>chciałbym</item>
+                        <item>obejrzeć</item>
+                        <item>zobaczyć</item>
+                    </one-of>
+                </item>
                 <item repeat="0-1">
+                    <item repeat="0-1">
+                        <one-of>
+                            <item>w</item>
+                            <item>na</item>
+                        </one-of>
+                    </item>
                     <item repeat="0-1">
                         <one-of>
                             <item>dzień</item>
                             <item>dnia</item>
-                            <item>dniu</item>
                         </one-of>
                     </item>
                     <ruleref uri="/cv/grammars/date.xml#day"/>
@@ -37,8 +50,14 @@
                 <item repeat="0-1">
                     <item repeat="0-1">
                         <one-of>
+                            <item>w</item>
                             <item>na</item>
                             <item>o</item>
+                            <item>z</item>
+                        </one-of>
+                    </item>
+                    <item repeat="0-1">
+                        <one-of>
                             <item>godzina</item>
                             <item>godzinie</item>
                             <item>godzinę</item>
@@ -49,7 +68,7 @@
                     <tag>out.time=rules.latest();</tag>
                 </item>
                 <item repeat="0-1">
-                    <item repeat="0-1">
+                    <item repeat="0-">
                         <one-of>
                             <item>film</item>
                             <item>filmem</item>
@@ -58,6 +77,9 @@
                             <item>tytuł</item>
                             <item>tytułem</item>
                             <item>tytule</item>
+                            <item>na</item>
+                            <item>o</item>
+                            <item>pod</item>
                         </one-of>
                     </item>
                     <ruleref uri="#movie"/>
