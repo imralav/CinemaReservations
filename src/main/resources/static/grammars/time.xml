@@ -21,145 +21,241 @@
   <rule id="hours" scope="public">
     <one-of>
         <item>
-            pierwsza
+            <one-of>
+                <item>pierwsza</item>
+                <item>pierwszą</item>
+                <item>pierwszej</item>
+            </one-of>
             <tag>
                 out = "1";
             </tag>
         </item>
         <item>
-            druga
+            <one-of>
+                <item>druga</item>
+                <item>drugą</item>
+                <item>drugiej</item>
+            </one-of>
             <tag>
                 out = "2";
             </tag>
         </item>
         <item>
-            trzecia
+            <one-of>
+                <item>trzecia</item>
+                <item>trzecią</item>
+                <item>trzeciej</item>
+            </one-of>
             <tag>
                 out = "3";
             </tag>
         </item>
         <item>
-            czwarta
+            <one-of>
+                <item>czwarta</item>
+                <item>czwartą</item>
+                <item>czwartej</item>
+            </one-of>
             <tag>
                 out = "4";
             </tag>
         </item>
         <item>
-            piąta
+            <one-of>
+                <item>piąta</item>
+                <item>piątą</item>
+                <item>piątej</item>
+            </one-of>
             <tag>
                 out = "5";
             </tag>
         </item>
         <item>
-            szósta
+            <one-of>
+                <item>szósta</item>
+                <item>szóstą</item>
+                <item>szóstej</item>
+            </one-of>
             <tag>
                 out = "6";
             </tag>
         </item>
         <item>
-            siódma
+            <one-of>
+                <item>siódma</item>
+                <item>siódmą</item>
+                <item>siódmej</item>
+            </one-of>
             <tag>
                 out = 7;
             </tag>
         </item>
         <item>
-            ósma
+            <one-of>
+                <item>ósma</item>
+                <item>ósmą</item>
+                <item>ósmej</item>
+            </one-of>
             <tag>
                 out = 8;
             </tag>
         </item>
         <item>
-            dziewiąta
+            <one-of>
+                <item>dziewiąta</item>
+                <item>dziewiątą</item>
+                <item>dziewiątej</item>
+            </one-of>
             <tag>
                 out = 9;
             </tag>
         </item>
         <item>
-            dziesiąta
+            <one-of>
+                <item>dziesiąta</item>
+                <item>dziesiątą</item>
+                <item>dziesiątej</item>
+            </one-of>
             <tag>
                 out = 10;
             </tag>
         </item>
         <item>
-            jedenasta
+            <one-of>
+                <item>jedenasta</item>
+                <item>jedenastą</item>
+                <item>jedenastej</item>
+            </one-of>
             <tag>
                 out = 11;
             </tag>
         </item>
         <item>
-            dwunasta
+            <one-of>
+                <item>dwunasta</item>
+                <item>dwunastą</item>
+                <item>dwunastej</item>
+            </one-of>
             <tag>
                 out = 12;
             </tag>
         </item>
         <item>
-            trzynasta
+            <one-of>
+                <item>trzynasta</item>
+                <item>trzynastą</item>
+                <item>trzynastej</item>
+            </one-of>
             <tag>
                 out = 13;
             </tag>
         </item>
         <item>
-            czternasta
+            <one-of>
+                <item>czternasta</item>
+                <item>czternastą</item>
+                <item>czternastej</item>
+            </one-of>
             <tag>
                 out = 14;
             </tag>
         </item>
         <item>
-            piętnasta
+            <one-of>
+                <item>piętnasta</item>
+                <item>piętnastą</item>
+                <item>piętnastej</item>
+            </one-of>
             <tag>
                 out = 15;
             </tag>
         </item>
         <item>
-            szesnasta
+            <one-of>
+                <item>szesnasta</item>
+                <item>szesnastą</item>
+                <item>szesnastej</item>
+            </one-of>
             <tag>
                 out = 16;
             </tag>
         </item>
         <item>
-            siedemnasta
+            <one-of>
+                <item>siedemnasta</item>
+                <item>siedemnastą</item>
+                <item>siedemnastej</item>
+            </one-of>
             <tag>
                 out = 17;
             </tag>
         </item>
         <item>
-            osiemnasta
+            <one-of>
+                <item>osiemnasta</item>
+                <item>osiemnastą</item>
+                <item>osiemnastej</item>
+            </one-of>
             <tag>
                 out = 18;
             </tag>
         </item>
         <item>
-            dziewiętnasta
+            <one-of>
+                <item>dziewiętnasta</item>
+                <item>dziewiętnastą</item>
+                <item>dziewiętnastej</item>
+            </one-of>
             <tag>
                 out = 19;
             </tag>
         </item>
         <item>
-            dwudziesta
+            <one-of>
+                <item>dwudziesta</item>
+                <item>dwudziestą</item>
+                <item>dwudziestej</item>
+            </one-of>
             <tag>
                 out = 20;
             </tag>
         </item>
         <item>
-            dwudziesta pierwsza
+            <one-of>
+                <item>dwudziesta pierwsza</item>
+                <item>dwudziestą pierwszą</item>
+                <item>dwudziestej pierwszej</item>
+            </one-of>
             <tag>
                 out = 21;
             </tag>
         </item>
         <item>
-            dwudziesta druga
+            <one-of>
+                <item>dwudziesta druga</item>
+                <item>dwudziestą drugą</item>
+                <item>dwudziestej drugiej</item>
+            </one-of>
             <tag>
                 out = 22;
             </tag>
         </item>
         <item>
-            dwudziesta trzecia
+            <one-of>
+                <item>dwudziesta trzeciaa</item>
+                <item>dwudziestą trzecią</item>
+                <item>dwudziestej trzeciej</item>
+            </one-of>
             <tag>
                 out = 23;
             </tag>
         </item>
         <item>
-            dwudziesta czwarta
+            <one-of>
+                <item>dwudziesta czwarta</item>
+                <item>dwudziestą czwartą</item>
+                <item>dwudziestej czwartej</item>
+            </one-of>
             <tag>
                 out = 24;
             </tag>
