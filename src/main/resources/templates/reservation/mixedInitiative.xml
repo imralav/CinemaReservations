@@ -16,7 +16,7 @@
                         <one-of>
                             <item>dzień</item>
                             <item>dnia</item>
-                            <item>w dniu</item>
+                            <item>dniu</item>
                         </one-of>
                     </item>
                     <ruleref uri="/cv/grammars/date.xml#day"/>
@@ -34,28 +34,32 @@
                         out.date.date = out.day.code + "." + out.month.code + ".2017";
                         out.date.readableDate = out.day.text + " " + out.month.text + " " + 2017;</tag>
                 </item>
-                <ruleref special="GARBAGE"/>
                 <item repeat="0-1">
                     <item repeat="0-1">
                         <one-of>
                             <item>na</item>
-                            <item>na godzinę</item>
                             <item>o</item>
-                            <item>o godzinie</item>
+                            <item>godzina</item>
+                            <item>godzinie</item>
+                            <item>godzinę</item>
+                            <item>godziny</item>
                         </one-of>
                     </item>
                     <ruleref uri="/cv/grammars/time.xml"/>
                     <tag>out.time=rules.latest();</tag>
                 </item>
-                <ruleref special="GARBAGE"/>
                 <item repeat="0-1">
                     <item repeat="0-1">
                         <one-of>
-                            <item>na</item>
-                            <item>na film</item>
+                            <item>film</item>
+                            <item>filmem</item>
+                            <item>filmie</item>
+                            <item>filmu</item>
+                            <item>tytuł</item>
+                            <item>tytułem</item>
+                            <item>tytule</item>
                         </one-of>
                     </item>
-                    <ruleref special="GARBAGE"/>
                     <ruleref uri="#movie"/>
                     <tag>out.title=rules.movie;</tag>
                 </item>
