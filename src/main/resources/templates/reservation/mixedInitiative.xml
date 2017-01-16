@@ -10,14 +10,22 @@
          version="1.0"
          xml:lang="pl-pl">
             <rule id="root_rule" scope="public">
+                <ruleref special="GARBAGE"/>
                 <item repeat="0-1">
                     <item repeat="0-1">
-                        dzień
+                        <one-of>
+                            <item>dzień</item>
+                            <item>dnia</item>
+                            <item>w dniu</item>
+                        </one-of>
                     </item>
                     <ruleref uri="/cv/grammars/date.xml#day"/>
                     <tag>out.day = rules.latest();</tag>
                     <item repeat="0-1">
-                        miesiąc
+                        <one-of>
+                            <item>miesiąc</item>
+                            <item>miesiąca</item>
+                        </one-of>
                     </item>
                     <ruleref uri="/cv/grammars/date.xml#month"/>
                     <tag>out.month = rules.latest();</tag>
@@ -26,6 +34,7 @@
                         out.date.date = out.day.code + "." + out.month.code + ".2017";
                         out.date.readableDate = out.day.text + " " + out.month.text + " " + 2017;</tag>
                 </item>
+                <ruleref special="GARBAGE"/>
                 <item repeat="0-1">
                     <item repeat="0-1">
                         <one-of>
@@ -38,6 +47,7 @@
                     <ruleref uri="/cv/grammars/time.xml"/>
                     <tag>out.time=rules.latest();</tag>
                 </item>
+                <ruleref special="GARBAGE"/>
                 <item repeat="0-1">
                     <item repeat="0-1">
                         <one-of>
