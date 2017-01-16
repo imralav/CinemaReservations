@@ -55,6 +55,7 @@
                             <item>na film</item>
                         </one-of>
                     </item>
+                    <ruleref special="GARBAGE"/>
                     <ruleref uri="#movie"/>
                     <tag>out.title=rules.movie;</tag>
                 </item>
