@@ -182,7 +182,7 @@
         </field>
         <filled mode="all">
             <prompt>Wybrane przez Ciebie dane, to:</prompt>
-            <prompt>Dzień: <value expr="date.readableDate"/>, godzina: <value expr="time"/>, film: <value expr="title"/></prompt>
+            <prompt>Dzień: <value expr="date.readableDate"/>, godzina: <value expr="time"/>, film: <value expr="title"/>.</prompt>
             <assign name="formData.date" expr="date.date"/>
             <assign name="formData.readableDate" expr="date.readableDate"/>
             <assign name="formData.time" expr="time"/>
