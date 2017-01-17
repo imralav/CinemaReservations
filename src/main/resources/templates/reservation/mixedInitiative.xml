@@ -133,7 +133,7 @@
     
         <field name="date">
             <prompt>
-                Podaj dzień miesiąca
+                Podaj dzień i nazwę miesiąca, na przykład dwudziesty lutego.
             </prompt>
           
             <nomatch>

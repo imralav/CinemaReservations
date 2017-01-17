@@ -10,19 +10,10 @@
   <rule id="date" scope="public">
     <item>
         <tag>out.year=2017;</tag>
-        <item repeat="0-1">
-            <one-of>
-                <item>dzień</item>
-                <item>dnia</item>
-            </one-of>
-        </item>
-        <ruleref uri="#day"/><tag>out.day=rules.day;</tag>
-        <item repeat="0-1">
-            <one-of>
-                <item>dzień</item>
-                <item>dnia</item>
-            </one-of>
-        </item>
+        <ruleref uri="#dayFillers"/>
+        <ruleref uri="#day"/>
+        <tag>out.day=rules.day;</tag>
+        <ruleref uri="#dayFillers"/>
         <item repeat="0-1">
             <one-of>
                 <item>miesiąc</item>
@@ -39,12 +30,24 @@
             </item>
             <ruleref uri="#year"/><tag>out.year=rules.year;</tag>
             <item repeat="0-1">
-                rok
+               <one-of>
+                <item>roku</item>
+                <item>rok</item>
+               </one-of>
             </item>
         </item>
         <tag>out.date=out.day.code+'.'+out.month.code+'.'+out.year;
             out.readableDate=out.day.text + ' ' + out.month.text + " " + out.year;</tag>
     </item>
+  </rule>
+  
+  <rule id="dayFillers" scope="public">
+	  <item repeat="0-1">
+	      <one-of>
+	          <item>dzień</item>
+	          <item>dnia</item>
+	      </one-of>
+	  </item>
   </rule>
   
   <rule id="day" scope="public">
