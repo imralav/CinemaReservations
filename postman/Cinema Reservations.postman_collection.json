@@ -1,0 +1,100 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Cinema Reservations",
+		"_postman_id": "d9a2db2d-8271-2605-7c31-a637c5ded94e",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cancel",
+			"description": "",
+			"item": [
+				{
+					"name": "Cancel",
+					"request": {
+						"url": "{{url}}/cancel/attemptCancel?customerCode={{customerCode}}&shouldCancel=true",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Cancel booking and remove customer code"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reservation",
+			"description": "",
+			"item": [
+				{
+					"name": "Finalize",
+					"request": {
+						"url": "{{url}}/reservation/finalize?showingId=3&seatIds=1,2,3,4",
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"description": "Allows to finalize reservation for showing and with specified seat ids. Returns customer code for the reservation."
+					},
+					"response": []
+				},
+				{
+					"name": "Seats prompt",
+					"request": {
+						"url": "{{url}}/reservation/seatsPrompt?showingId=3&readableDate=dwudziestypiąty styczeń 2017",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Allows to find how many available seats are there for certain showing specified by showing id."
+					},
+					"response": []
+				},
+				{
+					"name": "Reservation summary",
+					"request": {
+						"url": "{{url}}/reservation/showSummary?showingId=3&choice=5&readableDate=dwudziestypiąty styczeń 2016",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Reservation summary shows reservation date, movie title, showing time and seats that will be reserved."
+					},
+					"response": []
+				},
+				{
+					"name": "Show repertoire",
+					"request": {
+						"url": "{{url}}/reservation/showRepertoire?date=25.1.2017&readableDate=dwudziestypiaty styczeń 2017",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Displays movie repertoire for selected day."
+					},
+					"response": []
+				},
+				{
+					"name": "Collect showing time",
+					"request": {
+						"url": "{{url}}/reservation/collectShowingTime?date=25 stycznia 2017&readableDate=dwudziestypiąty styczeń 2017&movieId=1&oldDate=25.1.2017",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Displays prompt for selecting showing time for selected date and movie."
+					},
+					"response": []
+				},
+				{
+					"name": "Mixed initiative",
+					"request": {
+						"url": "{{url}}/reservation/mixedInitiativePrompt",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
