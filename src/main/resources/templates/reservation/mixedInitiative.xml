@@ -13,12 +13,12 @@
                 <item repeat="1-3">
                     <ruleref uri="#main_prefix"/>
                     <item repeat="0-1">
-                        <ruleref uri="date.xml"/>
+                        <ruleref uri="/cv/grammars/date.xml"/>
                         <tag>out.date = rules.latest();</tag>
                     </item>
                     <item repeat="0-1">
                         <ruleref uri="#time_prefix"/>
-                        <ruleref uri="http://85.255.13.158:8080/cv/grammars/time.xml"/>
+                        <ruleref uri="/cv/grammars/time.xml"/>
                         <tag>out.time=rules.latest();</tag>
                     </item>
                     <item repeat="0-1">
@@ -79,8 +79,7 @@
             
             <rule id="movie">
                 <one-of>
-                    <item>hugo</item>
-                    <item>mafia</item>
+                    <item th:each="title : ${titles}" th:text="${title}">Hugo</item>
                 </one-of>
             </rule>
         </grammar>
