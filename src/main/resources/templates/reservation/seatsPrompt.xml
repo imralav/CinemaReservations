@@ -12,16 +12,33 @@
         <field name="choice">
             <grammar xml:lang="pl-pl" root="SEATS_AMOUNT">
                 <rule id="SEATS_AMOUNT">
-                    <one-of>
-                        <item>
-                            <one-of>
-                                <item>1</item>
-                                <item>jedno</item>
-                            </one-of>
-                            <tag>out=1;</tag>
-                        </item>
-                        <item th:each="i : ${#numbers.sequence(2, maxSeats)}" th:text="${i}">2</item>
-                    </one-of>
+                    <item repeat="0-">
+                        <one-of>
+                            <item>chciałbym</item>
+                            <item>zarezerwować</item>
+                            <item>poproszę</item>
+                            <item>proszę</item>
+                        </one-of>
+                    </item>
+                    <item>
+                        <one-of>
+                            <item>
+                                <one-of>
+                                    <item>1</item>
+                                    <item>jedno</item>
+                                </one-of>
+                                <tag>out=1;</tag>
+                            </item>
+                            <item th:each="i : ${#numbers.sequence(2, maxSeats)}" th:text="${i}">2</item>
+                        </one-of>
+                    </item>
+                    <item repeat="0-1">
+                        <one-of>
+                            <item>miejsce</item>
+                            <item>miejsca</item>
+                            <item>miejsc</item>
+                        </one-of>
+                    </item>
                 </rule>
             </grammar>
             <prompt>Ile zarezerwować miejsc? Maksymalnie <value expr="maxSeats"/>.</prompt>

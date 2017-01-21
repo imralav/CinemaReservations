@@ -6,8 +6,16 @@
         <field name="customerCode">
             <grammar xml:lang="pl-pl" root="digits" version="1.0" type="application/srgs+xml" tag-format="semantics/1.0">
                 <rule id="digits" scope="public">
+                    <item repeat="0-">
+                        <one-of>
+                            <item>podaję</item>
+                            <item>mój</item>
+                            <item>kod</item>
+                            <item>to</item>
+                        </one-of>
+                    </item>
                     <tag>out="";</tag>
-                    <item repeat="1-4">
+                    <item repeat="4">
                         <ruleref uri="#digit"/>
                         <tag>out+=rules.latest();</tag>
                     </item>
@@ -27,12 +35,12 @@
                     </one-of>
                 </rule>
             </grammar>
-            <prompt>Podaj kod klienta uzyskany podczas rezerwacji.</prompt>
+            <prompt>Podaj czterocyfrowy kod klienta uzyskany podczas rezerwacji.</prompt>
             <filled>
                 <submit next="cancel/passCustomerCode" />
             </filled>
             <nomatch>
-                <prompt>Nie rozpoznano wyboru, proszę spróbować ponownie.</prompt>
+                <prompt>Nie rozpoznano wyboru, możliwe, że podano zbyt mało cyfr w kodzie użytkownika. Proszę spróbować ponownie.</prompt>
                 <reprompt />
             </nomatch>
             <noinput>
