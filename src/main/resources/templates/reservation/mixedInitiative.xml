@@ -13,25 +13,12 @@
                 <item repeat="1-3">
                     <ruleref uri="#main_prefix"/>
                     <item repeat="0-1">
-                        <ruleref uri="#day_prefix"/>
-                        <ruleref uri="/cv/grammars/date.xml#day"/>
-                        <tag>out.day = rules.latest();</tag>
-                        <item repeat="0-1">
-                            <one-of>
-                                <item>miesiąc</item>
-                                <item>miesiąca</item>
-                            </one-of>
-                        </item>
-                        <ruleref uri="/cv/grammars/date.xml#month"/>
-                        <tag>out.month = rules.latest();</tag>
-                        <tag>
-                            out.date = {};
-                            out.date.date = out.day.code + "." + out.month.code + ".2017";
-                            out.date.readableDate = out.day.text + " " + out.month.text + " " + 2017;</tag>
+                        <ruleref uri="date.xml"/>
+                        <tag>out.date = rules.latest();</tag>
                     </item>
                     <item repeat="0-1">
                         <ruleref uri="#time_prefix"/>
-                        <ruleref uri="/cv/grammars/time.xml"/>
+                        <ruleref uri="http://85.255.13.158:8080/cv/grammars/time.xml"/>
                         <tag>out.time=rules.latest();</tag>
                     </item>
                     <item repeat="0-1">
@@ -55,22 +42,6 @@
                 </item>
             </rule>
             
-            <rule id="day_prefix">
-                <item repeat="0-1">
-                    <one-of>
-                        <item>w</item>
-                        <item>na</item>
-                    </one-of>
-                </item>
-                <item repeat="0-1">
-                    <one-of>
-                        <item>dzień</item>
-                        <item>dnia</item>
-                        <item>dniu</item>
-                    </one-of>
-                </item>
-            </rule>
-            
             <rule id="time_prefix">
                 <item repeat="0-1">
                     <one-of>
@@ -85,7 +56,6 @@
                         <item>godzina</item>
                         <item>godzinie</item>
                         <item>godzinę</item>
-                        <item>godziny</item>
                     </one-of>
                 </item>
             </rule>
@@ -94,9 +64,6 @@
                 <item repeat="0-">
                     <one-of>
                         <item>film</item>
-                        <item>filmem</item>
-                        <item>filmie</item>
-                        <item>filmu</item>
                         <item>tytuł</item>
                         <item>tytułem</item>
                         <item>tytule</item>
@@ -112,7 +79,8 @@
             
             <rule id="movie">
                 <one-of>
-                    <item th:each="title : ${titles}" th:text="${title}">Hugo</item>
+                    <item>hugo</item>
+                    <item>mafia</item>
                 </one-of>
             </rule>
         </grammar>
@@ -171,7 +139,7 @@
             </noinput>
         </field>
         <field name="time">
-            <prompt>podaj godzinę </prompt>
+            <prompt>Podaj godzinę seansu, na przykład dziesiąta piętnaście.</prompt>
           
             <nomatch>
                 <prompt>
@@ -188,7 +156,7 @@
             </noinput>
         </field>
         <field name="title">
-            <prompt>Podaj nazwę filmu</prompt>
+            <prompt>Podaj nazwę filmu.</prompt>
           
             <nomatch>
                 <prompt>

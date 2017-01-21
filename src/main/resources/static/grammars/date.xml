@@ -37,17 +37,22 @@
             </item>
         </item>
         <tag>
+            var date = out.day.code+'.'+out.month.code+'.'+out.year;
+            var readableDate = out.day.text + ' ' + out.month.text + " " + out.year;
             out={};
-            out.date=out.day.code+'.'+out.month.code+'.'+out.year;
-            out.readableDate=out.day.text + ' ' + out.month.text + " " + out.year;</tag>
+            out.date=date;
+            out.readableDate=readableDate;</tag>
     </item>
   </rule>
   
   <rule id="dayFillers" scope="public">
-	  <item repeat="0-1">
+	  <item repeat="0-">
 	      <one-of>
-	          <item>dzień</item>
-	          <item>dnia</item>
+                <item>w</item>
+                <item>na</item>
+                <item>dzień</item>
+                <item>dnia</item>
+                <item>dniu</item>
 	      </one-of>
 	  </item>
   </rule>
