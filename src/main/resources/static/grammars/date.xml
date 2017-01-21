@@ -36,7 +36,9 @@
                </one-of>
             </item>
         </item>
-        <tag>out.date=out.day.code+'.'+out.month.code+'.'+out.year;
+        <tag>
+            out={};
+            out.date=out.day.code+'.'+out.month.code+'.'+out.year;
             out.readableDate=out.day.text + ' ' + out.month.text + " " + out.year;</tag>
     </item>
   </rule>
